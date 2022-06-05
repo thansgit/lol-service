@@ -12,7 +12,7 @@ export const createCategoryAction = createAsyncThunk(
         const { userAuth } = user;
 
         const config = {
-            headers:{
+            headers: {
                 Authorization: `Bearer ${userAuth?.token}`
             }
         };
@@ -30,11 +30,36 @@ export const createCategoryAction = createAsyncThunk(
         }
     });
 
+export const fetchCategoriesAction = createAsyncThunk(
+    'categories/fetch',
+    async (category, { rejectWithValue, getState, dispatch }) => {
+        //Get user token
+        const user = getState()?.users;
+        const { userAuth } = user;
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userAuth?.token}`
+            }
+        };
+        //Http call
+        try {
+            const { data } = await axios.get(`${baseURL}/api/categories`, config);
+            return data;
+        } catch (error) {
+            if (!error?.response) {
+                throw error;
+            }
+            return rejectWithValue(error?.response?.data);
+        }
+    });
+
 //Slices
 const categorySlices = createSlice({
     name: 'category',
     initialState: {},
     extraReducers: (builder) => {
+        //Create
         builder.addCase(createCategoryAction.pending,
             (state, action) => {
                 state.loading = true;
@@ -49,6 +74,25 @@ const categorySlices = createSlice({
             });
         builder.addCase(createCategoryAction.rejected,
             (state, action) => {
+                state.loading = false;
+                state.appErr = action?.payload?.message;
+                state.serverErr = action?.error?.message;
+            });
+
+        //Fetch all categories
+        builder.addCase(fetchCategoriesAction.pending,
+            (state,action) => {
+                state.loading = true;
+            });
+        builder.addCase(fetchCategoriesAction.fulfilled,
+            (state,action) => {
+                state.categoryList = action?.payload;
+                state.loading = false;
+                state.appErr = undefined;
+                state.serverErr = undefined;
+            });
+        builder.addCase(fetchCategoriesAction.rejected,
+            (state,action) => {
                 state.loading = false;
                 state.appErr = action?.payload?.message;
                 state.serverErr = action?.error?.message;
