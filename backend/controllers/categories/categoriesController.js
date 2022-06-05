@@ -16,7 +16,7 @@ const categoryCreateController = expressAsyncHandler(async (req, res) => {
         });
         res.json(category);
     } catch (error) {
-        res.json(error);
+        res.json('error');
     }
 });
 
