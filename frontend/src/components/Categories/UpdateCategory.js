@@ -1,30 +1,49 @@
-import { PlusCircleIcon, BookOpenIcon } from "@heroicons/react/solid";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { categoryCreateAction } from "../../redux/slices/category/categorySlice";
+import { useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { PlusCircleIcon, BookOpenIcon } from "@heroicons/react/solid";
+import {
+  categoryFetchAction,
+  categoryUpdateAction,
+  categoryDeleteAction
+} from "../../redux/slices/category/categorySlice";
 
-const AddNewCategory = () => {
+
+
+const UpdateCategory = () => {
+
+  //Get id from params
+  const { id } = useParams();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(categoryFetchAction(id))
+  }, []);
 
   const formSchema = Yup.object({
     title: Yup.string().required('Title is required'),
   });
 
+  //Get data from store
+  const state = useSelector(state => state?.category);
+  const { loading, appErr, serverErr, category } = state;
+
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
-      title: '',
+      title: category?.title,
     },
     onSubmit: values => {
-      dispatch(categoryCreateAction(values));
+      dispatch(categoryUpdateAction({ title: values.title, id }));
     },
     validationSchema: formSchema,
   });
 
-  const dispatch = useDispatch();
 
-  //Get data from store
-  const state = useSelector(state => state?.category);
-  const { loading, appErr, serverErr, category } = state;
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
@@ -32,7 +51,7 @@ const AddNewCategory = () => {
         <div>
           <BookOpenIcon className="mx-auto h-12 w-auto fill-white" />
           <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
-            Add New Category
+            Update category
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             <p className="font-medium text-indigo-600 hover:text-indigo-500">
@@ -60,7 +79,7 @@ const AddNewCategory = () => {
                 type="text"
                 autoComplete="text"
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-center focus:z-10 sm:text-sm"
-                placeholder="New Category"
+                placeholder="Update category name"
               />
               <div className="text-red-400 mb-2">
                 {formik.touched.title && formik.errors.title}
@@ -84,18 +103,30 @@ const AddNewCategory = () => {
                   />
                 </span>
                 Loading...
-              </button> : <button
-                type="submit"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                  <PlusCircleIcon
-                    className="h-5 w-5 text-yellow-500 group-hover:text-indigo-400"
-                    aria-hidden="true"
-                  />
-                </span>
-                Add new Category
-              </button>}
+              </button>
+                :
+                <>
+                  <button
+                    type="submit"
+                    className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  >
+                    <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+                      <PlusCircleIcon
+                        className="h-5 w-5 group-hover:text-indigo-400"
+                        aria-hidden="true"
+                      />
+                    </span>
+                    Update category
+                  </button>
+                  <button
+                    onClick={() => dispatch(categoryDeleteAction(id))}
+                    type="submit"
+                    className="group mt-2 relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-500 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  >
+                    Delete category
+                  </button>
+                </>
+              }
 
             </div>
           </div>
@@ -105,4 +136,4 @@ const AddNewCategory = () => {
   );
 };
 
-export default AddNewCategory;
+export default UpdateCategory;

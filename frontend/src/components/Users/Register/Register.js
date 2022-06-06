@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
-import { registerUserAction } from "../../../redux/slices/users/usersSlices";
+import { userRegisterAction } from "../../../redux/slices/users/usersSlices";
 
 //Form schema
 const formSchema = Yup.object({
@@ -27,7 +27,7 @@ const Register = () => {
     },
     onSubmit: (values) => {
       //Dispatch the action to store
-      dispatch(registerUserAction(values))
+      dispatch(userRegisterAction(values))
     },
     validationSchema: formSchema,
   });

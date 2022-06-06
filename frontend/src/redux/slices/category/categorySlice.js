@@ -2,10 +2,8 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { baseURL } from "../../../utils/baseURL";
 
-
-//Action
-export const createCategoryAction = createAsyncThunk(
-    'categories/create',
+export const categoryCreateAction = createAsyncThunk(
+    'category/create',
     async (category, { rejectWithValue, getState, dispatch }) => {
         //Get user token
         const user = getState()?.users;
@@ -29,9 +27,9 @@ export const createCategoryAction = createAsyncThunk(
             return rejectWithValue(error?.response?.data);
         }
     });
-
-export const fetchCategoriesAction = createAsyncThunk(
-    'categories/fetch',
+//Fetch all categories
+export const categoriesFetchAction = createAsyncThunk(
+    'category/fetchall',
     async (category, { rejectWithValue, getState, dispatch }) => {
         //Get user token
         const user = getState()?.users;
@@ -53,6 +51,76 @@ export const fetchCategoriesAction = createAsyncThunk(
             return rejectWithValue(error?.response?.data);
         }
     });
+//Fetch a single category
+export const categoryFetchAction = createAsyncThunk(
+    'category/fetchsingle',
+    async (id, { rejectWithValue, getState, dispatch }) => {
+        const user = getState()?.users;
+        const { userAuth } = user;
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userAuth?.token}`
+            }
+        };
+        try {
+            const { data } = await axios.get(`${baseURL}/api/categories/${id}`, config);
+            return data;
+        } catch (error) {
+            if (!error?.response) {
+                throw error;
+            }
+            return rejectWithValue(error?.response?.data);
+        };
+    }
+);
+//Update category
+export const categoryUpdateAction = createAsyncThunk(
+    'category/update',
+    async (category, { rejectWithValue, getState, dispatch }) => {
+        const user = getState()?.users;
+        const { userAuth } = user;
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userAuth?.token}`
+            }
+        };
+        try {
+            const { data } = await axios.put(
+                `${baseURL}/api/categories/${category?.id}`,
+                { title: category?.title },
+                config
+            );
+            return data;
+        } catch (error) {
+            if (!error?.response) {
+                throw error;
+            }
+            return rejectWithValue(error?.response?.data);
+        }
+    }
+);
+//Delete category
+export const categoryDeleteAction = createAsyncThunk(
+    'category/delete',
+    async (id, { rejectWithValue, getState, dispatch }) => {
+        const user = getState()?.users;
+        const { userAuth } = user;
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userAuth?.token}`
+            }
+        };
+        try {
+            const { data } = await axios.delete(`${baseURL}/api/categories/${id}`, config);
+            return data;
+        } catch (error) {
+            if (!error?.response) {
+                throw error;
+            }
+            return rejectWithValue(error?.response?.data);
+        }
+    }
+);
 
 //Slices
 const categorySlices = createSlice({
@@ -60,11 +128,11 @@ const categorySlices = createSlice({
     initialState: {},
     extraReducers: (builder) => {
         //Create
-        builder.addCase(createCategoryAction.pending,
+        builder.addCase(categoryCreateAction.pending,
             (state, action) => {
                 state.loading = true;
             });
-        builder.addCase(createCategoryAction.fulfilled,
+        builder.addCase(categoryCreateAction.fulfilled,
             (state, action) => {
                 state.category = action?.payload;
                 state.loading = false;
@@ -72,7 +140,7 @@ const categorySlices = createSlice({
                 state.appErr = undefined;
                 state.serverErr = undefined;
             });
-        builder.addCase(createCategoryAction.rejected,
+        builder.addCase(categoryCreateAction.rejected,
             (state, action) => {
                 state.loading = false;
                 state.appErr = action?.payload?.message;
@@ -80,19 +148,76 @@ const categorySlices = createSlice({
             });
 
         //Fetch all categories
-        builder.addCase(fetchCategoriesAction.pending,
-            (state,action) => {
+        builder.addCase(categoriesFetchAction.pending,
+            (state, action) => {
                 state.loading = true;
             });
-        builder.addCase(fetchCategoriesAction.fulfilled,
-            (state,action) => {
+        builder.addCase(categoriesFetchAction.fulfilled,
+            (state, action) => {
                 state.categoryList = action?.payload;
                 state.loading = false;
                 state.appErr = undefined;
                 state.serverErr = undefined;
             });
-        builder.addCase(fetchCategoriesAction.rejected,
-            (state,action) => {
+        builder.addCase(categoriesFetchAction.rejected,
+            (state, action) => {
+                state.loading = false;
+                state.appErr = action?.payload?.message;
+                state.serverErr = action?.error?.message;
+            });
+
+        //Fetch single category
+        builder.addCase(categoryFetchAction.pending,
+            (state, action) => {
+                state.loading = true;
+            });
+        builder.addCase(categoryFetchAction.fulfilled,
+            (state, action) => {
+                state.category = action?.payload;
+                state.loading = false;
+                state.appErr = undefined;
+                state.serverErr = undefined;
+            });
+        builder.addCase(categoryFetchAction.rejected,
+            (state, action) => {
+                state.loading = false;
+                state.appErr = action?.payload?.message;
+                state.serverErr = action?.error?.message;
+            });
+
+        //Update
+        builder.addCase(categoryUpdateAction.pending,
+            (state, action) => {
+                state.loading = true;
+            });
+        builder.addCase(categoryUpdateAction.fulfilled,
+            (state, action) => {
+                state.updatedCategory = action?.payload;
+                state.loading = false;
+                state.appErr = undefined;
+                state.serverErr = undefined;
+            });
+        builder.addCase(categoryUpdateAction.rejected,
+            (state, action) => {
+                state.loading = false;
+                state.appErr = action?.payload?.message;
+                state.serverErr = action?.error?.message;
+            });
+
+        //Delete
+        builder.addCase(categoryDeleteAction.pending,
+            (state, action) => {
+                state.loading = true;
+            });
+        builder.addCase(categoryDeleteAction.fulfilled,
+            (state, action) => {
+                state.deletedCategory = action?.payload;
+                state.loading = false;
+                state.appErr = undefined;
+                state.serverErr = undefined;
+            });
+        builder.addCase(categoryDeleteAction.rejected,
+            (state, action) => {
                 state.loading = false;
                 state.appErr = action?.payload?.message;
                 state.serverErr = action?.error?.message;

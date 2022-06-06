@@ -3,7 +3,7 @@ import axios from 'axios';
 import { baseURL } from "../../../utils/baseURL";
 
 //Register actions
-export const registerUserAction = createAsyncThunk(
+export const userRegisterAction = createAsyncThunk(
     'users/register',
     async (user, { rejectWithValue, getState, dispatch }) => {
         try {
@@ -29,7 +29,7 @@ export const registerUserAction = createAsyncThunk(
     });
 
 //Login actions
-export const loginUserAction = createAsyncThunk(
+export const userLoginAction = createAsyncThunk(
     'users/login',
     async (userData, { rejectWithValue, getState, dispatch }) => {
         const config = {
@@ -57,7 +57,7 @@ export const loginUserAction = createAsyncThunk(
 );
 
 //Logout action
-export const logoutUserAction = createAsyncThunk(
+export const userLogoutAction = createAsyncThunk(
     '/user/logout',
     async (payload, { rejectWithValue, getState, dispatch }) => {
         try {
@@ -83,52 +83,52 @@ const usersSlices = createSlice({
     },
     extraReducers: (builder) => {
         //Register
-        builder.addCase(registerUserAction.pending, (state, action) => {
+        builder.addCase(userRegisterAction.pending, (state, action) => {
             state.loading = true;
             state.appErr = undefined;
             state.serverErr = undefined;
         });
-        builder.addCase(registerUserAction.fulfilled, (state, action) => {
+        builder.addCase(userRegisterAction.fulfilled, (state, action) => {
             state.loading = false;
             state.registered = action?.payload;
             state.appErr = undefined;
             state.serverErr = undefined;
         });
-        builder.addCase(registerUserAction.rejected, (state, action) => {
+        builder.addCase(userRegisterAction.rejected, (state, action) => {
             state.loading = false;
             state.appErr = action?.payload?.message;
             state.serverErr = action?.error?.message;
         });
 
         //Login
-        builder.addCase(loginUserAction.pending, (state, action) => {
+        builder.addCase(userLoginAction.pending, (state, action) => {
             state.loading = true;
             state.appErr = undefined;
             state.serverErr = undefined;
         });
-        builder.addCase(loginUserAction.fulfilled, (state, action) => {
+        builder.addCase(userLoginAction.fulfilled, (state, action) => {
             state.userAuth = action?.payload;
             state.loading = false;
             state.appErr = undefined;
             state.serverErr = undefined;
         });
-        builder.addCase(loginUserAction.rejected, (state, action) => {
+        builder.addCase(userLoginAction.rejected, (state, action) => {
             state.loading = false;
             state.appErr = action?.payload?.message;
             state.serverErr = action?.error?.message;
         });
 
         //Logout
-        builder.addCase(logoutUserAction.pending, (state, action) => {
+        builder.addCase(userLogoutAction.pending, (state, action) => {
             state.loading = false;
         });
-        builder.addCase(logoutUserAction.fulfilled, (state, action) => {
+        builder.addCase(userLogoutAction.fulfilled, (state, action) => {
             state.userAuth = undefined;
             state.loading = false;
             state.appErr = undefined;
             state.serverErr = undefined;
         });
-        builder.addCase(logoutUserAction.rejected, (state, action) => {
+        builder.addCase(userLogoutAction.rejected, (state, action) => {
             state.appErr = action?.payload?.message;
             state.serverErr = action?.error?.message;
             state.loading = false;

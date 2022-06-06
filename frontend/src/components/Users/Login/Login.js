@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from 'yup';
 //import poster from '../../img/poster.png'
-import { loginUserAction } from "../../../redux/slices/users/usersSlices";
+import { userLoginAction } from "../../../redux/slices/users/usersSlices";
 
 //Form schema
 const formSchema = Yup.object({
@@ -22,7 +22,7 @@ const Login = () => {
       password: '',
     },
     onSubmit: (values) => {
-      dispatch(loginUserAction(values));
+      dispatch(userLoginAction(values));
     },
     validationSchema: formSchema
   });
@@ -140,7 +140,7 @@ const Login = () => {
                   </form>
                 </div>
               </div>
-              
+
               <div className="w-full lg:w-3/5 px-4 mb-16 lg:mb-0 order-first lg:order-last">
                 <h2 className="mb-10 text-center text-6xl lg:text-7xl text-gray-300 font-bold font-heading">
                   Ready to start? Login Now.
