@@ -1,6 +1,12 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, createAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { baseURL } from "../../../utils/baseURL";
+
+//Actions to navigate
+const categoryResetUpdateAction = createAction('category/resetUpdate');
+const categoryResetDeleteAction = createAction('category/resetDelete');
+const categoryResetCreateAction = createAction('category/resetCreate');
+
 
 export const categoryCreateAction = createAsyncThunk(
     'category/create',
@@ -19,6 +25,7 @@ export const categoryCreateAction = createAsyncThunk(
             const { data } = await axios.post(`${baseURL}/api/categories`, {
                 title: category?.title,
             }, config);
+            dispatch(categoryResetCreateAction());
             return data;
         } catch (error) {
             if (!error?.response) {
@@ -90,6 +97,9 @@ export const categoryUpdateAction = createAsyncThunk(
                 { title: category?.title },
                 config
             );
+
+            //Dispatch action to reset the updated data
+            dispatch(categoryResetUpdateAction());
             return data;
         } catch (error) {
             if (!error?.response) {
@@ -112,6 +122,8 @@ export const categoryDeleteAction = createAsyncThunk(
         };
         try {
             const { data } = await axios.delete(`${baseURL}/api/categories/${id}`, config);
+            //Dispatch action to reset the updated data
+            dispatch(categoryResetDeleteAction());
             return data;
         } catch (error) {
             if (!error?.response) {
@@ -132,9 +144,16 @@ const categorySlices = createSlice({
             (state, action) => {
                 state.loading = true;
             });
+
+        //Dispatch action for Navigate
+        builder.addCase(categoryResetCreateAction,
+            (state, action) => {
+                state.isCreated = true;
+            });
         builder.addCase(categoryCreateAction.fulfilled,
             (state, action) => {
                 state.category = action?.payload;
+                state.isCreated = false;
                 state.loading = false;
                 //state.isCreated = true;
                 state.appErr = undefined;
@@ -190,9 +209,15 @@ const categorySlices = createSlice({
             (state, action) => {
                 state.loading = true;
             });
+        //Dispatch action for Navigate
+        builder.addCase(categoryResetUpdateAction,
+            (state, action) => {
+                state.isUpdated = true;
+            });
         builder.addCase(categoryUpdateAction.fulfilled,
             (state, action) => {
                 state.updatedCategory = action?.payload;
+                state.isUpdated = false;
                 state.loading = false;
                 state.appErr = undefined;
                 state.serverErr = undefined;
@@ -209,9 +234,15 @@ const categorySlices = createSlice({
             (state, action) => {
                 state.loading = true;
             });
+        //Dispatch action for Navigate
+        builder.addCase(categoryResetDeleteAction,
+            (state, action) => {
+                state.isDeleted = true;
+            });
         builder.addCase(categoryDeleteAction.fulfilled,
             (state, action) => {
                 state.deletedCategory = action?.payload;
+                state.isDeleted = false;
                 state.loading = false;
                 state.appErr = undefined;
                 state.serverErr = undefined;

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { PlusCircleIcon, BookOpenIcon } from "@heroicons/react/solid";
@@ -16,11 +16,12 @@ const UpdateCategory = () => {
 
   //Get id from params
   const { id } = useParams();
-
   const dispatch = useDispatch();
+
 
   useEffect(() => {
     dispatch(categoryFetchAction(id))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const formSchema = Yup.object({
@@ -29,7 +30,7 @@ const UpdateCategory = () => {
 
   //Get data from store
   const state = useSelector(state => state?.category);
-  const { loading, appErr, serverErr, category } = state;
+  const { loading, appErr, serverErr, category, isUpdated, isDeleted } = state;
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -43,7 +44,8 @@ const UpdateCategory = () => {
   });
 
 
-
+  //Navigate
+  if (isUpdated || isDeleted) return <Navigate to='/category-list' />
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
