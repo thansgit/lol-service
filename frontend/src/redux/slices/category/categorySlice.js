@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, createAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { baseURL } from "../../../utils/baseURL";
 
-//Actions to navigate
+//Actions for navigation implementation after actions
 const categoryResetUpdateAction = createAction('category/resetUpdate');
 const categoryResetDeleteAction = createAction('category/resetDelete');
 const categoryResetCreateAction = createAction('category/resetCreate');

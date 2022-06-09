@@ -9,25 +9,25 @@ const validateMongodbID = require("../../utils/validateMongodbID");
 //Create post
 //-------------------------------------------------------------------
 const postCreateController = expressAsyncHandler(async (req, res) => {
-    console.log(req.file)
-    validateMongodbID(req.body.user);
+    const { _id } = req.user;
+    validateMongodbID(_id);
 
     //1. Get the path to the image
-    const localPath = `public/images/post/${req.file.filename}`;
+    //const localPath = `public/images/post/${req.file.filename}`;
     //2. Upload to cloudinary
-    const uploadedImg = await cloudinaryUploadImage(localPath);
+    //const uploadedImg = await cloudinaryUploadImage(localPath);
 
     //Maybe profane word filter for have to etc..
     try {
         const post = await Post.create({
             ...req.body,
-            image: uploadedImg?.url,
+            //image: uploadedImg?.url,
             user: _id,
         });
         res.json(post);
 
         //Remove local copies of uploaded imgs
-        fs.unlinkSync(localPath);
+        //fs.unlinkSync(localPath);
     } catch (error) {
         res.json(error);
     }
