@@ -15,10 +15,8 @@ const CategoryList = () => {
     dispatch(categoriesFetchAction());
   }, [dispatch]);
   const category = useSelector(state => state?.category);
-  console.log(category)
 
   const { categoryList, loading, appErr, serverErr } = category;
-  console.log(categoryList);
 
   return (
     <>
@@ -70,7 +68,7 @@ const CategoryList = () => {
                   </thead>
                   <tbody>
                     {categoryList?.map(category => (
-                      <tr className="bg-gray-200">
+                      <tr className="bg-gray-200" key={category?.createdAt}>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
                             <div className="flex-shrink-0 h-10 w-10">
