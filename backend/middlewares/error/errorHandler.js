@@ -17,4 +17,10 @@ const errorHandler = (err, req, res, next) => {
 
 };
 
-module.exports = { errorHandler, notFound };
+const multerErrorDebugger = (err, req, res, next) => {
+    const message =`This is the unexpected field -> ${error.field}`
+    console.log(message);
+    return res.status(500).send(message);
+};
+
+module.exports = { errorHandler, notFound, multerErrorDebugger };

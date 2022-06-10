@@ -11,7 +11,7 @@ const commentRoutes = require('./route/comments/commentsRoute');
 const emailRoutes = require('./route/emails/emailsRoute');
 const categoriesRoute = require("./route/categories/categoriesRoute");
 
-const { errorHandler, notFound } = require('./middlewares/error/errorHandler');
+const { errorHandler, notFound, multerErrorDebugger } = require('./middlewares/error/errorHandler');
 
 const app = express();
 //DB
@@ -39,6 +39,7 @@ app.use('/api/email', emailRoutes);
 app.use('/api/categories', categoriesRoute)
 
 //Err handling
+//app.use(multerErrorDebugger);
 app.use(notFound);  //Passes notfound error to errorhandler
 app.use(errorHandler);
 

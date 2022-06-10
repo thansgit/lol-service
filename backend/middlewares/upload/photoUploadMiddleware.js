@@ -12,10 +12,12 @@ const multerFilter = (req, file, callback) => {
         callback(null, true);
     } else {
         //Rejected files
-        callback({
-            message: 'Unsupported file format',
-        },
-            false);
+        callback(
+            {
+                message: 'Unsupported file format',
+            },
+            false
+        );
     }
 };
 
@@ -34,10 +36,10 @@ const profilePhotoResizeMiddleware = async (req, res, next) => {
     req.file.filename = `user-${Date.now()}-${req.file.originalname}`;
 
     await sharp(req.file.buffer)
-    .resize(250, 250)
-    .toFormat('jpeg')
-    .jpeg({quality: 90})
-    .toFile(path.join(`public/images/profile/${req.file.filename}`)); //250px, 250px
+        .resize(250, 250)
+        .toFormat('jpeg')
+        .jpeg({ quality: 90 })
+        .toFile(path.join(`public/images/profile/${req.file.filename}`)); //250px, 250px
 
     next();
 };
@@ -49,10 +51,10 @@ const postPhotoResizeMiddleware = async (req, res, next) => {
     req.file.filename = `user-${Date.now()}-${req.file.originalname}`;
 
     await sharp(req.file.buffer)
-    .resize(500, 500)
-    .toFormat('jpeg')
-    .jpeg({quality: 90})
-    .toFile(path.join(`public/images/post/${req.file.filename}`)); //250px, 250px
+        .resize(500, 500)
+        .toFormat('jpeg')
+        .jpeg({ quality: 90 })
+        .toFile(path.join(`public/images/post/${req.file.filename}`)); //250px, 250px
 
     next();
 };

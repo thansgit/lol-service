@@ -2,10 +2,12 @@ import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { postCreateAction } from "../../redux/slices/posts/postSlices";
+import CategoryDropdown from "../Categories/CategoryDropdown";
 
 const formSchema = Yup.object({
   title: Yup.string().required('Title is required'),
   description: Yup.string().required('Description is required'),
+  category: Yup.object().required('Category is required'),
 });
 
 export default function CreatePost() {
@@ -15,9 +17,15 @@ export default function CreatePost() {
     initialValues: {
       title: '',
       description: '',
+      category: ''
     },
     onSubmit: values => {
-      dispatch(postCreateAction(values));
+      const data = {
+        category: values?.category?.label,
+        title: values?.title,
+        description: values?.description
+      }
+      dispatch(postCreateAction(data));
     },
     validationSchema: formSchema,
   });
@@ -63,10 +71,17 @@ export default function CreatePost() {
                 </div>
                 {/* Err msg */}
                 <div className="text-red-500">
-                   {formik.touched.title && formik.errors.title}
+                   {formik?.touched?.title && formik?.errors?.title}
                 </div>
               </div>
-              Category input goes here
+              {/* Category select */}
+              <CategoryDropdown 
+              value={formik.values.category?.label}  
+              onChange={formik.setFieldValue}
+              onBlur={formik.setFieldTouched}
+              error={formik.errors.category}
+              touched={formik.touched.category}
+              />
               <div>
                 <label
                   htmlFor="password"
@@ -86,7 +101,7 @@ export default function CreatePost() {
                 ></textarea>
                 {/* Err msg */}
                 <div className="text-red-500">
-                {formik.touched.description && formik.errors.description}
+                {formik?.touched?.description && formik?.errors?.description}
                 </div>
               </div>
               <div>

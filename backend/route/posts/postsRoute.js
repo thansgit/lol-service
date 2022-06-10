@@ -13,6 +13,7 @@ const { photoUploadMiddleware, postPhotoResizeMiddleware } = require("../../midd
 const postRoutes = express.Router();
 
 
+
 //api/posts
 postRoutes.post('/',
     authMiddleWare,
