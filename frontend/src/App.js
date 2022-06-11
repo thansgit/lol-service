@@ -10,6 +10,7 @@ import CategoryList from "./components/Categories/CategoryList";
 import UpdateCategory from "./components/Categories/UpdateCategory";
 import LoggedInRoute from "./components/Navigation/ProtectedRoutes/LoggedInRoute";
 import AdminRoute from "./components/Navigation/ProtectedRoutes/AdminRoute";
+import PostsList from "./components/Posts/PostsList";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         </Route>
 
         {/* Public users routes */}
+        <Route path='/posts' element={<PostsList />} />
         <Route path='/' element={<HomePage />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />

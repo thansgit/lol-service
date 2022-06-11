@@ -19,15 +19,15 @@ const postCreateController = expressAsyncHandler(async (req, res) => {
 
     //Maybe profane word filter for have to etc..
     try {
-        // const post = await Post.create({
-        //     ...req.body,
-        //     //image: uploadedImg?.url,
-        //     user: _id,
-        // });
-        res.json(uploadedImg);
+        const post = await Post.create({
+            ...req.body,
+            user: _id,
+            image: uploadedImg?.url,
+        });
+        res.json(post);
 
         //Remove local copies of uploaded imgs
-        //fs.unlinkSync(localPath);
+        fs.unlinkSync(localPath);
     } catch (error) {
         res.json(error);
     }

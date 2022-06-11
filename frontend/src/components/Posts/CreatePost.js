@@ -1,5 +1,8 @@
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+import Dropzone from 'react-dropzone'
+import styled from 'styled-components'
 import * as Yup from 'yup';
 import { postCreateAction } from "../../redux/slices/posts/postSlices";
 import CategoryDropdown from "../Categories/CategoryDropdown";
@@ -8,29 +11,53 @@ const formSchema = Yup.object({
   title: Yup.string().required('Title is required'),
   description: Yup.string().required('Description is required'),
   category: Yup.object().required('Category is required'),
+  image: Yup.string().required('Image is required')
 });
 
 export default function CreatePost() {
   const dispatch = useDispatch();
 
+  const post = useSelector(state => state.post);
+  const { isCreated, loading, appErr, serverErr } = post;
+
   const formik = useFormik({
     initialValues: {
       title: '',
       description: '',
-      category: ''
+      category: '',
+      image: '',
     },
     onSubmit: values => {
       const data = {
         category: values?.category?.label,
         title: values?.title,
-        description: values?.description
+        description: values?.description,
+        image: values?.image,
       }
       dispatch(postCreateAction(data));
     },
     validationSchema: formSchema,
   });
+  //Dropzone css
+  const Container = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-width: 2px;
+  border-radius: 2px;
+  border-color: 'red';
+  border-style: dashed;
+  background-color: #fafafa;
+  color: #bdbdbd;
+  outline: none;
+  transition: border .24s ease-in-out;
+`;
 
-  const state = useSelector(state => state?.post);
+
+  //Navigate
+  if(isCreated) return <Navigate to='/posts' />
 
   return (
     <>
@@ -45,6 +72,12 @@ export default function CreatePost() {
               Share your thoughts to the world.
             </p>
           </p>
+
+          {appErr || serverErr ?
+            <p className="mt-2 text-center text-lg text-red-500">
+              {serverErr} - {appErr}
+            </p> : null}
+
         </div>
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
@@ -71,21 +104,27 @@ export default function CreatePost() {
                 </div>
                 {/* Err msg */}
                 <div className="text-red-500">
-                   {formik?.touched?.title && formik?.errors?.title}
+                  {formik?.touched?.title && formik?.errors?.title}
                 </div>
               </div>
               {/* Category select */}
-              <CategoryDropdown 
-              value={formik.values.category?.label}  
-              onChange={formik.setFieldValue}
-              onBlur={formik.setFieldTouched}
-              error={formik.errors.category}
-              touched={formik.touched.category}
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Select category
+              </label>
+              <CategoryDropdown
+                value={formik.values.category?.label}
+                onChange={formik.setFieldValue}
+                onBlur={formik.setFieldTouched}
+                error={formik.errors.category}
+                touched={formik.touched.category}
               />
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-gray-700 mb-2"
                 >
                   Description
                 </label>
@@ -101,17 +140,52 @@ export default function CreatePost() {
                 ></textarea>
                 {/* Err msg */}
                 <div className="text-red-500">
-                {formik?.touched?.description && formik?.errors?.description}
+                  {formik?.touched?.description && formik?.errors?.description}
                 </div>
+                {/* Image upload component */}
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700 mt-5 mb-2"
+                >
+                  Select image to upload
+                </label>
+                <Container className='container bg-gray-700'>
+                  <Dropzone
+                    onDrop={(acceptedFiles) => { formik.setFieldValue('image', acceptedFiles[0]) }}
+                    accept='image/jpeg, image/png'
+                    onBlur={formik.handleBlur('image')}
+                  >
+                    {({ getRootProps, getInputProps }) => {
+                      return (
+                        <div className="container">
+                          <div {...getRootProps({
+                            className: 'dropzone',
+                            onDrop: (e) => e.stopPropagation
+                          })}>
+                            <input {...getInputProps()} />
+                            <p className="text-gray-400 text-lg cursor-pointer hover:text-gray-600">
+                              Click to select image
+                            </p>
+                          </div>
+                        </div>
+                      )
+                    }}
+                  </Dropzone>
+                </Container>
               </div>
               <div>
                 {/* Submit btn */}
-                <button
+                {loading ? <button
+                  disabled
+                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-500"
+                >
+                  Loading...
+                </button> : <button
                   type="submit"
                   className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Create
-                </button>
+                </button>}
               </div>
             </form>
           </div>

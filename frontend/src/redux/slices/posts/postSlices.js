@@ -1,11 +1,15 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, createAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { baseURL } from "../../../utils/baseURL";
 
 
+//Actions for navigation implementation after actions
+const postResetCreateAction = createAction('post/resetPostCreate');
+
 //Create a post action
 export const postCreateAction = createAsyncThunk('post/create',
     async (post, { rejectWithValue, getState, dispatch }) => {
+        console.log(post);
         //Get the user token for headers
         const user = getState()?.users;
         const { userAuth } = user;
@@ -17,7 +21,29 @@ export const postCreateAction = createAsyncThunk('post/create',
 
         try {
             //Http call
-            const { data } = await axios.post(`${baseURL}/api/posts`, post, config);
+            const formData = new FormData();
+            formData.append('title', post?.title);
+            formData.append('description', post?.description);
+            formData.append('category', post?.category?.label);
+            formData.append('image', post?.image);
+
+            const { data } = await axios.post(`${baseURL}/api/posts`, formData, config);
+            dispatch(postResetCreateAction());
+            return data;
+        } catch (error) {
+            if (!error?.response) throw error;
+            return rejectWithValue(error?.response?.data);
+        };
+    });
+
+//Fetch all posts
+export const postFetchAll = createAsyncThunk('post/fetchall',
+    async (post, { rejectWithValue, getState, dispatch }) => {
+
+        try {
+            //Http call
+
+            const { data } = await axios.get()
             return data;
         } catch (error) {
             if (!error?.response) throw error;
@@ -35,9 +61,15 @@ const postSlice = createSlice({
             (state, action) => {
                 state.loading = true;
             });
+        //Dispatch action for Navigate
+        builder.addCase(postResetCreateAction,
+            (state, action) => {
+                state.isCreated = true;
+            });
         builder.addCase(postCreateAction.fulfilled,
             (state, action) => {
                 state.loading = false;
+                state.isCreated = false;
                 state.postCreated = action?.payload;
                 state.appErr = undefined;
                 state.serverErr = undefined;
