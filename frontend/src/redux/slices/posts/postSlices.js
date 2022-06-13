@@ -38,16 +38,71 @@ export const postCreateAction = createAsyncThunk('post/create',
 
 //Fetch all posts
 export const postFetchAllAction = createAsyncThunk('post/fetchall',
-    async (post, { rejectWithValue, getState, dispatch }) => {
+    async (category, { rejectWithValue, getState, dispatch }) => {
 
         try {
-            //Http call
-            const { data } = await axios.get(`${baseURL}/api/posts`);
+            //Fetch all from a specific category with query params.
+            const { data } = await axios.get(`${baseURL}/api/posts?category=${category}`);
             return data;
         } catch (error) {
             if (!error?.response) throw error;
             return rejectWithValue(error?.response?.data);
         };
+    });
+
+//Fetch a single post
+export const postFetchSingleAction = createAsyncThunk('post/fetchsingle',
+    async (postId, { rejectWithValue, getState, dispatch }) => {
+
+        try {
+            //Http call
+            const { data } = await axios.get(`${baseURL}/api/posts/${postId}`);
+            return data;
+        } catch (error) {
+            if (!error?.response) throw error;
+            return rejectWithValue(error?.response?.data);
+        };
+    });
+
+//Add empathic votes to post
+export const postToggleAddEmpathicVote = createAsyncThunk('post/addempathic',
+    async (postId, { rejectWithValue, getState, dispatch }) => {
+        const user = getState()?.users;
+        const { userAuth } = user;
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userAuth?.token}`,
+            },
+        };
+
+        try {
+            const { data } = await axios.put(`${baseURL}/api/posts/empathicvote`, { postId }, config);
+            return data;
+        } catch (error) {
+            if (!error?.response) throw error;
+            return rejectWithValue(error?.response?.data);
+        }
+
+    });
+//Add egoic votes to post
+export const postToggleAddEgoicVote = createAsyncThunk('post/addegoic',
+    async (postId, { rejectWithValue, getState, dispatch }) => {
+        const user = getState()?.users;
+        const { userAuth } = user;
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userAuth?.token}`,
+            },
+        };
+
+        try {
+            const { data } = await axios.put(`${baseURL}/api/posts/egoicvote`, { postId }, config);
+            return data;
+        } catch (error) {
+            if (!error?.response) throw error;
+            return rejectWithValue(error?.response?.data);
+        }
+
     });
 
 
@@ -94,6 +149,62 @@ const postSlice = createSlice({
                 state.serverErr = undefined;
             });
         builder.addCase(postFetchAllAction.rejected,
+            (state, action) => {
+                state.loading = false;
+                state.appErr = action?.payload?.message;
+                state.serverErr = action?.error?.message;
+            });
+
+        builder.addCase(postFetchSingleAction.pending,
+            (state, action) => {
+                state.loading = true;
+            });
+        builder.addCase(postFetchSingleAction.fulfilled,
+            (state, action) => {
+                state.postDetails = action?.payload;
+                state.loading = false;
+                state.appErr = undefined;
+                state.serverErr = undefined;
+            });
+        builder.addCase(postFetchSingleAction.rejected,
+            (state, action) => {
+                state.loading = false;
+                state.appErr = action?.payload?.message;
+                state.serverErr = action?.error?.message;
+            });
+
+        //Add empathic vote   
+        builder.addCase(postToggleAddEmpathicVote.pending,
+            (state, action) => {
+                state.loading = true;
+            });
+        builder.addCase(postToggleAddEmpathicVote.fulfilled,
+            (state, action) => {
+                state.empathicVotes = action?.payload;
+                state.loading = false;
+                state.appErr = undefined;
+                state.serverErr = undefined;
+            });
+        builder.addCase(postToggleAddEmpathicVote.rejected,
+            (state, action) => {
+                state.loading = false;
+                state.appErr = action?.payload?.message;
+                state.serverErr = action?.error?.message;
+            });
+
+        //Add egoic vote   
+        builder.addCase(postToggleAddEgoicVote.pending,
+            (state, action) => {
+                state.loading = true;
+            });
+        builder.addCase(postToggleAddEgoicVote.fulfilled,
+            (state, action) => {
+                state.egoicVotes = action?.payload;
+                state.loading = false;
+                state.appErr = undefined;
+                state.serverErr = undefined;
+            });
+        builder.addCase(postToggleAddEgoicVote.rejected,
             (state, action) => {
                 state.loading = false;
                 state.appErr = action?.payload?.message;

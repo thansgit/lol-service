@@ -38,9 +38,16 @@ const postCreateController = expressAsyncHandler(async (req, res) => {
 //Fetch all posts
 //-------------------------------------------------------------------
 const postFetchAllController = expressAsyncHandler(async (req, res) => {
+    const hasCategory = req.query.category
+
     try {
-        const posts = await Post.find({}).populate('user');
-        res.json(posts);
+        if (hasCategory) {
+            const posts = await Post.find({ category: hasCategory }).populate('user');
+            res.json(posts);
+        } else {
+            const posts = await Post.find({}).populate('user');
+            res.json(posts);
+        }
     } catch (error) {
         res.json(error);
     }

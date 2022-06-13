@@ -1,6 +1,6 @@
 import React from 'react';
 import {css} from '@emotion/react';
-import RiseLoader from 'react-spinners/CircleLoader';
+import RingLoader from 'react-spinners/MoonLoader';
 
 //Css
 const override = css`
@@ -10,7 +10,7 @@ const override = css`
 `;
 
 const LoadingComponent = () => {
-  return  <RiseLoader color='red' loading={true} css={override} />;
+  return  <RingLoader color='red' loading={true} css={override} />;
 };
 
 export default LoadingComponent;
