@@ -18,7 +18,6 @@ const PostDetails = () => {
 
   const post = useSelector(state => state?.post);
   const { postDetails, loading, appErr, serverErr } = post
-  console.log(postDetails);
 
   return (
     <>
@@ -61,7 +60,7 @@ const PostDetails = () => {
                     {postDetails?.description}
                     {/* Show delete and update btn if created user */}
                     <p className="flex">
-                      <Link className="p-3" to='/'>
+                      <Link className="p-3" to={`/update-post/${postDetails?._id}`}>
                         <PencilAltIcon className="h-8 mt-3 text-yellow-300" />
                       </Link>
                       <button className="ml-3">

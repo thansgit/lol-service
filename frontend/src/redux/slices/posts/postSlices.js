@@ -5,11 +5,11 @@ import { baseURL } from "../../../utils/baseURL";
 
 //Actions for navigation implementation after actions
 const postResetCreateAction = createAction('post/resetPostCreate');
+const postResetUpdateAction = createAction('post/resetPostUpdate');
 
 //Create a post action
 export const postCreateAction = createAsyncThunk('post/create',
     async (post, { rejectWithValue, getState, dispatch }) => {
-        console.log(post);
         //Get the user token for headers
         const user = getState()?.users;
         const { userAuth } = user;
@@ -29,6 +29,29 @@ export const postCreateAction = createAsyncThunk('post/create',
 
             const { data } = await axios.post(`${baseURL}/api/posts`, formData, config);
             dispatch(postResetCreateAction());
+            return data;
+        } catch (error) {
+            if (!error?.response) throw error;
+            return rejectWithValue(error?.response?.data);
+        };
+    });
+
+//Update a post action
+export const postUpdateAction = createAsyncThunk('post/update',
+    async (post, { rejectWithValue, getState, dispatch }) => {
+        //Get the user token for headers
+        const user = getState()?.users;
+        const { userAuth } = user;
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userAuth?.token}`,
+            },
+        };
+
+        try {
+            //Http call
+            const { data } = await axios.put(`${baseURL}/api/posts/${post?.id}`, post, config);
+            dispatch(postResetUpdateAction());
             return data;
         } catch (error) {
             if (!error?.response) throw error;
@@ -130,6 +153,31 @@ const postSlice = createSlice({
                 state.serverErr = undefined;
             });
         builder.addCase(postCreateAction.rejected,
+            (state, action) => {
+                state.loading = false;
+                state.appErr = action?.payload?.message;
+                state.serverErr = action?.error?.message;
+            });
+
+        //Update post
+        builder.addCase(postUpdateAction.pending,
+            (state, action) => {
+                state.loading = true;
+            });
+        //Dispatch action for Navigate
+        builder.addCase(postResetUpdateAction,
+            (state, action) => {
+                state.isUpdated = true;
+            });
+        builder.addCase(postUpdateAction.fulfilled,
+            (state, action) => {
+                state.loading = false;
+                state.isUpdated = false;
+                state.postUpdated = action?.payload;
+                state.appErr = undefined;
+                state.serverErr = undefined;
+            });
+        builder.addCase(postUpdateAction.rejected,
             (state, action) => {
                 state.loading = false;
                 state.appErr = action?.payload?.message;
