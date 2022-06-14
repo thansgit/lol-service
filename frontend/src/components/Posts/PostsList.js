@@ -78,7 +78,7 @@ export default function PostsList() {
               <div className="w-full lg:w-3/4 px-3">
                 {/* Posts */}
                 { appErr || serverErr ? <h1>{appErr} - {serverErr}</h1> :
-                  postList?.length <= 0 ? <h1 className="text-white">No posts..</h1> : postList?.map((post) => (
+                  postList?.length <= 0 ? <h1 className="text-white text-center text-lg">No posts found</h1> : postList?.map((post) => (
                     <div key={post.id} className="flex flex-wrap bg-gray-900 -mx-3  lg:mb-6">
                       <div className="mb-10  w-full lg:w-1/4 px-3">
                         <Link to='/'>

@@ -6,6 +6,7 @@ import { baseURL } from "../../../utils/baseURL";
 //Actions for navigation implementation after actions
 const postResetCreateAction = createAction('post/resetPostCreate');
 const postResetUpdateAction = createAction('post/resetPostUpdate');
+const postResetDeleteAction = createAction('post/resetPostDelete');
 
 //Create a post action
 export const postCreateAction = createAsyncThunk('post/create',
@@ -24,7 +25,7 @@ export const postCreateAction = createAsyncThunk('post/create',
             const formData = new FormData();
             formData.append('title', post?.title);
             formData.append('description', post?.description);
-            formData.append('category', post?.category?.label);
+            formData.append('category', post?.category);
             formData.append('image', post?.image);
 
             const { data } = await axios.post(`${baseURL}/api/posts`, formData, config);
@@ -128,6 +129,28 @@ export const postToggleAddEgoicVote = createAsyncThunk('post/addegoic',
 
     });
 
+//Delete a post action
+export const postDeleteAction = createAsyncThunk('post/delete',
+    async (postId, { rejectWithValue, getState, dispatch }) => {
+        //Get the user token for headers
+        const user = getState()?.users;
+        const { userAuth } = user;
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userAuth?.token}`,
+            },
+        };
+
+        try {
+            //Http call
+            const { data } = await axios.delete(`${baseURL}/api/posts/${postId}`, config);
+            dispatch(postResetDeleteAction());
+            return data;
+        } catch (error) {
+            if (!error?.response) throw error;
+            return rejectWithValue(error?.response?.data);
+        };
+    });
 
 //Slices
 const postSlice = createSlice({
@@ -253,6 +276,32 @@ const postSlice = createSlice({
                 state.serverErr = undefined;
             });
         builder.addCase(postToggleAddEgoicVote.rejected,
+            (state, action) => {
+                state.loading = false;
+                state.appErr = action?.payload?.message;
+                state.serverErr = action?.error?.message;
+            });
+
+
+                    //Delete
+        builder.addCase(postDeleteAction.pending,
+            (state, action) => {
+                state.loading = true;
+            });
+        //Dispatch action for Navigate
+        builder.addCase(postResetDeleteAction,
+            (state, action) => {
+                state.isDeleted = true;
+            });
+        builder.addCase(postDeleteAction.fulfilled,
+            (state, action) => {
+                state.deletedPost = action?.payload;
+                state.isDeleted = false;
+                state.loading = false;
+                state.appErr = undefined;
+                state.serverErr = undefined;
+            });
+        builder.addCase(postDeleteAction.rejected,
             (state, action) => {
                 state.loading = false;
                 state.appErr = action?.payload?.message;
