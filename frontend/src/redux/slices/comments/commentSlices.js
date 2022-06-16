@@ -54,6 +54,32 @@ export const commentDeleteAction = createAsyncThunk(
         }
     });
 
+//Update
+export const commentUpdateAction = createAsyncThunk(
+    'comment/update',
+    async (comment, { rejectWithValue, getState, dispatch }) => {
+        const user = getState()?.users;
+        const { userAuth } = user;
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userAuth?.token}`
+            }
+        };
+
+        try {
+            const { data } = await axios.put(`${baseURL}/api/comments/${comment?.id}`, config);
+            return data;
+        } catch (error) {
+            if (!error?.response) {
+                throw error;
+            }
+            return rejectWithValue(error?.response?.data);
+        }
+
+    }
+)
+
 const commentSlices = createSlice({
     name: 'comment',
     initialState: {},
@@ -93,10 +119,31 @@ const commentSlices = createSlice({
         builder.addCase(commentDeleteAction.rejected,
             (state, action) => {
                 state.loading = false;
-                state.commentDeleted= undefined;
+                state.commentDeleted = undefined;
                 state.appErr = action?.payload?.message;
                 state.serverErr = action?.error?.message;
             });
+
+        //Update
+        builder.addCase(commentUpdateAction.pending,
+            (state, action) => {
+                state.loading = true;
+            });
+        builder.addCase(commentUpdateAction.fulfilled,
+            (state, action) => {
+                state.loading = false;
+                state.commentUpdated = action?.payload;
+                state.appErr = undefined;
+                state.serverErr = undefined;
+            });
+        builder.addCase(commentUpdateAction.rejected,
+            (state, action) => {
+                state.loading = false;
+                state.commentUpdated = undefined;
+                state.appErr = action?.payload?.message;
+                state.serverErr = action?.error?.message;
+            });
+
     }
 });
 
