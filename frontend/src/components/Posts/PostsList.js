@@ -77,94 +77,97 @@ export default function PostsList() {
               </div>
               <div className="w-full lg:w-3/4 px-3">
                 {/* Posts */}
-                { appErr || serverErr ? <h1>{appErr} - {serverErr}</h1> :
-                  postList?.length <= 0 ? <h1 className="text-white text-center text-lg">No posts found</h1> : postList?.map((post) => (
-                    <div key={post.id} className="flex flex-wrap bg-gray-900 -mx-3  lg:mb-6">
-                      <div className="mb-10  w-full lg:w-1/4 px-3">
-                        <Link to='/'>
-                          {/* Post image */}
-                          <img
-                            className="w-full h-full object-cover rounded"
-                            src={post?.image}
-                            alt=""
-                          />
-                        </Link>
-                        {/* Likes, views dislikes */}
-                        <div className="flex flex-row bg-gray-300 justify-center w-full  items-center ">
-                          {/* Likes */}
-                          <div className="flex flex-row justify-center items-center ml-4 mr-4 pb-2 pt-1">
-                            {/* Toggle like  */}
-                            <div className="">
-                              <ThumbUpIcon
-                                onClick={() => dispatch(postToggleAddEmpathicVote(post?.id))}
-                                className="h-7 w-7 text-indigo-600 cursor-pointer"
-                              />
+                {appErr || serverErr ?
+                  <h1>{appErr} - {serverErr}</h1> :
+                  postList?.length <= 0 ?
+                    <h1 className="text-white text-center text-lg">No posts found</h1> :
+                    postList?.map((post) => (
+                      <div key={post.id} className="flex flex-wrap bg-gray-900 -mx-3  lg:mb-6">
+                        <div className="mb-10  w-full lg:w-1/4">
+                          <Link to='/'>
+                            {/* Post image */}
+                            <img
+                              className="w-full h-full object-cover rounded"
+                              src={post?.image}
+                              alt=""
+                            />
+                          </Link>
+                          {/* Likes, views dislikes */}
+                          <div className="flex flex-row bg-gray-300 justify-center w-full  items-center ">
+                            {/* Likes */}
+                            <div className="flex flex-row justify-center items-center ml-4 mr-4 pb-2 pt-1">
+                              {/* Toggle like  */}
+                              <div className="">
+                                <ThumbUpIcon
+                                  onClick={() => dispatch(postToggleAddEmpathicVote(post?.id))}
+                                  className="h-7 w-7 text-indigo-600 cursor-pointer"
+                                />
+                              </div>
+                              <div className="pl-2 text-gray-600">{post?.empathicVotes?.length}</div>
                             </div>
-                            <div className="pl-2 text-gray-600">{post?.empathicVotes?.length}</div>
-                          </div>
-                          {/* Dislike */}
-                          <div className="flex flex-row  justify-center items-center ml-4 mr-4 pb-2 pt-1">
-                            <div>
-                              <ThumbDownIcon 
-                              onClick={() => dispatch(postToggleAddEgoicVote(post?.id))}
-                              className="h-7 w-7 cursor-pointer text-gray-600" />
+                            {/* Dislike */}
+                            <div className="flex flex-row  justify-center items-center ml-4 mr-4 pb-2 pt-1">
+                              <div>
+                                <ThumbDownIcon
+                                  onClick={() => dispatch(postToggleAddEgoicVote(post?.id))}
+                                  className="h-7 w-7 cursor-pointer text-gray-600" />
+                              </div>
+                              <div className="pl-2 text-gray-600">{post?.egoicVotes?.length}</div>
                             </div>
-                            <div className="pl-2 text-gray-600">{post?.egoicVotes?.length}</div>
-                          </div>
-                          {/* Views */}
-                          <div className="flex flex-row justify-center items-center ml-4 mr-4 pb-2 pt-1">
-                            <div>
-                              <EyeIcon className="h-7 w-7  text-gray-400" />
-                            </div>
-                            <div className="pl-2 text-gray-600">
-                              {post?.numOfViews}
+                            {/* Views */}
+                            <div className="flex flex-row justify-center items-center ml-4 mr-4 pb-2 pt-1">
+                              <div>
+                                <EyeIcon className="h-7 w-7  text-gray-400" />
+                              </div>
+                              <div className="pl-2 text-gray-600">
+                                {post?.numOfViews}
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="w-full lg:w-3/4 px-3">
-                        <Link className="hover:underline" to='/'>
-                          <h3 className="mb-1 text-2xl text-green-400 font-bold font-heading">
-                            {(post?.title)}
-                          </h3>
-                        </Link>
-                        <p className="text-gray-300">{post?.description}</p>
-                        {/* Read more */}
-                        <Link className="text-indigo-500 hover:underline" to={`/posts/${post?.id}`}>
-                          Read More..
-                        </Link>
-                        {/* User Avatar */}
-                        <div className="mt-6 flex items-center">
-                          <div className="flex-shrink-0">
-                            <Link to='/'>
-                              <img
-                                className="h-10 w-10 rounded-full"
-                                src={post?.user?.profilePhoto}
-                                alt=""
-                              />
-                            </Link>
-                          </div>
-                          <div className="ml-3">
-                            <p className="text-sm font-medium text-gray-900">
-                              <Link className="text-yellow-400 hover:underline " to='/'>
-                                {post?.user?.nickName}
+                        <div className="w-full lg:w-3/4 px-3">
+                          <Link className="hover:underline" to='/'>
+                            <h3 className="mb-1 text-2xl text-green-400 font-bold font-heading">
+                              {(post?.title)}
+                            </h3>
+                          </Link>
+                          <p className="text-gray-300">{post?.description}</p>
+                          {/* Read more */}
+                          <Link className="text-indigo-500 hover:underline" to={`/posts/${post?.id}`}>
+                            Read More..
+                          </Link>
+                          {/* User Avatar */}
+                          <div className="mt-6 flex items-center">
+                            <div className="flex-shrink-0">
+                              <Link to='/'>
+                                <img
+                                  className="h-10 w-10 rounded-full"
+                                  src={post?.user?.profilePhoto}
+                                  alt=""
+                                />
                               </Link>
-                            </p>
-                            <div className="flex space-x-1 text-sm text-green-500">
-                              <time>
-                                {<DateFormatter date={post?.createdAt} />}
-                              </time>
-                              <span aria-hidden="true">&middot;</span>
+                            </div>
+                            <div className="ml-3">
+                              <p className="text-sm font-medium text-gray-900">
+                                <Link className="text-yellow-400 hover:underline " to='/'>
+                                  {post?.user?.nickName}
+                                </Link>
+                              </p>
+                              <div className="flex space-x-1 text-sm text-green-500">
+                                <time>
+                                  {<DateFormatter date={post?.createdAt} />}
+                                </time>
+                                <span aria-hidden="true">&middot;</span>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        {/* <p className="text-gray-500">
+                          {/* <p className="text-gray-500">
                           Quisque id sagittis turpis. Nulla sollicitudin rutrum
                           eros eu dictum...
                         </p> */}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
               </div>
             </div>
           </div>

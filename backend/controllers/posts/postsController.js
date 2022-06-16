@@ -42,10 +42,10 @@ const postFetchAllController = expressAsyncHandler(async (req, res) => {
 
     try {
         if (hasCategory) {
-            const posts = await Post.find({ category: hasCategory }).populate('user');
+            const posts = await Post.find({ category: hasCategory }).populate('user').populate('comments');
             res.json(posts);
         } else {
-            const posts = await Post.find({}).populate('user');
+            const posts = await Post.find({}).populate('user').populate('comments');
             res.json(posts);
         }
     } catch (error) {
@@ -64,7 +64,8 @@ const postFetchSingleController = expressAsyncHandler(async (req, res) => {
         const post = await Post.findById(id)
             .populate('user')
             .populate('egoicVotes')
-            .populate('empathicVotes');
+            .populate('empathicVotes')
+            .populate('comments');
         //Update number of views
         await Post.findByIdAndUpdate(id, {
             $inc: { numOfViews: 1 }
