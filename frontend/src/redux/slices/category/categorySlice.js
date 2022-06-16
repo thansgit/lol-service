@@ -155,7 +155,6 @@ const categorySlices = createSlice({
                 state.category = action?.payload;
                 state.isCreated = false;
                 state.loading = false;
-                //state.isCreated = true;
                 state.appErr = undefined;
                 state.serverErr = undefined;
             });

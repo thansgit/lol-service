@@ -2,6 +2,8 @@ import { createAsyncThunk, createSlice, createAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { baseURL } from "../../../utils/baseURL";
 
+const commentResetUpdateAction = createAction('comment/resetUpdate');
+
 //Create
 export const commentCreateAction = createAsyncThunk(
     'comment/create',
@@ -68,7 +70,11 @@ export const commentUpdateAction = createAsyncThunk(
         };
 
         try {
-            const { data } = await axios.put(`${baseURL}/api/comments/${comment?.id}`, config);
+            const { data } = await axios.put(`${baseURL}/api/comments/${comment?.id}`,
+                { description: comment?.description },
+                config,
+            );
+            dispatch(commentResetUpdateAction());
             return data;
         } catch (error) {
             if (!error?.response) {
@@ -78,7 +84,33 @@ export const commentUpdateAction = createAsyncThunk(
         }
 
     }
-)
+);
+
+//Fetch a single comment
+export const commentFetchSingleAction = createAsyncThunk(
+    'comment/fetchsingle',
+    async (id, { rejectWithValue, getState, dispatch }) => {
+        const user = getState()?.users;
+        const { userAuth } = user;
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userAuth?.token}`
+            }
+        };
+
+        try {
+            const { data } = await axios.get(`${baseURL}/api/comments/${id}`, config);
+            return data;
+        } catch (error) {
+            if (!error?.response) {
+                throw error;
+            }
+            return rejectWithValue(error?.response?.data);
+        }
+
+    }
+);
 
 const commentSlices = createSlice({
     name: 'comment',
@@ -140,6 +172,31 @@ const commentSlices = createSlice({
             (state, action) => {
                 state.loading = false;
                 state.commentUpdated = undefined;
+                state.appErr = action?.payload?.message;
+                state.serverErr = action?.error?.message;
+            });
+
+        //Fetch a single comment
+        builder.addCase(commentFetchSingleAction.pending,
+            (state, action) => {
+                state.loading = true;
+            });
+        builder.addCase(commentResetUpdateAction,
+            (state, action) => {
+                state.isUpdated = true;
+            });
+        builder.addCase(commentFetchSingleAction.fulfilled,
+            (state, action) => {
+                state.loading = false;
+                state.commentFetched = action?.payload;
+                state.isUpdated = false;
+                state.appErr = undefined;
+                state.serverErr = undefined;
+            });
+        builder.addCase(commentFetchSingleAction.rejected,
+            (state, action) => {
+                state.loading = false;
+                state.commentFetched = undefined;
                 state.appErr = action?.payload?.message;
                 state.serverErr = action?.error?.message;
             });

@@ -13,6 +13,7 @@ import AdminRoute from "./components/Navigation/ProtectedRoutes/AdminRoute";
 import PostsList from "./components/Posts/PostsList";
 import PostDetails from "./components/Posts/PostDetails";
 import UpdatePost from "./components/Posts/UpdatePost";
+import UpdateComment from "./components/Comments/UpdateComment";
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <Route element={<LoggedInRoute />}>
           <Route path='/create-post' element={<CreatePost />} />
           <Route path='/update-post/:id' element={<UpdatePost />} />
+          <Route path='/update-comment/:id' element={<UpdateComment />} />
         </Route>
 
         {/* Public users routes */}

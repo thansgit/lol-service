@@ -27,8 +27,8 @@ const PostDetails = () => {
 
   //Get login user
   const user = useSelector(state => state.users);
-  const { userAuth: { _id } } = user;
-  const isCreatedBy = postDetails?.user?._id === _id;
+  const { userAuth } = user;
+  const isCreatedBy = postDetails?.user?._id === userAuth?._id;
 
   if (isDeleted) return <Navigate to='/posts' />
 
@@ -85,8 +85,9 @@ const PostDetails = () => {
                 </div>
               </div>
             </div>
-            {/* Add comment Form component here */}
-            <AddComment postId={id} />
+            {/* Comment Form component*/}
+            {userAuth ? <AddComment postId={id} />
+              : null}
             <div className="flex justify-center  items-center">
               <CommentsList comments={postDetails?.comments} postId={postDetails?._id} />
             </div>

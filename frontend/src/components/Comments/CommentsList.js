@@ -6,6 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function CommentsList({ comments }) {
 
+  const user = useSelector(state => state.users);
+  const { userAuth } = user;
+  const isLoginUser = userAuth?._id;
+
   const dispatch = useDispatch();
 
   return (
@@ -39,16 +43,18 @@ export default function CommentsList({ comments }) {
                       <p className="text-sm text-gray-400">
                         {comment?.description}
                       </p>
-                      {/* Check if is the same user created this comment */}
+                      {/* Check if the same user created this comment */}
+                      {isLoginUser === comment?.user?._id ?
+                        <p className="flex">
+                          <Link className="p-3" to={`/update-comment/${comment?._id}`}>
+                            <PencilAltIcon className="h-5 mt-3 text-yellow-300" />
+                          </Link>
+                          <button onClick={() => dispatch(commentDeleteAction(comment?._id))} className="ml-3">
+                            <TrashIcon className="h-5 mt-3 text-red-600" />
+                          </button>
+                        </p> :
+                        null}
 
-                      <p className="flex">
-                        <Link className="p-3" to='/'>
-                          <PencilAltIcon className="h-5 mt-3 text-yellow-300" />
-                        </Link>
-                        <button onClick={() => dispatch(commentDeleteAction(comment?._id))} className="ml-3">
-                          <TrashIcon className="h-5 mt-3 text-red-600" />
-                        </button>
-                      </p>
                     </div>
                   </div>
                 </li>
