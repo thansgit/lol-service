@@ -23,9 +23,9 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const PrivateNavbar = ({ isLogin }) => {
+const PrivateNavbar = ({ isLoggedIn }) => {
   const userNavigation = [
-    { name: "Your Profile", href: `/profile` },
+    { name: "Your Profile", href: `/profile/${isLoggedIn?._id}` },
     { name: "Change your password", href: "/update-password" },
   ];
 
@@ -107,7 +107,7 @@ const PrivateNavbar = ({ isLogin }) => {
                             <span className="sr-only">Open user menu</span>
                             <img
                               className="h-8 w-8 rounded-full"
-                              // src={isLogin?.profilePhoto}
+                               src={isLoggedIn?.profilePhoto}
                               alt=""
                             />
                           </Menu.Button>

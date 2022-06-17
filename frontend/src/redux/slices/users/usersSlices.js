@@ -28,6 +28,29 @@ export const userRegisterAction = createAsyncThunk(
         }
     });
 
+//Fetch profile
+export const userFetchProfileAction = createAsyncThunk(
+    'users/fetchprofile',
+    async (id, { rejectWithValue, getState, dispatch }) => {
+        const user = getState()?.users;
+        const { userAuth } = user;
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userAuth?.token}`
+            }
+        };
+        try {
+            const { data } = await axios.get(`${baseURL}/api/users/profile/${id}`, config);
+            return data;
+        } catch (error) {
+            if (!error?.response) {
+                throw error;
+            }
+            return rejectWithValue(error?.response?.data);
+        }
+    }
+);
+
 //Login actions
 export const userLoginAction = createAsyncThunk(
     'users/login',
@@ -63,13 +86,13 @@ export const userLogoutAction = createAsyncThunk(
         try {
             localStorage.removeItem('userInfo');
         } catch (error) {
-            if(!error?.response){
+            if (!error?.response) {
                 throw error;
             }
             return rejectWithValue(error?.response?.data);
         }
     }
-)
+);
 
 //Get user from localstorage and place into store
 const userLoginFromLocalStorage = localStorage.getItem('userInfo')
@@ -129,6 +152,22 @@ const usersSlices = createSlice({
             state.serverErr = undefined;
         });
         builder.addCase(userLogoutAction.rejected, (state, action) => {
+            state.appErr = action?.payload?.message;
+            state.serverErr = action?.error?.message;
+            state.loading = false;
+        });
+
+        //Fetch profile
+        builder.addCase(userFetchProfileAction.pending, (state, action) => {
+            state.loading = false;
+        });
+        builder.addCase(userFetchProfileAction.fulfilled, (state, action) => {
+            state.profile = action?.payload;
+            state.loading = false;
+            state.appErr = undefined;
+            state.serverErr = undefined;
+        });
+        builder.addCase(userFetchProfileAction.rejected, (state, action) => {
             state.appErr = action?.payload?.message;
             state.serverErr = action?.error?.message;
             state.loading = false;

@@ -12,7 +12,9 @@ const Navbar = () => {
 
   return (
     <>
-      {isAdmin ? <AdminNavbar /> : userAuth ? <PrivateNavbar /> : <PublicNavbar />}
+      {isAdmin ? <AdminNavbar isLoggedIn={userAuth} /> :
+        userAuth ? <PrivateNavbar isLoggedIn={userAuth} /> :
+          <PublicNavbar />}
     </>
   );
 };

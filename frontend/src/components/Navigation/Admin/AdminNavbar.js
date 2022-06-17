@@ -28,13 +28,14 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const AdminNavbar = () => {
+const AdminNavbar = ({ isLoggedIn }) => {
+
   //Navigation
   const userNavigation = [
-    { name: "Your Profile", href: `/profile` },
+    { name: "Your Profile", href: `/profile/${isLoggedIn?._id}` },
     { name: "Change your password", href: "/update-password" },
   ];
-  
+
   const dispatch = useDispatch();
 
   return (
@@ -93,7 +94,7 @@ const AdminNavbar = () => {
                   </Link>
                   {/* Logout */}
                   <button
-                  onClick={() => dispatch(userLogoutAction())}
+                    onClick={() => dispatch(userLogoutAction())}
                     type="button"
                     className="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
                   >
@@ -114,7 +115,7 @@ const AdminNavbar = () => {
                             <span className="sr-only">Open user menu</span>
                             <img
                               className="h-8 w-8 rounded-full"
-                              // src={userAuth?.profilePhoto}
+                              src={isLoggedIn?.profilePhoto}
                               alt="Admin Profile"
                             />
                           </Menu.Button>
