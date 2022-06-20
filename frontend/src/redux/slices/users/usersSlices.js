@@ -51,6 +51,33 @@ export const userFetchProfileAction = createAsyncThunk(
     }
 );
 
+//Update profile photo action
+export const userUploadProfilePhotoAction = createAsyncThunk('users/uploadprofilephoto',
+    async (profileImg, { rejectWithValue, getState, dispatch }) => {
+        
+        console.log(profileImg?.image)
+        //Get the user token for headers
+        const user = getState()?.users;
+        const { userAuth } = user;
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userAuth?.token}`,
+            },
+        };
+
+        try {
+            //Http call
+            const formData = new FormData();
+            formData.append('image', profileImg?.image);
+
+            const { data } = await axios.put(`${baseURL}/api/users/profilephoto-upload`, formData, config);
+            return data;
+        } catch (error) {
+            if (!error?.response) throw error;
+            return rejectWithValue(error?.response?.data);
+        };
+    });
+
 //Login actions
 export const userLoginAction = createAsyncThunk(
     'users/login',
@@ -143,7 +170,7 @@ const usersSlices = createSlice({
 
         //Logout
         builder.addCase(userLogoutAction.pending, (state, action) => {
-            state.loading = false;
+            state.loading = true;
         });
         builder.addCase(userLogoutAction.fulfilled, (state, action) => {
             state.userAuth = undefined;
@@ -159,7 +186,7 @@ const usersSlices = createSlice({
 
         //Fetch profile
         builder.addCase(userFetchProfileAction.pending, (state, action) => {
-            state.loading = false;
+            state.loading = true;
         });
         builder.addCase(userFetchProfileAction.fulfilled, (state, action) => {
             state.profile = action?.payload;
@@ -168,6 +195,22 @@ const usersSlices = createSlice({
             state.serverErr = undefined;
         });
         builder.addCase(userFetchProfileAction.rejected, (state, action) => {
+            state.appErr = action?.payload?.message;
+            state.serverErr = action?.error?.message;
+            state.loading = false;
+        });
+
+        //Upload profile photo
+        builder.addCase(userUploadProfilePhotoAction.pending, (state, action) => {
+            state.loading = true;
+        });
+        builder.addCase(userUploadProfilePhotoAction.fulfilled, (state, action) => {
+            state.profilePhoto = action?.payload;
+            state.loading = false;
+            state.appErr = undefined;
+            state.serverErr = undefined;
+        });
+        builder.addCase(userUploadProfilePhotoAction.rejected, (state, action) => {
             state.appErr = action?.payload?.message;
             state.serverErr = action?.error?.message;
             state.loading = false;
