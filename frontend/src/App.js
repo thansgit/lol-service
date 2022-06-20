@@ -16,6 +16,7 @@ import UpdatePost from "./components/Posts/UpdatePost";
 import UpdateComment from "./components/Comments/UpdateComment";
 import Profile from "./components/Users/Profile/Profile";
 import UploadProfilePhoto from "./components/Users/Profile/UploadProfilePhoto";
+import UpdateProfileForm from "./components/Users/Profile/UpdateProfileForm";
 
 
 function App() {
@@ -35,7 +36,8 @@ function App() {
         <Route element={<LoggedInRoute />}>
           <Route path='/create-post' element={<CreatePost />} />
           <Route path='/update-post/:id' element={<UpdatePost />} />
-          <Route path='/upload-profile-photo/:id' element={<UploadProfilePhoto />} />
+          <Route path='/upload-profile-photo' element={<UploadProfilePhoto />} />
+          <Route path='/update-profile' element={<UpdateProfileForm />} />
           <Route path='/update-comment/:id' element={<UpdateComment />} />
           <Route path='/profile/:id' element={<Profile />} />
         </Route>
