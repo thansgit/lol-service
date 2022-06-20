@@ -57,7 +57,7 @@ userRoutes.put('/reset-password', userPasswordResetController);
 
 userRoutes.put('/password', authMiddleWare, userUpdatePasswordController);
 
-userRoutes.put('/:id', authMiddleWare, userUpdateController);
+userRoutes.put('/', authMiddleWare, userUpdateController);
 
 userRoutes.delete('/:id', userDeleteController);
 

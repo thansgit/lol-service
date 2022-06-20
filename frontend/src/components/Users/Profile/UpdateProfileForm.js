@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
-import { Redirect } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
-import { userRegisterAction } from "../../../redux/slices/users/usersSlices";
-
+import { userFetchProfileAction, userUpdateAction } from "../../../redux/slices/users/usersSlices";
 //Form schema
 const formSchema = Yup.object({
   nickName: Yup.string().required("Nickname is required"),
@@ -13,26 +12,41 @@ const formSchema = Yup.object({
 });
 
 const UpdateProfileForm = () => {
+
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  useEffect(() => {
+    dispatch(userFetchProfileAction(id));
+  }
+    , [dispatch, id])
+  const user = useSelector(state => state.users);
+  const { profile, userIsUpdated, loading, appErr, serverErr } = user;
   //formik
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
-      nickName: "",
-      email: "",
-      bio: "",
+      nickName: profile?.nickName,
+      email: profile?.email,
+      bio: profile?.bio,
     },
     onSubmit: values => {
       //dispatch the action
-      // dispatch(registerUserAction(values));
-      console.log(values);
+      dispatch(userUpdateAction(values));
     },
     validationSchema: formSchema,
   });
+
+  if (userIsUpdated) return <Navigate to={`/profile/${id}`} />
+
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h3 className="mt-6 text-center text-3xl font-extrabold text-gray-300">
-          Update your profile?
+          Update your profile, <br/>
+          <span className="text-green-300">{profile?.nickName}</span>?
         </h3>
+        {/* Error */}
+        {serverErr || appErr ? <h2 className="text-red-400 text-3xl" >{appErr} - {serverErr}</h2> : null}
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -110,12 +124,20 @@ const UpdateProfileForm = () => {
             </div>
             <div>
               {/* submit btn */}
-              <button
+              {loading ? <button
+                disabled
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-400"
+              >
+                Loading...
+              </button> : <button
                 type="submit"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="w-full flex justify-center py-2 px-4 border border-transparent
+                 rounded-md shadow-sm text-sm font-medium text-white
+                bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2
+                focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Update
-              </button>
+              </button>}
             </div>
           </form>
 

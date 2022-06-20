@@ -1,7 +1,7 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, createAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { baseURL } from "../../../utils/baseURL";
-
+const userResetUpdateAction = createAction('user/resetUpdateAction');
 //Register actions
 export const userRegisterAction = createAsyncThunk(
     'users/register',
@@ -52,10 +52,9 @@ export const userFetchProfileAction = createAsyncThunk(
 );
 
 //Update profile photo action
-export const userUploadProfilePhotoAction = createAsyncThunk('users/uploadprofilephoto',
+export const userUploadProfilePhotoAction = createAsyncThunk(
+    'users/uploadprofilephoto',
     async (profileImg, { rejectWithValue, getState, dispatch }) => {
-        
-        console.log(profileImg?.image)
         //Get the user token for headers
         const user = getState()?.users;
         const { userAuth } = user;
@@ -71,6 +70,36 @@ export const userUploadProfilePhotoAction = createAsyncThunk('users/uploadprofil
             formData.append('image', profileImg?.image);
 
             const { data } = await axios.put(`${baseURL}/api/users/profilephoto-upload`, formData, config);
+            return data;
+        } catch (error) {
+            if (!error?.response) throw error;
+            return rejectWithValue(error?.response?.data);
+        };
+    });
+
+//Update profile action
+export const userUpdateAction = createAsyncThunk(
+    'users/update',
+    async (userData, { rejectWithValue, getState, dispatch }) => {
+
+        //Get the userData token for headers
+        const { userAuth } = getState()?.users;
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userAuth?.token}`,
+            },
+        };
+
+        try {
+            //Http call
+            const { data } = await axios.put(`${baseURL}/api/users`,
+                {
+                    nickName: userData?.nickName,
+                    email: userData?.email,
+                    bio: userData?.bio
+                }, config);
+
+            dispatch(userResetUpdateAction());
             return data;
         } catch (error) {
             if (!error?.response) throw error;
@@ -145,6 +174,29 @@ const usersSlices = createSlice({
             state.serverErr = undefined;
         });
         builder.addCase(userRegisterAction.rejected, (state, action) => {
+            state.loading = false;
+            state.appErr = action?.payload?.message;
+            state.serverErr = action?.error?.message;
+        });
+
+        //Update user (profile)
+        builder.addCase(userUpdateAction.pending, (state, action) => {
+            state.loading = true;
+            state.appErr = undefined;
+            state.serverErr = undefined;
+        });
+
+        builder.addCase(userResetUpdateAction, (state, action) => {
+            state.userIsUpdated = true;
+        })
+        builder.addCase(userUpdateAction.fulfilled, (state, action) => {
+            state.loading = false;
+            state.updated = action?.payload;
+            state.userIsUpdated = false;
+            state.appErr = undefined;
+            state.serverErr = undefined;
+        });
+        builder.addCase(userUpdateAction.rejected, (state, action) => {
             state.loading = false;
             state.appErr = action?.payload?.message;
             state.serverErr = action?.error?.message;

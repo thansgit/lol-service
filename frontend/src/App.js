@@ -37,7 +37,7 @@ function App() {
           <Route path='/create-post' element={<CreatePost />} />
           <Route path='/update-post/:id' element={<UpdatePost />} />
           <Route path='/upload-profile-photo' element={<UploadProfilePhoto />} />
-          <Route path='/update-profile' element={<UpdateProfileForm />} />
+          <Route path='/update-profile/:id' element={<UpdateProfileForm />} /> 
           <Route path='/update-comment/:id' element={<UpdateComment />} />
           <Route path='/profile/:id' element={<Profile />} />
         </Route>

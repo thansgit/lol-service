@@ -120,7 +120,6 @@ const userProfileController = expressAsyncHandler(async (req, res) => {
 //-------------------------------------------------------------------
 const userUpdateController = expressAsyncHandler(async (req, res) => {
     const { _id } = req?.user;
-    //console.log(_id);
     validateMongodbID(_id);
 
     const user = await User.findByIdAndUpdate(_id, {
