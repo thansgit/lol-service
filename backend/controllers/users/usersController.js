@@ -159,23 +159,34 @@ const userFollowingController = expressAsyncHandler(async (req, res) => {
     const { followId } = req.body;
     const loginUserId = req.user.id;
 
-    //1. Find the user you want to follow and update it's followers field
-    await User.findByIdAndUpdate(followId, {
-        $push: { followers: loginUserId },
-        isFollowing: true,
-    }, { new: true });
 
     //Find the target user and check if the login id exists
     const targetUser = await User.findById(followId);
-    const alreadyFollowing = targetUser?.followers?.find(user => user?.toString() === loginUserId.toString());
+    const alreadyFollowing = targetUser?.followers?.find(
+        user => user?.toString() === loginUserId.toString()
+    );
 
     if (alreadyFollowing) throw new Error('You are already following this user');
 
+    //1. Find the user you want to follow and update it's followers field
+    await User.findByIdAndUpdate(
+        followId,
+        {
+            $push: { followers: loginUserId },
+            isFollowing: true,
+        }
+        , { new: true }
+    );
+
     //2. Update the login user following field
-    await User.findByIdAndUpdate(loginUserId, {
-        $push: { following: followId }
-    }, { new: true })
-    console.log('You have succesfully followed this user');
+    await User.findByIdAndUpdate(
+        loginUserId,
+        {
+            $push: { following: followId }
+        },
+        { new: true }
+    );
+    res.json('You have succesfully followed this user');
 });
 
 //-------------------------------------------------------------------
@@ -185,18 +196,25 @@ const userUnfollowingController = expressAsyncHandler(async (req, res) => {
     const { unFollowId } = req.body;
     const loginUserId = req.user.id;
 
-    await User.findByIdAndUpdate(unFollowId, {
-        $pull: { followers: loginUserId },
-        isFollowing: false,
-    }, { new: true });
+    await User.findByIdAndUpdate(
+        unFollowId,
+        {
+            $pull: { followers: loginUserId },
+            isFollowing: false,
+        },
+        { new: true }
+        );
 
-    await User.findByIdAndUpdate(loginUserId, {
-        $pull: { following: unFollowId },
-    }, { new: true });
+    await User.findByIdAndUpdate(
+        loginUserId,
+        {
+            $pull: { following: unFollowId },
+        },
+        { new: true }
+    );
 
     res.json('You have succesfully unfollowed this user');
 });
-
 //-------------------------------------------------------------------
 //Block user
 //-------------------------------------------------------------------

@@ -27,6 +27,8 @@ const PrivateNavbar = ({ isLoggedIn }) => {
   const userNavigation = [
     { name: "Your Profile", href: `/profile/${isLoggedIn?._id}` },
     { name: "Change your password", href: "/update-password" },
+    { name: "Feelings", href: "/feelings-list" },
+    { name: "Needs", href: "/needs-list" }
   ];
 
   //Logout

@@ -17,13 +17,16 @@ import UpdateComment from "./components/Comments/UpdateComment";
 import Profile from "./components/Users/Profile/Profile";
 import UploadProfilePhoto from "./components/Users/Profile/UploadProfilePhoto";
 import UpdateProfileForm from "./components/Users/Profile/UpdateProfileForm";
+import NeedsModal from "./components/Modals/NeedsModal";
 
 
 function App() {
 
   return (
     <Router>
+
       <Navbar />
+
       <Routes>
         {/* Admin routes */}
         <Route element={<AdminRoute />}>
@@ -37,9 +40,10 @@ function App() {
           <Route path='/create-post' element={<CreatePost />} />
           <Route path='/update-post/:id' element={<UpdatePost />} />
           <Route path='/upload-profile-photo' element={<UploadProfilePhoto />} />
-          <Route path='/update-profile/:id' element={<UpdateProfileForm />} /> 
+          <Route path='/update-profile/:id' element={<UpdateProfileForm />} />
           <Route path='/update-comment/:id' element={<UpdateComment />} />
           <Route path='/profile/:id' element={<Profile />} />
+          <Route path='/needs-list' element={<NeedsModal />} />
         </Route>
 
         {/* Public users routes */}
@@ -49,6 +53,7 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
       </Routes>
+
     </Router>
   );
 }

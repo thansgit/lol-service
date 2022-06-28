@@ -1,5 +1,7 @@
 import React from "react";
 import poster from '../img/poster.png'
+import NeedsModal from "../Modals/NeedsModal";
+import FeelingsModal from '../Modals/FeelingsModal'
 
 const HomePage = () => {
   return (
@@ -28,6 +30,8 @@ const HomePage = () => {
             <div className="w-full lg:w-1/2 px-4">
               <img className="w-full rounded-full" src={poster} alt={poster}/> 
             </div>
+            <NeedsModal />
+            <FeelingsModal />
           </div>
         </div>
       </section>

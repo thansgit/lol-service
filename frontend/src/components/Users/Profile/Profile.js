@@ -8,7 +8,11 @@ import {
 } from "@heroicons/react/outline";
 import { useDispatch, useSelector } from "react-redux";
 import { MailIcon, EyeIcon } from "@heroicons/react/solid";
-import { userFetchProfileAction } from "../../../redux/slices/users/usersSlices";
+import {
+  userFetchProfileAction,
+  userFollowProfileAction,
+  userUnfollowProfileAction
+} from "../../../redux/slices/users/usersSlices";
 import DateFormatter from "../../../utils/DateFormatter";
 import LoadingComponent from "../../../utils/LoadingComponent";
 
@@ -17,21 +21,29 @@ export default function Profile() {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  useEffect(() => {
-    dispatch(userFetchProfileAction(id))
-  }, [dispatch, id])
-
 
   const user = useSelector(state => state.users);
-  const { profile, loading, appErr, serverErr } = user;
-  console.log(user);
+  const {
+    profile,
+    profileLoading,
+    profileAppErr,
+    profileServerErr,
+    followed,
+    unFollowed
+  } = user;
+
+
+  useEffect(() => {
+    dispatch(userFetchProfileAction(id))
+  }, [dispatch, id, followed, unFollowed])
+console.log(profile);
 
   return (
     <>
       <div className="min-h-screen bg-gray-900 flex justify-center items-center" >
-        {loading ? <LoadingComponent />
-          : appErr || serverErr
-            ? <h2 className="text-red-500 text-3xl">{serverErr} - {appErr} </h2>
+        {profileLoading ? <LoadingComponent />
+          : profileAppErr || profileServerErr
+            ? <h2 className="text-red-500 text-3xl">{profileServerErr} - {profileAppErr} </h2>
             :
             <div className="h-screen flex overflow-hidden bg-gray-900">
               {/* Static sidebar for desktop */}
@@ -110,11 +122,12 @@ export default function Profile() {
                               <div className="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
                                 {/* // Hide follow button from the same */}
                                 <div>
+                                {profile?.isFollowing ? (
                                   <button
-                                    // onClick={() =>
-                                    //   dispatch(unFollowUserAction(profile?._id))
-                                    // }
-                                    className="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                                    onClick={() =>
+                                      dispatch(userUnfollowProfileAction(id))
+                                    }
+                                    className="mr-2 inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
                                   >
                                     <EmojiSadIcon
                                       className="-ml-1 mr-2 h-5 w-5 text-gray-400"
@@ -122,21 +135,26 @@ export default function Profile() {
                                     />
                                     <span>Unfollow</span>
                                   </button>
+                                ) : (
+                                  <button
+                                    onClick={() =>
+                                      dispatch(userFollowProfileAction(id))
+                                    }
+                                    type="button"
+                                    className="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                                  >
+                                    <HeartIcon
+                                      className="-ml-1 mr-2 h-5 w-5 text-gray-400"
+                                      aria-hidden="true"
+                                    />
+                                    <span>Follow </span>
+                                    <span className="pl-2">
+                                      {profile?.followers?.length}
+                                    </span>
+                                  </button>
+                                )}
 
-                                  <>
-                                    <button
-                                      // onClick={followHandler}
-                                      type="button"
-                                      className="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
-                                    >
-                                      <HeartIcon
-                                        className="-ml-1 mr-2 h-5 w-5 text-gray-400"
-                                        aria-hidden="true"
-                                      />
-                                      <span>Follow </span>
-                                    </button>
-                                  </>
-                                </div>
+                              </div>
 
                                 {/* Update Profile */}
 
