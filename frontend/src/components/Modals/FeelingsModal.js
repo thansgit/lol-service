@@ -51,7 +51,7 @@ const FeelingsModal = () => {
                             <button
                                 class="w-full text-left flex items-center outline-none focus:outline-none"
                             >
-                                <span class="pr-1 flex-1 text-white">Satisfied</span>
+                                <span class="pr-1 flex-1 text-white">Tyydyttyneet</span>
                                 <span class="mr-auto">
                                     <svg
                                         class="fill-white h-4 w-4
@@ -93,17 +93,6 @@ const FeelingsModal = () => {
                                                         </svg>
                                                     </span>
                                                 </button>
-                                                <ul
-                                                    class="absolute top-0 right-0 
-                                      transition duration-150 ease-in-out origin-top-left
-                                      min-w-32
-                                      "
-                                                >
-                                                    {item.subfeelings.map((sub) => {
-                                                        return <li class="px-3 py-1 bg-blue-500 hover:bg-blue-600">{sub.feeling}</li>
-                                                    })}
-
-                                                </ul>
                                             </li>
                                         </>
                                     )
@@ -122,7 +111,7 @@ const FeelingsModal = () => {
                             <button
                                 class="w-full text-left flex items-center outline-none focus:outline-none "
                             >
-                                <span class="pr-1 flex-1  text-white">Dissatisfied</span>
+                                <span class="pr-1 flex-1  text-white">Tyydyttymättömät</span>
                                 <span class="mr-auto">
                                     <svg
                                         class="fill-white h-4 w-4
@@ -163,17 +152,6 @@ const FeelingsModal = () => {
                                                         </svg>
                                                     </span>
                                                 </button>
-                                                <ul
-                                                    class="absolute top-0 right-0 
-                                      transition duration-150 ease-in-out origin-top-left
-                                      min-w-32
-                                      "
-                                                >
-                                                    {item.subfeelings.map((sub) => {
-                                                        return <li class="px-3 py-1 bg-blue-500 hover:bg-blue-600">{sub.feeling}</li>
-                                                    })}
-
-                                                </ul>
                                             </li>
                                         </>
                                     )

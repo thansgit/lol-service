@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import {
   HeartIcon,
   EmojiSadIcon,
@@ -20,7 +20,7 @@ export default function Profile() {
 
   const dispatch = useDispatch();
   const { id } = useParams();
-
+  const navigate = useNavigate();
 
   const user = useSelector(state => state.users);
   const {
@@ -32,11 +32,9 @@ export default function Profile() {
     unFollowed
   } = user;
 
-
   useEffect(() => {
     dispatch(userFetchProfileAction(id))
   }, [dispatch, id, followed, unFollowed])
-console.log(profile);
 
   return (
     <>
@@ -122,39 +120,39 @@ console.log(profile);
                               <div className="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
                                 {/* // Hide follow button from the same */}
                                 <div>
-                                {profile?.isFollowing ? (
-                                  <button
-                                    onClick={() =>
-                                      dispatch(userUnfollowProfileAction(id))
-                                    }
-                                    className="mr-2 inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
-                                  >
-                                    <EmojiSadIcon
-                                      className="-ml-1 mr-2 h-5 w-5 text-gray-400"
-                                      aria-hidden="true"
-                                    />
-                                    <span>Unfollow</span>
-                                  </button>
-                                ) : (
-                                  <button
-                                    onClick={() =>
-                                      dispatch(userFollowProfileAction(id))
-                                    }
-                                    type="button"
-                                    className="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
-                                  >
-                                    <HeartIcon
-                                      className="-ml-1 mr-2 h-5 w-5 text-gray-400"
-                                      aria-hidden="true"
-                                    />
-                                    <span>Follow </span>
-                                    <span className="pl-2">
-                                      {profile?.followers?.length}
-                                    </span>
-                                  </button>
-                                )}
+                                  {profile?.isFollowing ? (
+                                    <button
+                                      onClick={() =>
+                                        dispatch(userUnfollowProfileAction(id))
+                                      }
+                                      className="mr-2 inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                                    >
+                                      <EmojiSadIcon
+                                        className="-ml-1 mr-2 h-5 w-5 text-gray-400"
+                                        aria-hidden="true"
+                                      />
+                                      <span>Unfollow</span>
+                                    </button>
+                                  ) : (
+                                    <button
+                                      onClick={() =>
+                                        dispatch(userFollowProfileAction(id))
+                                      }
+                                      type="button"
+                                      className="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                                    >
+                                      <HeartIcon
+                                        className="-ml-1 mr-2 h-5 w-5 text-gray-400"
+                                        aria-hidden="true"
+                                      />
+                                      <span>Follow </span>
+                                      <span className="pl-2">
+                                        {profile?.followers?.length}
+                                      </span>
+                                    </button>
+                                  )}
 
-                              </div>
+                                </div>
 
                                 {/* Update Profile */}
 
@@ -171,9 +169,9 @@ console.log(profile);
                                   </Link>
                                 </>
                                 {/* Send Mail */}
-                                <Link to='/'
-                                  // to={`/send-mail?email=${profile?.email}`}
-                                  className="inline-flex justify-center bg-indigo-900 px-4 py-2 border border-yellow-700 shadow-sm text-sm font-medium rounded-md text-gray-700  hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                                <button
+                                  onClick={() => navigate(`/send-email/${profile?.email}`)}
+                                  className="inline-flex justify-center bg-indigo-900 px-4 py-2 border border-yellow-700 shadow-sm text-sm font-medium rounded-md text-gray-700  hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
                                 >
                                   <MailIcon
                                     className="-ml-1 mr-2 h-5 w-5 text-gray-200"
@@ -182,7 +180,7 @@ console.log(profile);
                                   <span className="text-base mr-2  text-bold text-yellow-500">
                                     Send Message
                                   </span>
-                                </Link>
+                                </button>
                               </div>
                             </div>
                           </div>

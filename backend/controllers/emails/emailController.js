@@ -11,9 +11,9 @@ const sendEmailController = expressAsyncHandler(async (req, res) => {
         //Build message
         const msg = {
             to,
+            from: 'lol-system@tutanota.com',        //Maybe change to sendgrid account
             subject,
             text: message,
-            from: 'lol-system@tutanota.com'        //Maybe change to sendgrid account
         };
         //Send message
         await sgMail.send(msg);

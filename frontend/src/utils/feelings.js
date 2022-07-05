@@ -411,392 +411,46 @@ export const dissatisfiedEng = {
 
 export const satisfiedFin = {
     "data": [
-
-        {
-            "feeling": "Kiintymys",
-            "subfeelings":
-                [
-                    { "feeling": "Myötätuntoinen" },
-                    { "feeling": "Ystävällinen" },
-                    { "feeling": "Rakastava" },
-                    { "feeling": "Avosydäminen" },
-                    { "feeling": "Sympaattinen" },
-                    { "feeling": "Hellä" },
-                    { "feeling": "Lämmin" },
-                ]
-        },
-
-        {
-            "feeling": "Osallistuva",
-            "subfeelings":
-                [
-                    { "feeling": "Uppoutunut" },
-                    { "feeling": "Tarkkaavainen" },
-                    { "feeling": "Utelias" },
-                    { "feeling": "Lumoutunut" },
-                    { "feeling": "Ihastunut" },
-                    { "feeling": "Kiinnostunut" },
-                    { "feeling": "Osallinen" },
-                    { "feeling": "Innostunut" },
-                ]
-        },
-
-
-        {
-            "feeling": "Toiveikas",
-            "subfeelings":
-                [
-                    { "feeling": "Odottava" },
-                    { "feeling": "Rohkaistunut" },
-                    { "feeling": "Optimistinen" },
-                ]
-        },
-
-        {
-            "feeling": "Itsevarma",
-            "subfeelings":
-                [
-                    { "feeling": "Voimaantunut" },
-                    { "feeling": "Avoin" },
-                    { "feeling": "Ylpeä" },
-                    { "feeling": "Turvallinen" },
-                ]
-        },
-
-        {
-            "feeling": "Innostunut",
-            "subfeelings":
-                [
-                    { "feeling": "Hämmästynyt" },
-                    { "feeling": "Virkeä" },
-                    { "feeling": "Hehkuva" },
-                    { "feeling": "Kiihottunut" },
-                    { "feeling": "Häikäistynyt" },
-                    { "feeling": "Halukas" },
-                    { "feeling": "Energinen" },
-                    { "feeling": "Intohimoinen" },
-                    { "feeling": "Innostunut" },
-                    { "feeling": "Virkistynyt" },
-                    { "feeling": "Eläväinen" },
-                    { "feeling": "Intohimoinen" },
-                    { "feeling": "Yllättynyt" },
-                ]
-        },
-
-        {
-            "feeling": "Kiitollisuus",
-            "subfeelings":
-                [
-                    { "feeling": "Arvostava" },
-                    { "feeling": "Liikuttunut" },
-                    { "feeling": "Kiitollinen" },
-                    { "feeling": "Koskettava" },
-                ]
-        },
-
-        {
-            "feeling": "Rauha",
-            "subfeelings":
-                [
-                    { "feeling": "Rauha" },
-                    { "feeling": "Selväpäinen" },
-                    { "feeling": "Mukava" },
-                    { "feeling": "Tasapainoinen" },
-                    { "feeling": "Tyytyväinen" },
-                    { "feeling": "Tyyneys" },
-                    { "feeling": "Täyttynyt" },
-                    { "feeling": "Lempeä" },
-                    { "feeling": "Hiljainen" },
-                    { "feeling": "Rentoutunut" },
-                    { "feeling": "Helpottunut" },
-                    { "feeling": "Tyydyttynyt" },
-                    { "feeling": "Seesteinen" },
-                    { "feeling": "Tyyni" },
-                    { "feeling": "Luottavainen" },
-                ]
-        },
-
-        {
-            "feeling": "Leikki",
-            "subfeelings":
-                [
-                    { "feeling": "Huvittunut" },
-                    { "feeling": "Ilahtunut" },
-                    { "feeling": "Iloinen" },
-                    { "feeling": "Onnellinen" },
-                    { "feeling": "Riemuitseva" },
-                    { "feeling": "Tyytyväinen" },
-                    { "feeling": "Kutkuttunut" },
-                ]
-        },
-
-        {
-            "feeling": "Riemastunut",
-            "subfeelings":
-                [
-                    { "feeling": "Autuas" },
-                    { "feeling": "Ekstaattinen" },
-                    { "feeling": "Haltioissaan" },
-                    { "feeling": "Elämäniloinen" },
-                    { "feeling": "Säteilevä" },
-                    { "feeling": "Hurmiollinen" },
-                    { "feeling": "Ihastunut" },
-                ]
-        },
-
-        {
-            "feeling": "Palautunut",
-            "subfeelings":
-                [
-                    { "feeling": "Elävöitynyt" },
-                    { "feeling": "Palautunut" },
-                    { "feeling": "Levännyt" },
-                    { "feeling": "Uudelleensyntynyt" },
-                ]
-        },
-
+            {"feeling": "Hämmästynyt"},
+            {"feeling": "Iloinen"},
+            {"feeling": "Energinen"},
+            {"feeling": "Mukava"},
+            {"feeling": "Iloinen"},
+            {"feeling": "Liikuttunut"},
+            {"feeling": "Yllättynyt"},
+            {"feeling": "Luottavainen"},
+            {"feeling": "Toiveikas"},
+            {"feeling": "Optimistinen"},
+            {"feeling": "Kiitollinen"},
+            {"feeling": "Innokas"},
+            {"feeling": "Inspiroitunut"},
+            {"feeling": "Ylpeä"},
+            {"feeling": "Koskettava"},
+            {"feeling": "Lumoutunut"},
+            {"feeling": "Helpottunut"},
+            {"feeling": "Luottavainen"},
     ]
 };
 
 export const dissatisfiedFin = {
     "data": [
-        {
-            "feeling": "Pelko",
-            "subfeelings":
-                [
-                    { "feeling": "Ahdistunut" },
-                    { "feeling": "Kammoksua" },
-                    { "feeling": "Enteillä pahaa" },
-                    { "feeling": "Peloissaan" },
-                    { "feeling": "Epäluuloinen" },
-                    { "feeling": "Paniikkinen" },
-                    { "feeling": "Kauhistunut" },
-                    { "feeling": "Epäilevä" },
-                    { "feeling": "Järkyttynyt" },
-                    { "feeling": "Varuillaan" },
-                    { "feeling": "Huolissaan" },
-                ]
-        },
-
-        {
-            "feeling": "Ärsytys",
-            "subfeelings":
-                [
-                    { "feeling": "Suuttunut" },
-                    { "feeling": "Tyrmistynyt" },
-                    { "feeling": "Tyytymätön" },
-                    { "feeling": "Ärsyyntynyt" },
-                    { "feeling": "Hermostunut" },
-                    { "feeling": "Malttamaton" },
-                    { "feeling": "Häiriintynyt" },
-                ]
-        },
-
-        {
-            "feeling": "Vihaisuus",
-            "subfeelings":
-                [
-                    { "feeling": "Raivostunut" },
-                    { "feeling": "Vihainen" },
-                    { "feeling": "Tuohtunut" },
-                    { "feeling": "Katkera" },
-                ]
-        },
-
-        {
-            "feeling": "Vastenmielisyys",
-            "subfeelings":
-                [
-                    { "feeling": "Vihamielisyys" },
-                    { "feeling": "Järkyttynyt" },
-                    { "feeling": "Halveksuva" },
-                    { "feeling": "Inhottunut" },
-                    { "feeling": "Pitämättömyys" },
-                    { "feeling": "Viha" },
-                    { "feeling": "Torjuttu" },
-                ]
-        },
-
-        {
-            "feeling": "Confused",
-            "subfeelings":
-                [
-                    { "feeling": "Ambivalent" },
-                    { "feeling": "Baffled" },
-                    { "feeling": "Bewildered" },
-                    { "feeling": "Dazed" },
-                    { "feeling": "Hesitant" },
-                    { "feeling": "Lost" },
-                    { "feeling": "Mystified" },
-                    { "feeling": "Perplexed" },
-                    { "feeling": "Puzzled" },
-                    { "feeling": "Torn" },
-                ]
-        },
-
-        {
-            "feeling": "Disconnected",
-            "subfeelings":
-                [
-                    { "feeling": "Alienated" },
-                    { "feeling": "Aloof" },
-                    { "feeling": "Apathetic" },
-                    { "feeling": "Bored" },
-                    { "feeling": "Cold" },
-                    { "feeling": "Detached" },
-                    { "feeling": "Distant" },
-                    { "feeling": "Distracted" },
-                    { "feeling": "Indifferent" },
-                    { "feeling": "Numb" },
-                    { "feeling": "Removed" },
-                    { "feeling": "Uninterested" },
-                    { "feeling": "Withdrawn" },
-                ]
-        },
-
-        {
-            "feeling": "Disquiet",
-            "subfeelings":
-                [
-                    { "feeling": "Agitated" },
-                    { "feeling": "Alarmed" },
-                    { "feeling": "Discombobulated" },
-                    { "feeling": "Disconcerted" },
-                    { "feeling": "Disturbed" },
-                    { "feeling": "Perturbed" },
-                    { "feeling": "Rattled" },
-                    { "feeling": "Restless" },
-                    { "feeling": "Shocked" },
-                    { "feeling": "Startled" },
-                    { "feeling": "Surprised" },
-                    { "feeling": "Troubled" },
-                    { "feeling": "Turbulent" },
-                    { "feeling": "Turmoil" },
-                    { "feeling": "Uncomfortable" },
-                    { "feeling": "Uneasy" },
-                    { "feeling": "Unnerved" },
-                    { "feeling": "Unsettled" },
-                    { "feeling": "Upset" },
-                ]
-        },
-
-        {
-            "feeling": "Embarrassed",
-            "subfeelings":
-                [
-                    { "feeling": "Ashamed" },
-                    { "feeling": "Chagrined" },
-                    { "feeling": "Flustered" },
-                    { "feeling": "Guilty" },
-                    { "feeling": "Mortified" },
-                    { "feeling": "Self-conscious" },
-                ]
-        },
-
-        {
-            "feeling": "Fatigue",
-            "subfeelings":
-                [
-                    { "feeling": "Beat" },
-                    { "feeling": "Burnt out" },
-                    { "feeling": "Depleted" },
-                    { "feeling": "Exhausted" },
-                    { "feeling": "Lethargic" },
-                    { "feeling": "Listless" },
-                    { "feeling": "Sleepy" },
-                    { "feeling": "Tired" },
-                    { "feeling": "Weary" },
-                    { "feeling": "Worn out" },
-                ]
-        },
-
-        {
-            "feeling": "Pain",
-            "subfeelings":
-                [
-                    { "feeling": "Agony" },
-                    { "feeling": "Anguished" },
-                    { "feeling": "Bereaved" },
-                    { "feeling": "Devastated" },
-                    { "feeling": "Grief" },
-                    { "feeling": "Heartbroken" },
-                    { "feeling": "Hurt" },
-                    { "feeling": "Lonely" },
-                    { "feeling": "Miserable" },
-                    { "feeling": "Regretful" },
-                    { "feeling": "Remorseful" },
-                ]
-        },
-
-        {
-            "feeling": "Sad",
-            "subfeelings":
-                [
-                    { "feeling": "Depressed" },
-                    { "feeling": "Dejected" },
-                    { "feeling": "Despair" },
-                    { "feeling": "Despondent" },
-                    { "feeling": "Disappointed" },
-                    { "feeling": "Discouraged" },
-                    { "feeling": "Disheartened" },
-                    { "feeling": "Forlorn" },
-                    { "feeling": "Gloomy" },
-                    { "feeling": "Heavy hearted" },
-                    { "feeling": "Hopeless" },
-                    { "feeling": "Melancholy" },
-                    { "feeling": "Unhappy" },
-                    { "feeling": "Wretched" },
-                ]
-        },
-
-        {
-            "feeling": "Tense",
-            "subfeelings":
-                [
-                    { "feeling": "Anxious" },
-                    { "feeling": "Cranky" },
-                    { "feeling": "Distressed" },
-                    { "feeling": "Distraught" },
-                    { "feeling": "Edgy" },
-                    { "feeling": "Fidgety" },
-                    { "feeling": "Frazzled" },
-                    { "feeling": "Irritable" },
-                    { "feeling": "Jittery" },
-                    { "feeling": "Nervous" },
-                    { "feeling": "Overwhelmed" },
-                    { "feeling": "Restless" },
-                    { "feeling": "Stressed out" },
-                ]
-        },
-        {
-            "feeling": "Vulnerable",
-            "subfeelings":
-                [
-                    { "feeling": "Fragile" },
-                    { "feeling": "Guarded" },
-                    { "feeling": "Helpless" },
-                    { "feeling": "Insecure" },
-                    { "feeling": "Leery" },
-                    { "feeling": "Reserved" },
-                    { "feeling": "Sensitive" },
-                    { "feeling": "Shaky" },
-                ]
-        },
-        {
-            "feeling": "Yearning",
-            "subfeelings":
-                [
-                    { "feeling": "Envious" },
-                    { "feeling": "Jealous" },
-                    { "feeling": "Longing" },
-                    { "feeling": "Nostalgic" },
-                    { "feeling": "Pining" },
-                    { "feeling": "Wistful" },
-                ]
-        },
-
-
-
+        {"feeling":"Vihainen"},
+        {"feeling":"Lannistunut"},
+        {"feeling":"Toivoton"},
+        {"feeling":"Ylikuormittunut"},
+        {"feeling":"Ärsyyntynyt"},
+        {"feeling":"Ahdistunut"},
+        {"feeling":"Levoton"},
+        {"feeling":"Hämillään"},
+        {"feeling":"Huolestunut"},
+        {"feeling":"Nolostunut"},
+        {"feeling":"Turhautunut"},
+        {"feeling":"Vastahakoinen"},
+        {"feeling":"Yksinäinen"},
+        {"feeling":"Surullinen"},
+        {"feeling":"Pettynyt"},
+        {"feeling":"Avuton"},
+        {"feeling":"Hermostunut"},
     ]
 };
 

@@ -18,6 +18,7 @@ import Profile from "./components/Users/Profile/Profile";
 import UploadProfilePhoto from "./components/Users/Profile/UploadProfilePhoto";
 import UpdateProfileForm from "./components/Users/Profile/UpdateProfileForm";
 import NeedsModal from "./components/Modals/NeedsModal";
+import SendEmail from "./components/Users/Emailing/SendEmail";
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           <Route path='/update-category/:id' element={<UpdateCategory />} />
           <Route path='/add-category' element={<AddNewCategory />} />
           <Route path='/category-list' element={<CategoryList />} />
+          <Route path='/send-email/:id' element={<SendEmail />} />
         </Route>
 
         {/* Logged in users routes */}
