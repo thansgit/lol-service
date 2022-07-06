@@ -252,20 +252,26 @@ const userVerificationTokenGeneratorController = expressAsyncHandler(async (req,
 
     try {
         //Generate token
-        const verificationToken = await user.createAccountVerificationToken();
+        const verificationToken = await user?.createAccountVerificationToken();
+        const verificationLink = `http://localhost:3000/verify-account/${verificationToken}`
         //Save the user with the token to database
         await user.save();
         //Build email
         const resetURL = `If you requested to verify your account, verify within 10 minutes. Otherwise, ignore this message.
-        <a href='http://localhost:3000/verify-account/${verificationToken}'>Click to verify</a>`
+        <a href='${verificationLink}'> Click to verify </a>`
         const msg = {
-            to: 'lol-system@tutanota.com',
+            to: user?.email,
             from: 'lol-system@tutanota.com',
-            subject: 'My first NODEJS email',
-            html: resetURL,
+            subject: 'Verify your account',
+            content: [
+                {
+                  "type": "text/html", 
+                  "value": `<html><head>Verification</head><body>${resetURL}c</body></html>`
+                }
+              ], 
         };
 
-        //await sendGridMail.send(msg);
+        await sendGridMail.send(msg);
         res.json(resetURL);
     } catch (error) {
         res.json(error);
