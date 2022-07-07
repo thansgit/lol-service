@@ -38,7 +38,7 @@ export default function Profile() {
   }, [dispatch, id, followed, unFollowed])
 
   const isLoggedInUser = userAuth?._id === profile?._id;
-  console.log(isLoggedInUser);
+  console.log(profile?.viewedBy);
 
   return (
     <>
@@ -76,9 +76,9 @@ export default function Profile() {
                               <div className=" flex flex-col 2xl:block mt-10 min-w-0 flex-1">
                                 <h1 className="text-2xl font-bold text-white ">
                                   {profile?.nickName}
-
-                                  <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
-                                    {/* {profile?.accountType} */}
+                                    {" "}
+                                  <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-yellow-500 text-yellow-800">
+                                    {profile?.accountType}
                                   </span>
                                   {/* Display if verified or not */}
                                   {profile?.isAccountVerified ? <span className="inline-flex ml-2 items-center px-3 py-0.5  rounded-lg text-sm font-medium bg-green-600 text-gray-300">
@@ -199,28 +199,32 @@ export default function Profile() {
                       <div className="flex justify-center place-items-start flex-wrap  md:mb-0">
                         <div className="w-full md:w-1/3 px-4 mb-4 md:mb-0">
                           <h1 className="text-center text-xl border-gray-500 mb-2 border-b-2 text-white">
-                            Who viewed my profile : 9
+                            Users viewed profile: {profile?.viewedBy?.length}
                           </h1>
 
                           {/* Who view my post */}
                           <ul className="">
-                            <Link to='/'>
-                              <div className="flex mb-2 items-center space-x-4 lg:space-x-6">
-                                <img
-                                  className="w-16 h-16 rounded-full lg:w-20 lg:h-20"
-                                // src={user.profilePhoto}
-                                // alt={user?._id}
-                                />
-                                <div className="font-medium text-lg leading-6 space-y-1">
-                                  <h3>
-                                    {/* {user?.firstName} {user?.lastName} */}Name
-                                  </h3>
-                                  <p className="text-indigo-600">
-                                    {/* {user.accountType} */} Account Type
-                                  </p>
-                                </div>
-                              </div>
-                            </Link>
+                            {profile?.viewedBy?.length <= 0 ? <h1 className="text-rose-600">No viewers</h1>
+                              :
+                              profile?.viewedBy?.map((viewer) => {
+                                return <Link to={`/profile/${viewer._id}`}>
+                                  <div className="flex mb-2 items-center space-x-4 lg:space-x-6">
+                                    <img
+                                      className="w-16 h-16 rounded-full lg:w-20 lg:h-20"
+                                      src={viewer?.profilePhoto}
+                                      alt={viewer?._id}
+                                    />
+                                    <div className="font-medium text-lg leading-6 space-y-1">
+                                      <h3 className="text-green-500">
+                                        {viewer?.nickName}
+                                      </h3>
+                                      <p className="text-indigo-600">
+                                        {viewer?.accountType}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </Link>
+                              })}
                           </ul>
                         </div>
                         {/* All my Post */}
