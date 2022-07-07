@@ -32,7 +32,7 @@ const Login = () => {
   const storeData = useSelector(state => state?.users);
   const { userAuth, loading, serverErr, appErr } = storeData;
 
-  if (userAuth) return <Navigate to="/profile" />;
+  if (userAuth) return <Navigate to={`/profile/${userAuth?._id}`} />;
 
   return (
     <>

@@ -29,12 +29,16 @@ export default function Profile() {
     profileAppErr,
     profileServerErr,
     followed,
-    unFollowed
+    unFollowed,
+    userAuth,
   } = user;
 
   useEffect(() => {
     dispatch(userFetchProfileAction(id))
   }, [dispatch, id, followed, unFollowed])
+
+  const isLoggedInUser = userAuth?._id === profile?._id;
+  console.log(isLoggedInUser);
 
   return (
     <>
@@ -118,8 +122,8 @@ export default function Profile() {
                               </div>
 
                               <div className="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
-                                {/* // Hide follow button from the same */}
-                                <div>
+                                {/* // Hide follow button if the user is viewing own profile*/}
+                                {isLoggedInUser ? null : <div>
                                   {profile?.isFollowing ? (
                                     <button
                                       onClick={() =>
@@ -152,7 +156,7 @@ export default function Profile() {
                                     </button>
                                   )}
 
-                                </div>
+                                </div>}
 
                                 {/* Update Profile */}
 

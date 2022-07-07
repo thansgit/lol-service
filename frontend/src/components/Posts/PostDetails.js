@@ -57,11 +57,13 @@ const PostDetails = () => {
                     alt="img"
                   />
                   <div className="text-left">
-                    <h4 className="mb-1 text-2xl font-bold text-gray-50">
-                      <span className="text-xl lg:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-yellow-200 to-orange-600">
-                        {postDetails?.user?.nickName}
-                      </span>
-                    </h4>
+                    <Link to={`/profile/${postDetails?.user?._id}`} className="hover:underline text-green-800">
+                      <h4 className="mb-1 text-2xl font-bold text-gray-50">
+                        <span className="text-xl lg:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-yellow-200 to-orange-600">
+                          {postDetails?.user?.nickName}
+                        </span>
+                      </h4>
+                    </Link>
                     <p className="text-gray-500">
                       {<DateFormatter date={postDetails?.createdAt} />}
                     </p>

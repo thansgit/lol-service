@@ -78,7 +78,7 @@ export default function PostsList() {
               <div className="w-full lg:w-3/4 px-3">
                 {/* Posts */}
                 {appErr || serverErr ?
-                  <h1>{appErr} - {serverErr}</h1> :
+                  <h1 className="text-rose-600">{serverErr} - {appErr}</h1> :
                   postList?.length <= 0 ?
                     <h1 className="text-white text-center text-lg">No posts found</h1> :
                     postList?.map((post) => (
@@ -149,7 +149,7 @@ export default function PostsList() {
                             </div>
                             <div className="ml-3">
                               <p className="text-sm font-medium text-gray-900">
-                                <Link className="text-yellow-400 hover:underline " to='/'>
+                                <Link className="text-yellow-400 hover:underline " to={`/profile/${post?.user?._id}`}>
                                   {post?.user?.nickName}
                                 </Link>
                               </p>

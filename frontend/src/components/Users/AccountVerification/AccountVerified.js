@@ -16,7 +16,7 @@ export default function AccountVerified() {
 
   //store
   const accountVerification = useSelector(state => state.accountVerification);
-  const { loading, appErr, serverErr, isVerified, verified } = accountVerification;
+  const { verified } = accountVerification;
 
 
   return (
