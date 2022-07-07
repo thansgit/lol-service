@@ -21,7 +21,7 @@ export default function AccountVerificationAlertWarning() {
             <button
               onClick={() => dispatch(accountVerificationSendTokenAction())}
               className="font-medium underline text-green-200 hover:text-yellow-600">
-              Click this link to verify
+              Click to verify
             </button>
           </p>
         </div>

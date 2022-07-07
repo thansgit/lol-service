@@ -50,6 +50,7 @@ const userLoginController = expressAsyncHandler(async (req, res) => {
             profilePhoto: userFound?.profilePhoto,
             isAdmin: userFound?.isAdmin,
             token: generateToken(userFound?._id), //Generate JWT token for user
+            isAccountVerified: userFound?.isAccountVerified,
         });
     } else {
         res.status(401);
@@ -134,7 +135,7 @@ const userUpdateController = expressAsyncHandler(async (req, res) => {
 });
 
 //-------------------------------------------------------------------
-//Update profile
+//Update profile password
 //-------------------------------------------------------------------
 const userUpdatePasswordController = expressAsyncHandler(async (req, res) => {
     const { _id } = req.user;
@@ -258,7 +259,7 @@ const userVerificationTokenGeneratorController = expressAsyncHandler(async (req,
         await user.save();
         //Build email
         const resetURL = `If you requested to verify your account, verify within 10 minutes. Otherwise, ignore this message.
-        <a href='${verificationLink}'> Click to verify </a>`
+        ${verificationLink} Navigate to verify`
         const msg = {
             to: user?.email,
             from: 'lol-system@tutanota.com',

@@ -12,6 +12,9 @@ const Navbar = () => {
   const { userAuth, profile } = state;
   const isAdmin = userAuth?.isAdmin;
 
+  const verification = useSelector(state => state?.accountVerification);
+  const { loading, appErr, serverErr, tokenSent } = verification;
+
 
   return (
     <>
@@ -19,7 +22,10 @@ const Navbar = () => {
         userAuth ? <PrivateNavbar isLoggedIn={userAuth} /> :
           <PublicNavbar />}
       {/* Alert */}
-      {!profile?.isAccountVerified && <AccountVerificationAlertWarning />}
+      {userAuth && !userAuth?.isAccountVerified && <AccountVerificationAlertWarning />}
+      {loading && <h2 className="text-center bg-green-300 text-green-800">Loading...</h2>}
+      {tokenSent && <AccountVerificationAlertSuccess />}
+      {appErr || serverErr ? <h2 className="text-center text-red-500">{serverErr} {appErr}</h2> : null}
     </>
   );
 };

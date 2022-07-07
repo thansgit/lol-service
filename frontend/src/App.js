@@ -19,6 +19,7 @@ import UploadProfilePhoto from "./components/Users/Profile/UploadProfilePhoto";
 import UpdateProfileForm from "./components/Users/Profile/UpdateProfileForm";
 import NeedsModal from "./components/Modals/NeedsModal";
 import SendEmail from "./components/Users/Emailing/SendEmail";
+import AccountVerified from "./components/Users/AccountVerification/AccountVerified";
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
           <Route path='/update-profile/:id' element={<UpdateProfileForm />} />
           <Route path='/update-comment/:id' element={<UpdateComment />} />
           <Route path='/profile/:id' element={<Profile />} />
+          <Route path='/verify-account/:token' element={<AccountVerified />} />
           <Route path='/needs-list' element={<NeedsModal />} />
         </Route>
 
