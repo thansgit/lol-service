@@ -20,6 +20,7 @@ import UpdateProfileForm from "./components/Users/Profile/UpdateProfileForm";
 import NeedsModal from "./components/Modals/NeedsModal";
 import SendEmail from "./components/Users/Emailing/SendEmail";
 import AccountVerified from "./components/Users/AccountVerification/AccountVerified";
+import UsersList from "./components/Users/UsersList/UsersList";
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
           <Route path='/add-category' element={<AddNewCategory />} />
           <Route path='/category-list' element={<CategoryList />} />
           <Route path='/send-email/:id' element={<SendEmail />} />
+          <Route path='/users' element={<UsersList />} />
         </Route>
 
         {/* Logged in users routes */}

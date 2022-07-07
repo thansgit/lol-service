@@ -50,6 +50,28 @@ export const userFetchProfileAction = createAsyncThunk(
         }
     }
 );
+//Fetch profiles
+export const userFetchAllProfilesAction = createAsyncThunk(
+    'users/fetchallprofiles',
+    async (payload, { rejectWithValue, getState, dispatch }) => {
+        const user = getState()?.users;
+        const { userAuth } = user;
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userAuth?.token}`
+            }
+        };
+        try {
+            const { data } = await axios.get(`${baseURL}/api/users`, config);
+            return data;
+        } catch (error) {
+            if (!error?.response) {
+                throw error;
+            }
+            return rejectWithValue(error?.response?.data);
+        }
+    }
+);
 
 //Follow profile
 export const userFollowProfileAction = createAsyncThunk(
@@ -303,6 +325,21 @@ const usersSlices = createSlice({
             state.profileServerErr = undefined;
         });
         builder.addCase(userFetchProfileAction.rejected, (state, action) => {
+            state.profileAppErr = action?.payload?.message;
+            state.profileServerErr = action?.error?.message;
+            state.profileLoading = false;
+        });
+        //Fetch profiles
+        builder.addCase(userFetchAllProfilesAction.pending, (state, action) => {
+            state.profileLoading = true;
+        });
+        builder.addCase(userFetchAllProfilesAction.fulfilled, (state, action) => {
+            state.allProfiles = action?.payload;
+            state.profileLoading = false;
+            state.profileAppErr = undefined;
+            state.profileServerErr = undefined;
+        });
+        builder.addCase(userFetchAllProfilesAction.rejected, (state, action) => {
             state.profileAppErr = action?.payload?.message;
             state.profileServerErr = action?.error?.message;
             state.profileLoading = false;
