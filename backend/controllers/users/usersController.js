@@ -108,9 +108,32 @@ const userFetchDetailsController = expressAsyncHandler(async (req, res) => {
 const userProfileController = expressAsyncHandler(async (req, res) => {
     const { id } = req.params;
     validateMongodbID(id);
+
+    //1. Find the logged in user
+    //2. Check if current user in array "viewedBy"
+    const loggedInUserId = req?.user?._id?.toString();
+
     try {
-        const myProfile = await User.findById(id).populate('posts');
-        res.json(myProfile);
+        const profileToFetch = await User.findById(id)
+            .populate('posts')
+            .populate('viewedBy');
+
+        const alreadyViewed = profileToFetch?.viewedBy?.find(user => {
+            return user?._id.toString() === loggedInUserId;
+        });
+        const ownProfile = loggedInUserId === profileToFetch?.id
+
+        if (alreadyViewed || ownProfile) {
+            res.json(profileToFetch);
+        } else {
+            const profile = await User.findByIdAndUpdate(profileToFetch?._id, {
+                $push: { viewedBy: loggedInUserId },
+            });
+
+            res.json(profile);
+        }
+
+
     } catch (error) {
         res.json(error);
     }
@@ -204,7 +227,7 @@ const userUnfollowingController = expressAsyncHandler(async (req, res) => {
             isFollowing: false,
         },
         { new: true }
-        );
+    );
 
     await User.findByIdAndUpdate(
         loginUserId,
@@ -266,10 +289,10 @@ const userVerificationTokenGeneratorController = expressAsyncHandler(async (req,
             subject: 'Verify your account',
             content: [
                 {
-                  "type": "text/html", 
-                  "value": `<html><head>Verification</head><body>${resetURL}c</body></html>`
+                    "type": "text/html",
+                    "value": `<html><head>Verification</head><body>${resetURL}c</body></html>`
                 }
-              ], 
+            ],
         };
 
         await sendGridMail.send(msg);

@@ -93,8 +93,8 @@ export default function Profile() {
                                 </p>
                                 <p className="text-green-400 mt-2 mb-2">
                                   {profile?.posts?.length} posts{" "}
-                                  {profile?.followers.length} followers{" "}
-                                  {profile?.following.length} following
+                                  {profile?.followers?.length} followers{" "}
+                                  {profile?.following?.length} following
                                 </p>
                                 {/* Who view my profile */}
                                 <div className="flex items-center  mb-2">
@@ -230,7 +230,7 @@ export default function Profile() {
                           </h1>
                           {/* Loo here */}
                           {profile?.posts?.length <= 0 ? <h2 className="text-center text-lg"> No posts found </h2> :
-                            profile?.posts.map(post => (
+                            profile?.posts?.map(post => (
                               <div key={post?._id} className="flex flex-wrap  -mx-3 mt-3  lg:mb-6">
                                 <div className="mb-2   w-full lg:w-1/4 px-3">
                                   <Link to={`/posts/${post?._id}`}>
