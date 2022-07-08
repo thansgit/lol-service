@@ -38,7 +38,6 @@ export default function Profile() {
   }, [dispatch, id, followed, unFollowed])
 
   const isLoggedInUser = userAuth?._id === profile?._id;
-  console.log(profile?.viewedBy);
 
   return (
     <>
@@ -76,7 +75,7 @@ export default function Profile() {
                               <div className=" flex flex-col 2xl:block mt-10 min-w-0 flex-1">
                                 <h1 className="text-2xl font-bold text-white ">
                                   {profile?.nickName}
-                                    {" "}
+                                  {" "}
                                   <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-yellow-500 text-yellow-800">
                                     {profile?.accountType}
                                   </span>
@@ -107,9 +106,8 @@ export default function Profile() {
                                   </div>
                                 </div>
 
-                                {/* is login user */}
                                 {/* Upload profile photo */}
-                                <Link
+                                {isLoggedInUser && <Link
                                   to={`/upload-profile-photo`}
                                   className="inline-flex justify-center w-48 px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
                                 >
@@ -118,7 +116,8 @@ export default function Profile() {
                                     aria-hidden="true"
                                   />
                                   <span>Set profile photo</span>
-                                </Link>
+                                </Link>}
+
                               </div>
 
                               <div className="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
@@ -161,7 +160,7 @@ export default function Profile() {
                                 {/* Update Profile */}
 
                                 <>
-                                  <Link
+                                  {isLoggedInUser && <Link
                                     to={`/update-profile/${profile?._id}`}
                                     className="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
                                   >
@@ -170,7 +169,8 @@ export default function Profile() {
                                       aria-hidden="true"
                                     />
                                     <span>Update Profile</span>
-                                  </Link>
+                                  </Link>}
+
                                 </>
                                 {/* Send Mail */}
                                 <button
@@ -204,7 +204,7 @@ export default function Profile() {
 
                           {/* Who view my post */}
                           <ul className="">
-                            {profile?.viewedBy?.length <= 0 ? <h1 className="text-rose-600">No viewers</h1>
+                            {profile?.viewedBy?.length <= 0 ? <h1 className="text-rose-600 text-center text-lg">No viewers</h1>
                               :
                               profile?.viewedBy?.map((viewer) => {
                                 return <Link to={`/profile/${viewer._id}`}>
@@ -233,7 +233,7 @@ export default function Profile() {
                             My posts - {profile?.posts?.length}
                           </h1>
                           {/* Loo here */}
-                          {profile?.posts?.length <= 0 ? <h2 className="text-center text-lg"> No posts found </h2> :
+                          {profile?.posts?.length <= 0 ? <h2 className="text-center text-lg text-rose-600"> No posts found </h2> :
                             profile?.posts?.map(post => (
                               <div key={post?._id} className="flex flex-wrap  -mx-3 mt-3  lg:mb-6">
                                 <div className="mb-2   w-full lg:w-1/4 px-3">
