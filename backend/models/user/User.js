@@ -105,7 +105,7 @@ userSchema.virtual('posts', {
 //Account type:
 userSchema.virtual('accountType').get(function(){
     const totalFollowers = this.followers?.length;
-    return totalFollowers >= 1 ? 'Emotionally liberated' : 'Obnoxious person'
+    return totalFollowers >= 2 ? 'Emotionally liberated' : 'Obnoxious person'
 })
 
 //Hash password

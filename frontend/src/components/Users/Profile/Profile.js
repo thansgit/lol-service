@@ -83,7 +83,7 @@ export default function Profile() {
                                   {/* Display if verified or not */}
                                   {profile?.isAccountVerified ? <span className="inline-flex ml-2 items-center px-3 py-0.5  rounded-lg text-sm font-medium bg-green-600 text-gray-300">
                                     Account Verified
-                                  </span> : <span className="inline-flex ml-2 items-center px-3 py-0.5  rounded-lg text-sm font-medium bg-red-600 text-gray-300">
+                                  </span> : <span className="inline-flex ml-2 items-center px-3 py-0.5  rounded-lg text-sm font-medium bg-rose-600 text-gray-300">
                                     Unverified Account
                                   </span>}
                                 </h1>

@@ -4,20 +4,26 @@ const fs = require('fs');
 const User = require("../../models/user/User");
 const cloudinaryUploadImage = require("../../utils/cloudinary");
 const validateMongodbID = require("../../utils/validateMongodbID");
-const blockedUser = require("../../utils/blockedUser");
+const checkIfUserBlockedError = require("../../utils/checkIfUserBlockedError");
+
 
 //-------------------------------------------------------------------
 //Create post
 //-------------------------------------------------------------------
 const postCreateController = expressAsyncHandler(async (req, res) => {
     const { _id } = req.user;
-    blockedUser(req.user)
+    checkIfUserBlockedError(req.user)
     validateMongodbID(_id);
 
     //1. Get the path to the image
     const localPath = `public/images/post/${req.file.filename}`;
     //2. Upload to cloudinary
     const uploadedImg = await cloudinaryUploadImage(localPath);
+
+    //Prevent user if account type is not high enough
+    if (req?.user?.accountType === 'Obnoxious person' && req?.user?.postCount >= 2) {
+        throw new Error('Account type post limit is 2 posts. Gain more followers.')
+    }
 
     //Maybe profane word filter for have to etc..
     try {
@@ -26,8 +32,12 @@ const postCreateController = expressAsyncHandler(async (req, res) => {
             user: _id,
             image: uploadedImg?.url,
         });
-        res.json(post);
+        //Update postcount
+        await User.findByIdAndUpdate(_id, {
+            $inc: { postCount: 1 },
+        }, { new: true });
 
+        res.json(post);
         //Remove local copies of uploaded imgs
         fs.unlinkSync(localPath);
     } catch (error) {

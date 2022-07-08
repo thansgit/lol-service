@@ -17,10 +17,11 @@ import UpdateComment from "./components/Comments/UpdateComment";
 import Profile from "./components/Users/Profile/Profile";
 import UploadProfilePhoto from "./components/Users/Profile/UploadProfilePhoto";
 import UpdateProfileForm from "./components/Users/Profile/UpdateProfileForm";
-import NeedsModal from "./components/Modals/NeedsModal";
 import SendEmail from "./components/Users/Emailing/SendEmail";
 import AccountVerified from "./components/Users/AccountVerification/AccountVerified";
 import UsersList from "./components/Users/UsersList/UsersList";
+import UpdatePassword from "./components/PasswordManagement/UpdatePassword";
+import NeedsModal from "./components/General/NeedsModal";
 
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
           <Route path='/profile/:id' element={<Profile />} />
           <Route path='/verify-account/:token' element={<AccountVerified />} />
           <Route path='/needs-list' element={<NeedsModal />} />
+          <Route path='/update-password' element={<UpdatePassword />} />
         </Route>
 
         {/* Public users routes */}

@@ -6,7 +6,7 @@ const generateToken = require("../../config/token/generateToken");
 const User = require('../../models/user/User');
 const validateMongodbID = require("../../utils/validateMongodbID");
 const cloudinaryUploadImage = require("../../utils/cloudinary");
-const blockedUser = require("../../utils/blockedUser");
+const checkIfUserBlockedError = require('../../utils/checkIfUserBlockedError')
 
 
 sendGridMail.setApiKey(process.env.SEND_GRID_API_KEY);
@@ -42,7 +42,7 @@ const userLoginController = expressAsyncHandler(async (req, res) => {
     const { email, password } = req.body;
     //Check if user exists
     const userFound = await User.findOne({ email });
-    blockedUser(userFound);
+    checkIfUserBlockedError(userFound);
     //Check if password is a match
     if (userFound && await userFound.isPasswordMatched(password)) {
         res.json({
