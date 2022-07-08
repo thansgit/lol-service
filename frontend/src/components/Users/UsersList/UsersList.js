@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userFetchAllProfilesAction } from "../../../redux/slices/users/usersSlices";
 import LoadingComponent from "../../../utils/LoadingComponent";
+import Footer from "../../General/Footer";
 import UsersListHeader from "./UsersListHeader";
 import UsersListItem from "./UsersListItem";
 
@@ -32,6 +33,7 @@ const UsersList = () => {
                 </>
               ))}
       </section>
+      <Footer />
     </>
   );
 };

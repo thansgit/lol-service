@@ -6,6 +6,7 @@ import styled from "styled-components";
 import * as Yup from "yup";
 import { userUploadProfilePhotoAction } from "../../../redux/slices/users/usersSlices";
 import { Navigate } from "react-router-dom";
+import Footer from "../../General/Footer";
 //Css for dropzone
 const Container = styled.div`
   flex: 1;
@@ -49,6 +50,7 @@ export default function UploadProfilePhoto() {
   if (profilePhoto) return <Navigate to={`/profile/${userAuth?._id}`} />
 
   return (
+    <>
     <div className="min-h-screen bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-300">
@@ -123,5 +125,7 @@ export default function UploadProfilePhoto() {
         </div>
       </div>
     </div>
+    <Footer />
+    </>
   );
 }

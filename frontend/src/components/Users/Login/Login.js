@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as Yup from 'yup';
 //import poster from '../../img/poster.png'
 import { userLoginAction } from "../../../redux/slices/users/usersSlices";
+import Footer from "../../General/Footer";
 
 //Form schema
 const formSchema = Yup.object({
@@ -150,6 +151,7 @@ const Login = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </>
   );
 };

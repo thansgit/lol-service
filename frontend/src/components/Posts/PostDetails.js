@@ -7,6 +7,7 @@ import DateFormatter from "../../utils/DateFormatter";
 import LoadingComponent from "../../utils/LoadingComponent";
 import AddComment from "../Comments/AddComment";
 import CommentsList from "../Comments/CommentsList";
+import Footer from "../General/Footer";
 
 
 
@@ -34,9 +35,9 @@ const PostDetails = () => {
 
   return (
     <>
-      {loading ? <div className="h-screen bg-gray-800"><LoadingComponent /></div> :
+      {loading ? <div className="h-screen bg-gray-900"><LoadingComponent /></div> :
         appErr || serverErr ? <h1 className="h-screen text-red-400 text-xl">{appErr} - {serverErr}</h1> :
-          <section className="py-20 2xl:py-40 bg-gray-800 overflow-hidden">
+          <section className="py-20 2xl:py-40 bg-gray-900 overflow-hidden">
             <div className="container px-4 mx-auto">
               {/* Post Image */}
               <img
@@ -94,6 +95,7 @@ const PostDetails = () => {
               <CommentsList comments={postDetails?.comments} postId={postDetails?._id} />
             </div>
           </section>}
+          <Footer />
     </>
   );
 };

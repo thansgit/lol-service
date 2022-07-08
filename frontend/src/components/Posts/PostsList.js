@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import DateFormatter from "../../utils/DateFormatter";
 import { categoriesFetchAction } from "../../redux/slices/category/categorySlice";
 import LoadingComponent from "../../utils/LoadingComponent";
+import Footer from "../General/Footer";
 export default function PostsList() {
 
   const dispatch = useDispatch();
@@ -172,26 +173,7 @@ export default function PostsList() {
             </div>
           </div>
         </div>
-        <div className="bg-gray-900">
-          <div className="skew bg-green-500 skew-bottom mr-for-radius">
-            <svg
-              className="h-8 md:h-12 lg:h-10 w-full text-gray-900"
-              viewBox="0 0 10 10"
-              preserveAspectRatio="none"
-            >
-              <polygon fill="currentColor" points="0 0 10 0 0 10"></polygon>
-            </svg>
-          </div>
-          <div className="skew bg-gray-500  skew-bottom ml-for-radius">
-            <svg
-              className="h-8 bg-gray-500 md:h-12 lg:h-20 w-full text-gray-900"
-              viewBox="0 0 10 10"
-              preserveAspectRatio="none"
-            >
-              <polygon fill="currentColor" points="0 0 10 0 10 10"></polygon>
-            </svg>
-          </div>
-        </div>
+        <Footer />
       </section>
     </>
   );

@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import * as Yup from 'yup';
 import { postCreateAction } from "../../redux/slices/posts/postSlices";
 import CategoryDropdown from "../Categories/CategoryDropdown";
+import Footer from "../General/Footer";
 
 const formSchema = Yup.object({
   title: Yup.string().required('Title is required'),
@@ -191,6 +192,7 @@ export default function CreatePost() {
           </div>
         </div>
       </div>
+<Footer />
     </>
   );
 }

@@ -6,10 +6,9 @@ import {
   LoginIcon,
   BookOpenIcon,
 } from "@heroicons/react/outline";
-import { PlusIcon } from "@heroicons/react/solid";
 
 const navigation = [
-  { name: "Home", href: "/", current: true },
+  { name: "Home", href: "/", current: false },
   { name: "Create", href: "/create-post", current: false },
   { name: "Posts", href: "/posts", current: false },
   { name: "Register", href: "/register", current: false },
@@ -73,18 +72,6 @@ const PublicNavbar = () => {
                       aria-hidden="true"
                     />
                     <span>Login</span>
-                  </Link>
-                </div>
-                <div className="hidden md:ml-4 md:flex-shrink-0 md:flex md:items-center">
-                  <Link
-                    to="/create-post"
-                    className="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-pink-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
-                  >
-                    <PlusIcon
-                      className="-ml-1 mr-2 h-5 w-5"
-                      aria-hidden="true"
-                    />
-                    <span>New Post</span>
                   </Link>
                 </div>
               </div>

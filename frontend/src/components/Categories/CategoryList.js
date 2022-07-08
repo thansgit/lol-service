@@ -6,6 +6,7 @@ import { PencilAltIcon } from "@heroicons/react/outline";
 import { categoriesFetchAction } from "../../redux/slices/category/categorySlice";
 import DateFormatter from "../../utils/DateFormatter";
 import LoadingComponent from "../../utils/LoadingComponent";
+import Footer from "../General/Footer";
 
 
 
@@ -108,6 +109,7 @@ const CategoryList = () => {
           </div>
         </div>
       )}
+      <Footer />
     </>
   );
 };

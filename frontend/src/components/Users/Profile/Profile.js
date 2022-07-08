@@ -15,6 +15,7 @@ import {
 } from "../../../redux/slices/users/usersSlices";
 import DateFormatter from "../../../utils/DateFormatter";
 import LoadingComponent from "../../../utils/LoadingComponent";
+import Footer from "../../General/Footer";
 
 export default function Profile() {
 
@@ -274,7 +275,7 @@ export default function Profile() {
             </div>}
 
       </div>
-
+      <Footer />
 
     </>
   );

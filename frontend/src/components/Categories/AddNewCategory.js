@@ -4,6 +4,7 @@ import { categoryCreateAction } from "../../redux/slices/category/categorySlice"
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Navigate } from "react-router-dom";
+import Footer from "../General/Footer";
 
 const AddNewCategory = () => {
 
@@ -31,6 +32,7 @@ const AddNewCategory = () => {
   if(isCreated) return <Navigate to='/category-list'/>
 
   return (
+    <>
     <div className="min-h-screen flex items-center justify-center bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
@@ -106,6 +108,8 @@ const AddNewCategory = () => {
         </form>
       </div>
     </div>
+    <Footer />
+    </>
   );
 };
 
