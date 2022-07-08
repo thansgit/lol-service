@@ -34,8 +34,6 @@ const AdminNavbar = ({ isLoggedIn }) => {
   const userNavigation = [
     { name: "Your Profile", href: `/profile/${isLoggedIn?._id}` },
     { name: "Change your password", href: "/update-password" },
-    { name: "Feelings", href: "/feelings-list" },
-    { name: "Needs", href: "/needs-list" }
   ];
 
   const dispatch = useDispatch();
@@ -183,14 +181,14 @@ const AdminNavbar = ({ isLoggedIn }) => {
               <div className="flex items-center px-5 sm:px-6">
                 <div className="flex-shrink-0">
                   {/* Image */}
-                  <img className="h-10 w-10 rounded-full" src="" alt="" />
+                  <img className="h-10 w-10 rounded-full" src={isLoggedIn?.profilePhoto} alt={isLoggedIn?.nickName} />
                 </div>
                 <div className="ml-3">
                   <div className="text-base font-medium text-white">
-                    {/* {user.name} */}
+                    {isLoggedIn?.nickName}
                   </div>
                   <div className="text-sm font-medium text-gray-400">
-                    {/* {user.email} */}
+                    {isLoggedIn?.email}
                   </div>
                 </div>
                 <button className="ml-auto flex-shrink-0 bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">

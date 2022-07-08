@@ -4,12 +4,14 @@ const fs = require('fs');
 const User = require("../../models/user/User");
 const cloudinaryUploadImage = require("../../utils/cloudinary");
 const validateMongodbID = require("../../utils/validateMongodbID");
+const blockedUser = require("../../utils/blockedUser");
 
 //-------------------------------------------------------------------
 //Create post
 //-------------------------------------------------------------------
 const postCreateController = expressAsyncHandler(async (req, res) => {
     const { _id } = req.user;
+    blockedUser(req.user)
     validateMongodbID(_id);
 
     //1. Get the path to the image

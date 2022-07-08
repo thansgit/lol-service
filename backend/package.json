@@ -1,8 +1,11 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Language of life service",
   "main": "server.js",
+  "engines": {
+    "node": "v16.15.0"
+  },
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js"

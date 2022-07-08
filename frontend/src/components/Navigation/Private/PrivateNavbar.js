@@ -11,13 +11,7 @@ import {
 import { PlusIcon, LogoutIcon } from "@heroicons/react/solid";
 import { useDispatch } from "react-redux";
 import { userLogoutAction } from "../../../redux/slices/users/usersSlices";
-
-const navigation = [
-  { name: "Home", href: "/", current: true },
-  { name: "Create", href: "/create-post", current: false },
-  { name: "Posts", href: "/posts", current: false },
-  { name: "Authors", href: "/users", current: false },
-];
+import { useSelector } from "react-redux";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -27,10 +21,17 @@ const PrivateNavbar = ({ isLoggedIn }) => {
   const userNavigation = [
     { name: "Your Profile", href: `/profile/${isLoggedIn?._id}` },
     { name: "Change your password", href: "/update-password" },
-    { name: "Feelings", href: "/feelings-list" },
-    { name: "Needs", href: "/needs-list" }
   ];
 
+  const user = useSelector(state => state.users);
+  const { userAuth } = user;
+
+  const navigation = [
+    { name: "Home", href: "/", current: true },
+    { name: "Create", href: "/create-post", current: false },
+    { name: "Posts", href: "/posts", current: false },
+    { name: "Profile", href: `/profile/${userAuth?._id}`, current: false },
+  ];
   //Logout
   const dispatch = useDispatch();
 
@@ -109,7 +110,7 @@ const PrivateNavbar = ({ isLoggedIn }) => {
                             <span className="sr-only">Open user menu</span>
                             <img
                               className="h-8 w-8 rounded-full"
-                               src={isLoggedIn?.profilePhoto}
+                              src={isLoggedIn?.profilePhoto}
                               alt=""
                             />
                           </Menu.Button>

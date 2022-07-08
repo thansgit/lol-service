@@ -1,5 +1,6 @@
 const expressAsyncHandler = require("express-async-handler");
 const Comment = require("../../models/comment/Comment");
+const blockedUser = require("../../utils/blockedUser");
 const validateMongodbID = require("../../utils/validateMongodbID");
 
 
@@ -9,6 +10,10 @@ const validateMongodbID = require("../../utils/validateMongodbID");
 const commentCreateController = expressAsyncHandler(async (req, res) => {
     //1. Get the user, because of authmiddleware we have req.user
     const user = req.user;
+
+    //Check if user is blocked
+    blockedUser(user);
+
     //2. Get the post id and description
     const { postId, description } = req.body;
 
