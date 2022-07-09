@@ -39,7 +39,7 @@ const AdminNavbar = ({ isLoggedIn }) => {
   const dispatch = useDispatch();
 
   return (
-    <Disclosure as="nav" className="bg-green-800 sticky top-0 z-50">
+    <Disclosure as="nav" className="bg-custom-gray-light sticky top-0 z-50">
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">

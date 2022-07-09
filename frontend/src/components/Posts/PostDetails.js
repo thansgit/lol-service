@@ -35,9 +35,9 @@ const PostDetails = () => {
 
   return (
     <>
-      {loading ? <div className="h-screen bg-gray-900"><LoadingComponent /></div> :
+      {loading ? <div className="h-screen bg-custom-gray"><LoadingComponent /></div> :
         appErr || serverErr ? <h1 className="h-screen text-custom-red text-xl">{appErr} - {serverErr}</h1> :
-          <section h-screen className="py-20 2xl:py-40 bg-gray-900 overflow-hidden">
+          <section h-screen className="py-20 2xl:py-40 bg-custom-gray overflow-hidden">
             <div className=" h-screen container px-4 mx-auto">
               {/* Post Image */}
               <img

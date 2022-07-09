@@ -42,12 +42,12 @@ export default function Profile() {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-900 flex justify-center items-center" >
+      <div className="min-h-screen bg-custom-gray flex justify-center items-center" >
         {profileLoading ? <LoadingComponent />
           : profileAppErr || profileServerErr
             ? <h2 className="text-custom-red text-3xl">{profileServerErr} - {profileAppErr} </h2>
             :
-            <div className="h-screen flex overflow-hidden bg-gray-900">
+            <div className="h-screen flex overflow-hidden bg-custom-gray">
               {/* Static sidebar for desktop */}
 
               <div className="flex flex-col min-w-0 flex-1 overflow-hidden">
@@ -77,7 +77,7 @@ export default function Profile() {
                                 <h1 className="text-2xl font-bold text-white ">
                                   {profile?.nickName}
                                   {" "}
-                                  <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-custom-yellow text-yellow-800">
+                                  <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-custom-yellow text-custom-gray-light">
                                     {profile?.accountType}
                                   </span>
                                   {/* Display if verified or not */}
@@ -101,7 +101,7 @@ export default function Profile() {
                                   <EyeIcon className="h-5 w-5 fill-white" />
                                   <div className="pl-2 text-white">
                                     {profile?.viewedBy?.length}{" "}
-                                    <span className="text-indigo-400 cursor-pointer hover:underline">
+                                    <span className="text-custom-blue cursor-pointer hover:underline">
                                       users viewed your profile
                                     </span>
                                   </div>
@@ -110,10 +110,10 @@ export default function Profile() {
                                 {/* Upload profile photo */}
                                 {isLoggedInUser && <Link
                                   to={`/upload-profile-photo`}
-                                  className="inline-flex justify-center w-48 px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                                  className="inline-flex justify-center w-48 px-4 py-2 border border-custom-yellow shadow-sm text-sm font-medium rounded-md text-custom-yellow bg-custom-gray-light hover:bg-custom-gray-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
                                 >
                                   <UploadIcon
-                                    className="-ml-1 mr-2 h-5 w-5 text-gray-400"
+                                    className="-ml-1 mr-2 h-5 w-5 text-white"
                                     aria-hidden="true"
                                   />
                                   <span>Set profile photo</span>
@@ -129,7 +129,7 @@ export default function Profile() {
                                       onClick={() =>
                                         dispatch(userUnfollowProfileAction(id))
                                       }
-                                      className="mr-2 inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                                      className="mr-2 inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-custom-gray-light hover:bg-custom-gray-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
                                     >
                                       <EmojiSadIcon
                                         className="-ml-1 mr-2 h-5 w-5 text-gray-400"
@@ -143,10 +143,10 @@ export default function Profile() {
                                         dispatch(userFollowProfileAction(id))
                                       }
                                       type="button"
-                                      className="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                                      className="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-custom-gray-light hover:bg-custom-gray-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
                                     >
                                       <HeartIcon
-                                        className="-ml-1 mr-2 h-5 w-5 text-gray-400"
+                                        className="-ml-1 mr-2 h-5 w-5 text-white"
                                         aria-hidden="true"
                                       />
                                       <span>Follow </span>
@@ -163,10 +163,10 @@ export default function Profile() {
                                 <>
                                   {isLoggedInUser && <Link
                                     to={`/update-profile/${profile?._id}`}
-                                    className="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                                    className="inline-flex justify-center px-4 py-2 border border-custom-yellow shadow-sm text-sm font-medium rounded-md text-custom-yellow bg-custom-gray-light hover:bg-custom-gray-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
                                   >
                                     <UserIcon
-                                      className="-ml-1 mr-2 h-5 w-5 text-gray-400"
+                                      className="-ml-1 mr-2 h-5 w-5 text-white"
                                       aria-hidden="true"
                                     />
                                     <span>Update Profile</span>
@@ -176,7 +176,7 @@ export default function Profile() {
                                 {/* Send Mail */}
                                 <button
                                   onClick={() => navigate(`/send-email/${profile?.email}`)}
-                                  className="inline-flex justify-center bg-indigo-900 px-4 py-2 border border-custom-yellow shadow-sm text-sm font-medium rounded-md text-gray-700  hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                                  className="inline-flex justify-center bg-custom-gray-light px-4 py-2 border border-custom-yellow shadow-sm text-sm font-medium rounded-md text-gray-700  hover:bg-custom-gray-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
                                 >
                                   <MailIcon
                                     className="-ml-1 mr-2 h-5 w-5 text-gray-200"
@@ -219,7 +219,7 @@ export default function Profile() {
                                       <h3 className="text-custom-green">
                                         {viewer?.nickName}
                                       </h3>
-                                      <p className="text-indigo-600">
+                                      <p className="text-custom-blue">
                                         {viewer?.accountType}
                                       </p>
                                     </div>
@@ -260,7 +260,7 @@ export default function Profile() {
                                   </p>
                                   {/* Read more */}
                                   <Link
-                                    className="text-indigo-500 hover:underline"
+                                    className="text-custom-blue hover:underline"
                                     to={`/posts/${post?._id}`}
                                   >Read more...</Link>
                                 </div>

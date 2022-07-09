@@ -37,12 +37,12 @@ function App() {
           <Route path='/update-category/:id' element={<UpdateCategory />} />
           <Route path='/add-category' element={<AddNewCategory />} />
           <Route path='/category-list' element={<CategoryList />} />
-          <Route path='/send-email/:id' element={<SendEmail />} />
           <Route path='/users' element={<UsersList />} />
         </Route>
 
         {/* Logged in users routes */}
         <Route element={<LoggedInRoute />}>
+          <Route path='/send-email/:id' element={<SendEmail />} />
           <Route path='/create-post' element={<CreatePost />} />
           <Route path='/update-post/:id' element={<UpdatePost />} />
           <Route path='/upload-profile-photo' element={<UploadProfilePhoto />} />

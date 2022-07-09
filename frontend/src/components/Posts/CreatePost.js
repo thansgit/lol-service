@@ -79,12 +79,12 @@ export default function CreatePost() {
 
         </div>
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          <div className="bg-custom-gray-light py-8 px-4 shadow sm:rounded-lg sm:px-10 border-2 border-custom-yellow">
             <form className="space-y-6" onSubmit={formik.handleSubmit} >
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-white"
                 >
                   Title
                 </label>
@@ -109,7 +109,7 @@ export default function CreatePost() {
               {/* Category select */}
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-white"
               >
                 Select category
               </label>
@@ -123,7 +123,7 @@ export default function CreatePost() {
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium text-gray-700 mb-2"
+                  className="block text-sm font-medium text-white mb-2"
                 >
                   Description
                 </label>
@@ -134,7 +134,7 @@ export default function CreatePost() {
                   onBlur={formik.handleBlur('description')}
                   rows="5"
                   cols="10"
-                  className="rounded-lg appearance-none block w-full py-3 px-3 text-base text-center leading-tight text-gray-600 bg-transparent focus:bg-transparent  border border-gray-200 focus:border-gray-500  focus:outline-none"
+                  className="rounded-lg appearance-none block w-full py-3 px-3 text-base text-center leading-tight text-white bg-transparent focus:bg-transparent  border border-gray-200 focus:border-gray-500  focus:outline-none"
                   type="text"
                 ></textarea>
                 {/* Err msg */}
@@ -144,7 +144,7 @@ export default function CreatePost() {
                 {/* Image upload component */}
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium text-gray-700 mt-5 mb-2"
+                  className="block text-sm font-medium text-white mt-5 mb-2"
                 >
                   Select image to upload
                 </label>

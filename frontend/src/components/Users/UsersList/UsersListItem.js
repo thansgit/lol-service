@@ -78,12 +78,6 @@ const UsersListItem = user => {
               </span>
             </Link>
           </div>
-          <div className="w-full lg:w-1/12 px-4">
-            <div className="flex items-center">
-              {/* Send Mail */}
-              <div></div>
-            </div>
-          </div>
         </div>
       </div>
     </>

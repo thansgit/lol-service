@@ -5,6 +5,7 @@ import LoadingComponent from "../../../utils/LoadingComponent";
 import Footer from "../../General/Footer";
 import UsersListHeader from "./UsersListHeader";
 import UsersListItem from "./UsersListItem";
+import ErrorDisplay from "../../../utils/ErrorDisplay";
 
 const UsersList = () => {
 
@@ -23,9 +24,9 @@ const UsersList = () => {
 
   return (
     <>
-      <section class="py-8 bg-gray-900 min-h-screen">
+      <section class="py-8 bg-custom-gray min-h-screen">
         {loading ? <LoadingComponent />
-          : appErr || serverErr ? <h3 className="text-custom-redtext-center text-lg">{appErr} - {serverErr}</h3>
+          : appErr || serverErr ? <ErrorDisplay serverErr={serverErr} appErr={appErr} />
             : allProfiles?.length <= 0 ? <h2>No profiles found...</h2>
               : allProfiles?.map(profile => (
                 <>

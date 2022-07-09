@@ -48,7 +48,7 @@ const UpdateCategory = () => {
   if (isUpdated || isDeleted) return <Navigate to='/category-list' />
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-custom-gray py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
           <BookOpenIcon className="mx-auto h-12 w-auto fill-white" />
@@ -80,7 +80,7 @@ const UpdateCategory = () => {
                 onBlur={formik.handleBlur('title')}
                 type="text"
                 autoComplete="text"
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-center focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-custom-gray rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-center focus:z-10 sm:text-sm"
                 placeholder="Update category name"
               />
               <div className="text-custom-red mb-2">

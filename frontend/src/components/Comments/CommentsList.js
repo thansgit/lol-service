@@ -14,7 +14,7 @@ export default function CommentsList({ comments }) {
 
   return (
     <div>
-      <ul className="divide-y bg-gray-700 w-96 divide-gray-200 p-3 mt-5">
+      <ul className="divide-y bg-custom-gray-light rounded-md w-96 divide-gray-200 p-3 mt-5">
         <div className="text-gray-400">{comments?.length} Comments </div>
         <>
           {comments?.length <= 0 ? (

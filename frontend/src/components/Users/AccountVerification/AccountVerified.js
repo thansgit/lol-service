@@ -34,7 +34,7 @@ export default function AccountVerified() {
               <div className="mt-3 text-center sm:mt-5">
                 <div
                   as="h3"
-                  className="text-lg leading-6 font-medium text-gray-900"
+                  className="text-lg leading-6 font-medium text-custom-gray"
                 >
                   Account Verified
                 </div>
@@ -58,7 +58,7 @@ export default function AccountVerified() {
           </div>
         </div>
       ) : (
-        <div className="flex justify-center bg-gray-800 items-center h-screen">
+        <div className="flex justify-center bg-custom-gray items-center h-screen">
           <Link
             to="/"
             type="button"

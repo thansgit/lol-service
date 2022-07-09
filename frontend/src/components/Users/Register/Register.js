@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import { userRegisterAction } from "../../../redux/slices/users/usersSlices";
 import Footer from "../../General/Footer";
 import LoadingButton from "../../../utils/LoadingButton";
+import ErrorDisplay from "../../../utils/ErrorDisplay";
 
 //Form schema
 const formSchema = Yup.object({
@@ -45,7 +46,7 @@ const Register = () => {
 
   return (
     <>
-      <section className="relative py-20 2xl:py-40 bg-gray-900 overflow-hidden h-screen">
+      <section className="relative py-20 2xl:py-40 bg-custom-gray overflow-hidden h-screen">
         <div className="relative container px-4 mx-auto">
           <div className="max-w-5xl mx-auto">
             <div className="flex flex-wrap items-center -mx-4">
@@ -60,16 +61,11 @@ const Register = () => {
                 </div>
               </div>
               <div className="w-full lg:w-1/2 px-4">
-                <div className="px-6 lg:px-20 py-12 lg:py-24 bg-gray-600 rounded-lg">
+                <div className="px-6 lg:px-20 py-12 lg:py-24 bg-custom-gray-light rounded-lg">
                   <form onSubmit={formik.handleSubmit}>
                     <h3 className="mb-10 text-2xl text-white font-bold font-heading">
                       Register Account
-
-                      {/* Display error message*/}
-                      {appErr || serverErr ?
-                        <div className='text-custom-red'>
-                          {serverErr} {appErr}
-                        </div> : null}
+                      {appErr || serverErr ? <ErrorDisplay serverErr={serverErr} appErr={appErr} /> : null}
                     </h3>
 
                     {/* NickName */}

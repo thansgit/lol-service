@@ -6,10 +6,12 @@ module.exports = {
     extend: {
       colors: {
         "custom-red": "#e11d48",
-        "custom-gray": "#111827",
-        "custom-green": "#22c55e",
-        "custom-yellow": "#eab308",
-        "custom-blue": "#2563eb",
+        "custom-gray": "#000000",
+        "custom-gray-light": "#1B1B1B",
+        "custom-gray-hover": "#2F2F2F",
+        "custom-green": "#FF9000",
+        "custom-yellow": "#FF9000",
+        "custom-blue": "#3A88E9",
       }
     },
   },

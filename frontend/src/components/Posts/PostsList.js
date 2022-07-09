@@ -34,7 +34,7 @@ export default function PostsList() {
   return (
     <>
       <section>
-        <div className="py-20 bg-gray-900 min-h-screen radius-for-skewed">
+        <div className="py-20 bg-custom-gray min-h-screen radius-for-skewed">
           <div className="container mx-auto px-4">
             <div className="mb-16 flex flex-wrap items-center">
               <div className="w-full lg:w-1/2">
@@ -56,8 +56,8 @@ export default function PostsList() {
             </div>
             <div className="flex flex-wrap -mx-3">
               <div className="mb-8 lg:mb-0 w-full lg:w-1/4 px-3">
-                <div className="py-4 px-6 bg-gray-600 shadow rounded">
-                  <h4 className="mb-4 text-gray-300 font-bold uppercase">
+                <div className="py-4 px-6 bg-custom-gray-light shadow rounded">
+                  <h4 className="mb-4 text-gray-300 text-center font-bold uppercase border-b border-custom-red">
                     Categories
                   </h4>
                   <ul>
@@ -68,7 +68,7 @@ export default function PostsList() {
                             <p
                               onClick={() => dispatch(postFetchAllAction(category.title))}
                               className="block cursor-pointer py-2 px-3 mb-4 rounded
-                             text-custom-yellow font-bold bg-gray-500">
+                             text-custom-yellow font-bold">
                               {category?.title}
                             </p>
                           </li>
@@ -83,7 +83,7 @@ export default function PostsList() {
                   postList?.length <= 0 ?
                     <h1 className="text-white text-center text-lg">No posts found</h1> :
                     postList?.map((post) => (
-                      <div key={post.id} className="flex flex-wrap bg-gray-900 -mx-3  lg:mb-6">
+                      <div key={post.id} className="flex flex-wrap bg-custom-gray -mx-3  lg:mb-6">
                         <div className="mb-10  w-full lg:w-1/4">
                           <Link to='/'>
                             {/* Post image */}
@@ -134,7 +134,7 @@ export default function PostsList() {
                           </Link>
                           <p className="text-gray-300">{post?.description}</p>
                           {/* Read more */}
-                          <Link className="text-indigo-500 hover:underline" to={`/posts/${post?.id}`}>
+                          <Link className="text-custom-blue hover:underline" to={`/posts/${post?.id}`}>
                             Read More..
                           </Link>
                           {/* User Avatar */}
@@ -149,7 +149,7 @@ export default function PostsList() {
                               </Link>
                             </div>
                             <div className="ml-3">
-                              <p className="text-sm font-medium text-gray-900">
+                              <p className="text-sm font-medium text-custom-gray">
                                 <Link className="text-custom-yellow hover:underline " to={`/profile/${post?.user?._id}`}>
                                   {post?.user?.nickName}
                                 </Link>
