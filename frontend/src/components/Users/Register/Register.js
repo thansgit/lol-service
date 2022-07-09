@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { userRegisterAction } from "../../../redux/slices/users/usersSlices";
 import Footer from "../../General/Footer";
+import LoadingButton from "../../../utils/LoadingButton";
 
 //Form schema
 const formSchema = Yup.object({
@@ -50,7 +51,7 @@ const Register = () => {
             <div className="flex flex-wrap items-center -mx-4">
               <div className="w-full lg:w-1/2 px-4 mb-16 lg:mb-0">
                 <div className="max-w-md">
-                  <span className="text-lg text-blue-400 font-bold">
+                  <span className="text-lg text-custom-green font-bold">
                     Register Account
                   </span>
                   <h2 className="mt-8 mb-12 text-5xl font-bold font-heading text-white">
@@ -216,12 +217,7 @@ const Register = () => {
 
                     {/* Check for loading */}
                     {loading ? (
-                      <button
-                        disabled
-                        className="py-4 w-full bg-gray-500  text-white font-bold rounded-full transition duration-200"
-                      >
-                        Loading please wait...
-                      </button>
+                      <LoadingButton />
                     ) : (
                       <button
                         type="submit"

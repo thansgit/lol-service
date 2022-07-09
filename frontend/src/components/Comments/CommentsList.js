@@ -18,7 +18,7 @@ export default function CommentsList({ comments }) {
         <div className="text-gray-400">{comments?.length} Comments </div>
         <>
           {comments?.length <= 0 ? (
-            <h1 className="text-yellow-400 text-lg text-center">No comments</h1>
+            <h1 className="text-custom-yellow text-lg text-center">No comments</h1>
           ) : (
             comments?.map(comment => (
               <>
@@ -31,12 +31,12 @@ export default function CommentsList({ comments }) {
                     />
                     <div className="flex-1 space-y-1">
                       <div className="flex items-center justify-between">
-                        <Link to={`/profile/${comment?.user?._id}`} className="hover:underline text-green-800">
-                          <h3 className="text-sm font-medium text-green-400">
+                        <Link to={`/profile/${comment?.user?._id}`} className="hover:underline text-custom-green">
+                          <h3 className="text-sm font-medium text-custom-green">
                             {comment?.user?.nickName}
                           </h3>
                         </Link>
-                        <p className="text-bold text-yellow-500 text-base ml-5">
+                        <p className="text-bold text-custom-yellow text-base ml-5">
                           <Moment fromNow ago>
                             {comment?.createdAt}
                           </Moment>
@@ -49,7 +49,7 @@ export default function CommentsList({ comments }) {
                       {isLoginUser === comment?.user?._id ?
                         <p className="flex">
                           <Link className="p-3" to={`/update-comment/${comment?._id}`}>
-                            <PencilAltIcon className="h-5 mt-3 text-yellow-300" />
+                            <PencilAltIcon className="h-5 mt-3 text-custom-yellow" />
                           </Link>
                           <button onClick={() => dispatch(commentDeleteAction(comment?._id))} className="ml-3">
                             <TrashIcon className="h-5 mt-3 text-custom-red" />

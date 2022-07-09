@@ -38,7 +38,7 @@ export default function PostsList() {
           <div className="container mx-auto px-4">
             <div className="mb-16 flex flex-wrap items-center">
               <div className="w-full lg:w-1/2">
-                <span className="text-green-600 font-bold">
+                <span className="text-custom-green font-bold">
                   Latest posts from your fellow beings
                 </span>
                 <h2 className="text-4xl text-gray-300 lg:text-5xl font-bold font-heading">
@@ -49,7 +49,7 @@ export default function PostsList() {
                 {/* View All */}
                 <button
                   onClick={() => dispatch(postFetchAllAction(''))}
-                  className="inline-block py-2 px-6 rounded-l-xl rounded-t-xl bg-green-600 hover:bg-green-700 text-gray-50 font-bold leading-loose transition duration-200">
+                  className="inline-block py-2 px-6 rounded-l-xl rounded-t-xl bg-custom-green hover:bg-green-700 text-gray-50 font-bold leading-loose transition duration-200">
                   View all posts
                 </button>
               </div>
@@ -68,7 +68,7 @@ export default function PostsList() {
                             <p
                               onClick={() => dispatch(postFetchAllAction(category.title))}
                               className="block cursor-pointer py-2 px-3 mb-4 rounded
-                             text-yellow-500 font-bold bg-gray-500">
+                             text-custom-yellow font-bold bg-gray-500">
                               {category?.title}
                             </p>
                           </li>
@@ -128,7 +128,7 @@ export default function PostsList() {
                         </div>
                         <div className="w-full lg:w-3/4 px-3">
                           <Link className="hover:underline" to='/'>
-                            <h3 className="mb-1 text-2xl text-green-400 font-bold font-heading">
+                            <h3 className="mb-1 text-2xl text-custom-green font-bold font-heading">
                               {(post?.title)}
                             </h3>
                           </Link>
@@ -150,11 +150,11 @@ export default function PostsList() {
                             </div>
                             <div className="ml-3">
                               <p className="text-sm font-medium text-gray-900">
-                                <Link className="text-yellow-400 hover:underline " to={`/profile/${post?.user?._id}`}>
+                                <Link className="text-custom-yellow hover:underline " to={`/profile/${post?.user?._id}`}>
                                   {post?.user?.nickName}
                                 </Link>
                               </p>
-                              <div className="flex space-x-1 text-sm text-green-500">
+                              <div className="flex space-x-1 text-sm text-custom-green">
                                 <time>
                                   {<DateFormatter date={post?.createdAt} />}
                                 </time>

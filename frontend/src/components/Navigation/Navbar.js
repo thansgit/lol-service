@@ -23,7 +23,7 @@ const Navbar = () => {
           <PublicNavbar />}
       {/* Alert */}
       {userAuth && !userAuth?.isAccountVerified && <AccountVerificationAlertWarning />}
-      {loading && <h2 className="text-center bg-green-300 text-green-800">Loading...</h2>}
+      {loading && <h2 className="text-center bg-custom-green text-green-800">Loading...</h2>}
       {tokenSent && <AccountVerificationAlertSuccess />}
       {appErr || serverErr ? <h2 className="text-center text-custom-red">{serverErr} {appErr}</h2> : null}
     </>

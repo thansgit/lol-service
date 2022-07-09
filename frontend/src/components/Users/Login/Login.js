@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 //import poster from '../../img/poster.png'
 import { userLoginAction } from "../../../redux/slices/users/usersSlices";
 import Footer from "../../General/Footer";
-
+import LoadingButton from "../../../utils/LoadingButton";
 //Form schema
 const formSchema = Yup.object({
   email: Yup.string().required('Email is required'),
@@ -38,13 +38,6 @@ const Login = () => {
   return (
     <>
       <section className="min-h-screen relative py-20 2xl:py-40 bg-gray-900 overflow-hidden">
-        <div className="absolute top-0 left-0 lg:bottom-0 h-full lg:h-auto w-full lg:w-4/12 bg-gray-900 lg:overflow-hidden">
-          {/* <img
-            className="hidden lg:block h-full w-full object-cover"
-            src={poster}
-            alt=""
-          /> */}
-        </div>
         <div className="relative container px-4 mx-auto">
           <div className="max-w-5xl mx-auto">
             <div className="flex flex-wrap items-center -mx-4">
@@ -52,7 +45,7 @@ const Login = () => {
                 <div className="px-6 lg:px-12 py-12 lg:py-24 bg-gray-600 shadow-lg rounded-lg">
                   {/* Form */}
                   <form onSubmit={formik.handleSubmit}>
-                    <h3 className="mb-10 text-2xl font-bold font-heading text-white">
+                    <h3 className="mb-10 text-2xl font-bold font-heading text-white text-center">
                       {/* Header */}
                       Login to your Account
                     </h3>
@@ -127,22 +120,20 @@ const Login = () => {
                       {formik.touched.password && formik.errors.password}
                     </div>
                     {/* Login btn */}
-                    {loading ? <button
-                      disabled
-                      className="py-4 w-full bg-gray-500 text-white font-bold rounded-full transition duration-200"
-                    >
-                      Loading...
-                    </button> : <button
-                      type="submit"
-                      className="py-4 w-full bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-full transition duration-200"
-                    >
-                      Login
-                    </button>}
+                    {loading ?
+                      <LoadingButton />
+                      : <button
+                        type="submit"
+                        className="py-4 w-full bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-full transition duration-200"
+                      >
+                        Login
+                      </button>}
                   </form>
                 </div>
               </div>
 
               <div className="w-full lg:w-3/5 px-4 mb-16 lg:mb-0 order-first lg:order-last">
+
                 <h2 className="mb-10 text-center text-6xl lg:text-7xl text-gray-300 font-bold font-heading">
                   Ready to start? Login Now.
                 </h2>

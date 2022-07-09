@@ -37,8 +37,8 @@ const PostDetails = () => {
     <>
       {loading ? <div className="h-screen bg-gray-900"><LoadingComponent /></div> :
         appErr || serverErr ? <h1 className="h-screen text-custom-red text-xl">{appErr} - {serverErr}</h1> :
-          <section className="py-20 2xl:py-40 bg-gray-900 overflow-hidden">
-            <div className="container px-4 mx-auto">
+          <section h-screen className="py-20 2xl:py-40 bg-gray-900 overflow-hidden">
+            <div className=" h-screen container px-4 mx-auto">
               {/* Post Image */}
               <img
                 className="mb-24 w-full h-96 object-cover"
@@ -58,9 +58,9 @@ const PostDetails = () => {
                     alt="img"
                   />
                   <div className="text-left">
-                    <Link to={`/profile/${postDetails?.user?._id}`} className="hover:underline text-green-800">
+                    <Link to={`/profile/${postDetails?.user?._id}`} className="hover:underline text-custom-green">
                       <h4 className="mb-1 text-2xl font-bold text-gray-50">
-                        <span className="text-xl lg:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-yellow-200 to-orange-600">
+                        <span className="text-xl lg:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-custom-yellow to-orange-600">
                           {postDetails?.user?.nickName}
                         </span>
                       </h4>
@@ -72,12 +72,12 @@ const PostDetails = () => {
                 </div>
                 {/* Post description */}
                 <div className="max-w-xl mx-auto">
-                  <p className="mb-6 text-left  text-xl text-gray-200">
+                  <p className="mb-6  text-xl text-gray-200 text-center">
                     {postDetails?.description}
                     {/* Show delete and update btn if created by current user */}
                     {isCreatedBy ? <p className="flex">
                       <Link className="p-3" to={`/update-post/${postDetails?._id}`}>
-                        <PencilAltIcon className="h-8 mt-3 text-yellow-300" />
+                        <PencilAltIcon className="h-8 mt-3 text-custom-yellow" />
                       </Link>
                       <button onClick={() => dispatch(postDeleteAction(id))} className="ml-3">
                         <TrashIcon className="h-8 mt-3 text-custom-red" />
@@ -87,15 +87,15 @@ const PostDetails = () => {
                   </p>
                 </div>
               </div>
-            </div>
-            {/* Comment Form component*/}
-            {userAuth ? <AddComment postId={id} />
-              : null}
-            <div className="flex justify-center  items-center">
-              <CommentsList comments={postDetails?.comments} postId={postDetails?._id} />
+              {/* Comment Form component*/}
+              {userAuth ? <AddComment postId={id} />
+                : null}
+              <div className="flex justify-center  items-center">
+                <CommentsList comments={postDetails?.comments} postId={postDetails?._id} />
+              </div>
             </div>
           </section>}
-          <Footer />
+      <Footer />
     </>
   );
 };

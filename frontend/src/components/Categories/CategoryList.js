@@ -30,7 +30,7 @@ const CategoryList = () => {
           {serverErr} {serverErr}
         </h2>
       ) : categoryList?.length <= 0 ? (
-        <h2 className="text-center text-3xl text-green-800">
+        <h2 className="text-center text-3xl text-custom-green">
           No category Found
         </h2>
       ) : (

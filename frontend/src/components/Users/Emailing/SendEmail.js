@@ -44,7 +44,7 @@ const SendEmail = () => {
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-300">
             Send message <br />
             {/* Email title */}
-            <span className="text-green-300">email title</span>
+            <span className="text-custom-green">email title</span>
           </h2>
 
           <p className="mt-2 text-center text-lg text-custom-red">

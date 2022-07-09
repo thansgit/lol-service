@@ -77,11 +77,11 @@ export default function Profile() {
                                 <h1 className="text-2xl font-bold text-white ">
                                   {profile?.nickName}
                                   {" "}
-                                  <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-yellow-500 text-yellow-800">
+                                  <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-custom-yellow text-yellow-800">
                                     {profile?.accountType}
                                   </span>
                                   {/* Display if verified or not */}
-                                  {profile?.isAccountVerified ? <span className="inline-flex ml-2 items-center px-3 py-0.5  rounded-lg text-sm font-medium bg-green-600 text-gray-300">
+                                  {profile?.isAccountVerified ? <span className="inline-flex ml-2 items-center px-3 py-0.5  rounded-lg text-sm font-medium bg-custom-green text-gray-300">
                                     Account Verified
                                   </span> : <span className="inline-flex ml-2 items-center px-3 py-0.5  rounded-lg text-sm font-medium bg-custom-red text-gray-300">
                                     Unverified Account
@@ -91,7 +91,7 @@ export default function Profile() {
                                   Date Joined:{" "}
                                   <DateFormatter date={profile?.createdAt} />{" "}
                                 </p>
-                                <p className="text-green-400 mt-2 mb-2">
+                                <p className="text-custom-green mt-2 mb-2">
                                   {profile?.posts?.length} posts{" "}
                                   {profile?.followers?.length} followers{" "}
                                   {profile?.following?.length} following
@@ -176,13 +176,13 @@ export default function Profile() {
                                 {/* Send Mail */}
                                 <button
                                   onClick={() => navigate(`/send-email/${profile?.email}`)}
-                                  className="inline-flex justify-center bg-indigo-900 px-4 py-2 border border-yellow-700 shadow-sm text-sm font-medium rounded-md text-gray-700  hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                                  className="inline-flex justify-center bg-indigo-900 px-4 py-2 border border-custom-yellow shadow-sm text-sm font-medium rounded-md text-gray-700  hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
                                 >
                                   <MailIcon
                                     className="-ml-1 mr-2 h-5 w-5 text-gray-200"
                                     aria-hidden="true"
                                   />
-                                  <span className="text-base mr-2  text-bold text-yellow-500">
+                                  <span className="text-base mr-2  text-bold text-custom-yellow">
                                     Send Message
                                   </span>
                                 </button>
@@ -216,7 +216,7 @@ export default function Profile() {
                                       alt={viewer?._id}
                                     />
                                     <div className="font-medium text-lg leading-6 space-y-1">
-                                      <h3 className="text-green-500">
+                                      <h3 className="text-custom-green">
                                         {viewer?.nickName}
                                       </h3>
                                       <p className="text-indigo-600">
@@ -251,7 +251,7 @@ export default function Profile() {
                                     to={`/posts/${post?._id}`}
                                     className="hover:underline"
                                   >
-                                    <h3 className="mb-1 text-2xl text-green-400 font-bold font-heading">
+                                    <h3 className="mb-1 text-2xl text-custom-green font-bold font-heading">
                                       {post?.title}
                                     </h3>
                                   </Link>
