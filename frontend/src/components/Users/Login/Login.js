@@ -57,7 +57,7 @@ const Login = () => {
                       Login to your Account
                     </h3>
                     {/* Display error */}
-                    {serverErr || appErr ? <h2 className='text-red-400 font-semibold mb-3'>{serverErr} - {appErr}</h2> : null}
+                    {serverErr || appErr ? <h2 className='text-custom-red font-semibold mb-3'>{serverErr} - {appErr}</h2> : null}
                     <div className="flex items-center pl-6 mb-3 border border-gray-50 bg-white rounded-full">
                       <span className="inline-block pr-3 border-r border-gray-50">
                         <svg
@@ -89,7 +89,7 @@ const Login = () => {
                       />
                     </div>
                     {/* Err message */}
-                    <div className="text-red-400 mb-2">
+                    <div className="text-custom-red mb-2">
                       {formik.touched.email && formik.errors.email}
                     </div>
                     <div className="flex items-center pl-6 mb-6 border border-gray-50 bg-white rounded-full">
@@ -123,7 +123,7 @@ const Login = () => {
                       />
                     </div>
                     {/* Err msg */}
-                    <div className="text-red-400 mb-2">
+                    <div className="text-custom-red mb-2">
                       {formik.touched.password && formik.errors.password}
                     </div>
                     {/* Login btn */}

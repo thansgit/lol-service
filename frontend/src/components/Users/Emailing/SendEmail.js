@@ -47,7 +47,7 @@ const SendEmail = () => {
             <span className="text-green-300">email title</span>
           </h2>
 
-          <p className="mt-2 text-center text-lg text-red-600">
+          <p className="mt-2 text-center text-lg text-custom-red">
             {serverErr || appErr ? <h2>{serverErr} - {appErr}</h2> : null}
           </p>
           <p className="mt-2 text-center text-sm text-gray-600">
@@ -80,7 +80,7 @@ const SendEmail = () => {
                   />
                 </div>
                 {/* Err msg */}
-                <div className="text-red-500">
+                <div className="text-custom-red">
                   {formik.touched.toEmail && formik.errors.toEmail}
                 </div>
               </div>
@@ -105,7 +105,7 @@ const SendEmail = () => {
                   />
                 </div>
                 {/* err msg */}
-                <div className="text-red-500">
+                <div className="text-custom-red">
                   {formik.touched.subject && formik.errors.subject}
                 </div>
               </div>
@@ -127,7 +127,7 @@ const SendEmail = () => {
                   type="text"
                 ></textarea>
                 {/* err here */}
-                <div className="text-red-500">
+                <div className="text-custom-red">
                   {formik.touched.message && formik.errors.message}
                 </div>
               </div>

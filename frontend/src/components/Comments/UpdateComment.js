@@ -64,7 +64,7 @@ const UpdateComment = () => {
             Submit
           </button>
         </form>
-        <div className="text-red-400 mb-2 mt-2">
+        <div className="text-custom-red mb-2 mt-2">
           {formik.touched.description && formik.errors.description}
         </div>
       </div>

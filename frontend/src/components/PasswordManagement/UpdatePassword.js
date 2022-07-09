@@ -37,7 +37,7 @@ const UpdatePassword = () => {
             Change your password
           </h2>
 
-          <h3 className="text-center text-rose-600 text-lg">
+          <h3 className="text-center text-custom-red text-lg">
             {serverErr || appErr ? <p>{serverErr} - {appErr}</p> : null}
           </h3>
         </div>
@@ -77,7 +77,7 @@ const UpdatePassword = () => {
                 />
               </div>
               {/* Err msg */}
-              <div className="text-red-400 mb-2">
+              <div className="text-custom-red mb-2">
                 {formik.touched.password && formik.errors.password}
               </div>
               <div>

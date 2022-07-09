@@ -64,7 +64,7 @@ export default function UploadProfilePhoto() {
           <form className="space-y-6" onSubmit={formik.handleSubmit}>
             {/* Display err here */}
             {appErr || serverErr ?
-              <h2 className="text center text-red-500" >{serverErr} - {appErr}</h2> :
+              <h2 className="text center text-custom-red" >{serverErr} - {appErr}</h2> :
               null}
             {/* Image container here thus Dropzone */}
             <Container className="">
@@ -93,7 +93,7 @@ export default function UploadProfilePhoto() {
               </Dropzone>
             </Container>
 
-            <div className="text-red-500">
+            <div className="text-custom-red">
               {formik.touched.image && formik.errors.image}
             </div>
             <p className="text-sm text-gray-500">

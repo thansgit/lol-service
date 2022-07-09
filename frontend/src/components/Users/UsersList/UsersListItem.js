@@ -59,7 +59,7 @@ const UsersListItem = user => {
             ) : (
               <button
                 onClick={() => dispatch(userBlockAction(user?.user?._id))}
-                className="inline-block py-1 px-2 text-center bg-red-600 text-gray-300 mr-2 mb-1 lg:mb-0 text-xs border rounded"
+                className="inline-block py-1 px-2 text-center bg-custom-red text-gray-300 mr-2 mb-1 lg:mb-0 text-xs border rounded"
               >
                 Block
               </button>

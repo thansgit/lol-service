@@ -45,7 +45,7 @@ export default function Profile() {
       <div className="min-h-screen bg-gray-900 flex justify-center items-center" >
         {profileLoading ? <LoadingComponent />
           : profileAppErr || profileServerErr
-            ? <h2 className="text-red-500 text-3xl">{profileServerErr} - {profileAppErr} </h2>
+            ? <h2 className="text-custom-red text-3xl">{profileServerErr} - {profileAppErr} </h2>
             :
             <div className="h-screen flex overflow-hidden bg-gray-900">
               {/* Static sidebar for desktop */}
@@ -83,7 +83,7 @@ export default function Profile() {
                                   {/* Display if verified or not */}
                                   {profile?.isAccountVerified ? <span className="inline-flex ml-2 items-center px-3 py-0.5  rounded-lg text-sm font-medium bg-green-600 text-gray-300">
                                     Account Verified
-                                  </span> : <span className="inline-flex ml-2 items-center px-3 py-0.5  rounded-lg text-sm font-medium bg-rose-600 text-gray-300">
+                                  </span> : <span className="inline-flex ml-2 items-center px-3 py-0.5  rounded-lg text-sm font-medium bg-custom-red text-gray-300">
                                     Unverified Account
                                   </span>}
                                 </h1>
@@ -205,7 +205,7 @@ export default function Profile() {
 
                           {/* Who view my post */}
                           <ul className="">
-                            {profile?.viewedBy?.length <= 0 ? <h1 className="text-rose-600 text-center text-lg">No viewers</h1>
+                            {profile?.viewedBy?.length <= 0 ? <h1 className="text-custom-red text-center text-lg">No viewers</h1>
                               :
                               profile?.viewedBy?.map((viewer) => {
                                 return <Link to={`/profile/${viewer._id}`}>
@@ -234,7 +234,7 @@ export default function Profile() {
                             My posts - {profile?.posts?.length}
                           </h1>
                           {/* Loo here */}
-                          {profile?.posts?.length <= 0 ? <h2 className="text-center text-lg text-rose-600"> No posts found </h2> :
+                          {profile?.posts?.length <= 0 ? <h2 className="text-center text-lg text-custom-red"> No posts found </h2> :
                             profile?.posts?.map(post => (
                               <div key={post?._id} className="flex flex-wrap  -mx-3 mt-3  lg:mb-6">
                                 <div className="mb-2   w-full lg:w-1/4 px-3">

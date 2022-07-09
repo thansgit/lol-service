@@ -52,7 +52,7 @@ export default function CommentsList({ comments }) {
                             <PencilAltIcon className="h-5 mt-3 text-yellow-300" />
                           </Link>
                           <button onClick={() => dispatch(commentDeleteAction(comment?._id))} className="ml-3">
-                            <TrashIcon className="h-5 mt-3 text-red-600" />
+                            <TrashIcon className="h-5 mt-3 text-custom-red" />
                           </button>
                         </p> :
                         null}

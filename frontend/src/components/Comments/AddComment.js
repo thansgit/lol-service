@@ -32,7 +32,7 @@ const AddComment = ({ postId }) => {
   return (
     <div className="flex flex-col justify-center items-center">
       {/* Errors */}
-      {serverErr || appErr ? <h2 className="text-rose-600 text-lg">{serverErr} {appErr}</h2> : null}
+      {serverErr || appErr ? <h2 className="text-custom-red text-lg">{serverErr} {appErr}</h2> : null}
       <form
         onSubmit={formik.handleSubmit}
         className="mt-1 flex max-w-sm m-auto"

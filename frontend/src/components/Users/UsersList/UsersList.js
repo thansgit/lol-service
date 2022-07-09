@@ -25,7 +25,7 @@ const UsersList = () => {
     <>
       <section class="py-8 bg-gray-900 min-h-screen">
         {loading ? <LoadingComponent />
-          : appErr || serverErr ? <h3 className="text-rose-600 text-center text-lg">{appErr} - {serverErr}</h3>
+          : appErr || serverErr ? <h3 className="text-custom-redtext-center text-lg">{appErr} - {serverErr}</h3>
             : allProfiles?.length <= 0 ? <h2>No profiles found...</h2>
               : allProfiles?.map(profile => (
                 <>

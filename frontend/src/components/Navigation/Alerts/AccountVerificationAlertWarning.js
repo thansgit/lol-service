@@ -7,7 +7,7 @@ export default function AccountVerificationAlertWarning() {
   const dispatch = useDispatch();
 
   return (
-    <div className="bg-rose-600 border-l-4 border-yellow-400 p-1">
+    <div className="bg-custom-red border-l-4 border-yellow-400 p-1">
       <div className="flex">
         <div className="flex-shrink-0">
           <ExclamationIcon

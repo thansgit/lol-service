@@ -48,7 +48,7 @@ const UpdateProfileForm = () => {
           <span className="text-green-300">{profile?.nickName}</span>?
         </h3>
         {/* Error */}
-        {serverErr || appErr ? <h2 className="text-red-400 text-3xl" >{appErr} - {serverErr}</h2> : null}
+        {serverErr || appErr ? <h2 className="text-custom-red text-3xl" >{appErr} - {serverErr}</h2> : null}
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -74,7 +74,7 @@ const UpdateProfileForm = () => {
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
               </div>
-              <div className="text-red-500">
+              <div className="text-custom-red">
                 {formik.touched.nickName && formik.errors.nickName}
               </div>
             </div>
@@ -99,7 +99,7 @@ const UpdateProfileForm = () => {
                 />
               </div>
               {/* err msg */}
-              <div className="text-red-500">
+              <div className="text-custom-red">
                 {formik.touched.email && formik.errors.email}
               </div>
             </div>
@@ -120,7 +120,7 @@ const UpdateProfileForm = () => {
                 type="text"
               ></textarea>
               {/* Err msg */}
-              <div className="text-red-500">
+              <div className="text-custom-red">
                 {formik.touched.bio && formik.errors.bio}
               </div>
             </div>

@@ -78,7 +78,7 @@ export default function UpdatePost() {
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
-                <div className="text-red-500">
+                <div className="text-custom-red">
                   {formik.touched.title && formik.errors.title}
                 </div>
               </div>
@@ -106,7 +106,7 @@ export default function UpdatePost() {
                   className="rounded-lg appearance-none block w-full py-3 px-3 text-base text-center leading-tight text-gray-600 bg-transparent focus:bg-transparent  border border-gray-200 focus:border-gray-500  focus:outline-none"
                   type="text"
                 ></textarea>
-                <div className="text-red-500">
+                <div className="text-custom-red">
                   {formik.touched.description && formik.errors.description}
                 </div>
               </div>
@@ -126,7 +126,7 @@ export default function UpdatePost() {
                 <button
                     onClick={() => dispatch(postDeleteAction(id))}
                     type="submit"
-                    className="group mt-2 relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-500 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="group mt-2 relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-custom-red hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     Delete category
                   </button>

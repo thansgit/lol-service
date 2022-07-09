@@ -66,7 +66,7 @@ const Register = () => {
 
                       {/* Display error message*/}
                       {appErr || serverErr ?
-                        <div className='text-red-400'>
+                        <div className='text-custom-red'>
                           {serverErr} {appErr}
                         </div> : null}
                     </h3>
@@ -121,7 +121,7 @@ const Register = () => {
                       />
                     </div>
                     {/* Err msg*/}
-                    <div className="text-red-400 mb-2">
+                    <div className="text-custom-red mb-2">
                       {formik.touched.nickName && formik.errors.nickName}
                     </div>
                     {/* Email */}
@@ -174,7 +174,7 @@ const Register = () => {
                       />
                     </div>
                     {/* Err msg*/}
-                    <div className="text-red-400 mb-2">
+                    <div className="text-custom-red mb-2">
                       {formik.touched.email && formik.errors.email}
                     </div>
                     {/* Password */}
@@ -208,7 +208,7 @@ const Register = () => {
                       />
                     </div>
                     {/* Err msg*/}
-                    <div className="text-red-400 mb-2">
+                    <div className="text-custom-red mb-2">
                       {formik.touched.password && formik.errors.password}
                     </div>
 

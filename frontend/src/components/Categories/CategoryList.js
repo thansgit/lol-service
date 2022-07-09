@@ -26,7 +26,7 @@ const CategoryList = () => {
         <LoadingComponent />
         </>
       ) : appErr || serverErr ? (
-        <h2 className="text-center text-3xl text-red-400">
+        <h2 className="text-center text-3xl text-custom-red">
           {serverErr} {serverErr}
         </h2>
       ) : categoryList?.length <= 0 ? (

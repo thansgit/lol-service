@@ -79,7 +79,7 @@ export default function PostsList() {
               <div className="w-full lg:w-3/4 px-3">
                 {/* Posts */}
                 {appErr || serverErr ?
-                  <h1 className="text-rose-600">{serverErr} - {appErr}</h1> :
+                  <h1 className="text-custom-red">{serverErr} - {appErr}</h1> :
                   postList?.length <= 0 ?
                     <h1 className="text-white text-center text-lg">No posts found</h1> :
                     postList?.map((post) => (

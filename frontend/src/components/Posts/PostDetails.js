@@ -36,7 +36,7 @@ const PostDetails = () => {
   return (
     <>
       {loading ? <div className="h-screen bg-gray-900"><LoadingComponent /></div> :
-        appErr || serverErr ? <h1 className="h-screen text-red-400 text-xl">{appErr} - {serverErr}</h1> :
+        appErr || serverErr ? <h1 className="h-screen text-custom-red text-xl">{appErr} - {serverErr}</h1> :
           <section className="py-20 2xl:py-40 bg-gray-900 overflow-hidden">
             <div className="container px-4 mx-auto">
               {/* Post Image */}
@@ -80,7 +80,7 @@ const PostDetails = () => {
                         <PencilAltIcon className="h-8 mt-3 text-yellow-300" />
                       </Link>
                       <button onClick={() => dispatch(postDeleteAction(id))} className="ml-3">
-                        <TrashIcon className="h-8 mt-3 text-red-600" />
+                        <TrashIcon className="h-8 mt-3 text-custom-red" />
                       </button>
                     </p> : null}
 

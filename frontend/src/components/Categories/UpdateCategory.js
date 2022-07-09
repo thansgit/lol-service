@@ -61,7 +61,7 @@ const UpdateCategory = () => {
             </p>
             {/* Error message */}
             <div>
-              {appErr || serverErr ? <h2 className="text-red-400 text-center text-lg">{serverErr} - {appErr}</h2> : null}
+              {appErr || serverErr ? <h2 className="text-custom-red text-center text-lg">{serverErr} - {appErr}</h2> : null}
             </div>
           </p>
         </div>
@@ -83,7 +83,7 @@ const UpdateCategory = () => {
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-center focus:z-10 sm:text-sm"
                 placeholder="Update category name"
               />
-              <div className="text-red-400 mb-2">
+              <div className="text-custom-red mb-2">
                 {formik.touched.title && formik.errors.title}
               </div>
             </div>
@@ -123,7 +123,7 @@ const UpdateCategory = () => {
                   <button
                     onClick={() => dispatch(categoryDeleteAction(id))}
                     type="submit"
-                    className="group mt-2 relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-500 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="group mt-2 relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-custom-red hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     Delete category
                   </button>

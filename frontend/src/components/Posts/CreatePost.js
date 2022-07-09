@@ -62,20 +62,18 @@ export default function CreatePost() {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-custom-gray flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-300">
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
             Create Post
           </h2>
 
-          <p className="mt-2 text-center text-sm text-gray-600">
-            <p className="font-medium text-green-600 hover:text-indigo-500">
+            <p className="font-medium text-lg text-custom-green text-center mt-2">
               Share your thoughts to the world.
             </p>
-          </p>
 
           {appErr || serverErr ?
-            <p className="mt-2 text-center text-lg text-red-500">
+            <p className="mt-2 text-center text-lg text-custom-red">
               {serverErr} - {appErr}
             </p> : null}
 
@@ -104,7 +102,7 @@ export default function CreatePost() {
                   />
                 </div>
                 {/* Err msg */}
-                <div className="text-red-500">
+                <div className="text-custom-red">
                   {formik?.touched?.title && formik?.errors?.title}
                 </div>
               </div>
@@ -140,7 +138,7 @@ export default function CreatePost() {
                   type="text"
                 ></textarea>
                 {/* Err msg */}
-                <div className="text-red-500">
+                <div className="text-custom-red">
                   {formik?.touched?.description && formik?.errors?.description}
                 </div>
                 {/* Image upload component */}

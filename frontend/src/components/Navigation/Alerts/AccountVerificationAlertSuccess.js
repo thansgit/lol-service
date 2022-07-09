@@ -13,7 +13,7 @@ export default function AccountVerificationAlertSuccess() {
         </div>
         <div className="ml-3">
           <p className="text-sm font-medium text-green-800">
-            Account verification message sent to your email. Verify within <span className="text-rose-600">10</span> minutes.
+            Account verification message sent to your email. Verify within <span className="text-custom-red">10</span> minutes.
           </p>
         </div>
       </div>
