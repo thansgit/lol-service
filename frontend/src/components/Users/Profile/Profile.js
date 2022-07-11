@@ -81,7 +81,7 @@ export default function Profile() {
                                     {profile?.accountType}
                                   </span>
                                   {/* Display if verified or not */}
-                                  {profile?.isAccountVerified ? <span className="inline-flex ml-2 items-center px-3 py-0.5  rounded-lg text-sm font-medium bg-custom-green text-gray-300">
+                                  {profile?.isAccountVerified ? <span className="inline-flex ml-2 items-center px-3 py-0.5  rounded-lg text-sm font-medium bg-green-600 text-gray-300">
                                     Account Verified
                                   </span> : <span className="inline-flex ml-2 items-center px-3 py-0.5  rounded-lg text-sm font-medium bg-custom-red text-gray-300">
                                     Unverified Account
@@ -129,7 +129,7 @@ export default function Profile() {
                                       onClick={() =>
                                         dispatch(userUnfollowProfileAction(id))
                                       }
-                                      className="mr-2 inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-custom-gray-light hover:bg-custom-gray-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                                      className="mr-2 inline-flex justify-center px-4 py-2 border border-custom-yellow shadow-sm text-sm font-medium rounded-md text-custom-yellow bg-custom-gray-light hover:bg-custom-gray-hover"
                                     >
                                       <EmojiSadIcon
                                         className="-ml-1 mr-2 h-5 w-5 text-gray-400"
@@ -143,7 +143,7 @@ export default function Profile() {
                                         dispatch(userFollowProfileAction(id))
                                       }
                                       type="button"
-                                      className="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-custom-gray-light hover:bg-custom-gray-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                                      className="inline-flex justify-center px-4 py-2 border border-custom-yellow shadow-sm text-sm font-medium rounded-md text-custom-yellow bg-custom-gray-light hover:bg-custom-gray-hover"
                                     >
                                       <HeartIcon
                                         className="-ml-1 mr-2 h-5 w-5 text-white"
@@ -163,7 +163,7 @@ export default function Profile() {
                                 <>
                                   {isLoggedInUser && <Link
                                     to={`/update-profile/${profile?._id}`}
-                                    className="inline-flex justify-center px-4 py-2 border border-custom-yellow shadow-sm text-sm font-medium rounded-md text-custom-yellow bg-custom-gray-light hover:bg-custom-gray-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                                    className="inline-flex justify-center px-4 py-2 border border-custom-yellow shadow-sm text-sm font-medium rounded-md text-custom-yellow bg-custom-gray-light hover:bg-custom-gray-hover"
                                   >
                                     <UserIcon
                                       className="-ml-1 mr-2 h-5 w-5 text-white"
@@ -176,10 +176,10 @@ export default function Profile() {
                                 {/* Send Mail */}
                                 <button
                                   onClick={() => navigate(`/send-email/${profile?.email}`)}
-                                  className="inline-flex justify-center bg-custom-gray-light px-4 py-2 border border-custom-yellow shadow-sm text-sm font-medium rounded-md text-gray-700  hover:bg-custom-gray-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                                  className="inline-flex justify-center bg-custom-gray-light px-4 py-2 border border-custom-yellow shadow-sm text-sm font-medium rounded-md  hover:bg-custom-gray-hover"
                                 >
                                   <MailIcon
-                                    className="-ml-1 mr-2 h-5 w-5 text-gray-200"
+                                    className="-ml-1 mr-2 h-5 w-5 text-white"
                                     aria-hidden="true"
                                   />
                                   <span className="text-base mr-2  text-bold text-custom-yellow">

@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { emailSendAction } from "../../../redux/slices/email/emailSlices";
 import Footer from "../../General/Footer";
-
+import ErrorDisplay from "../../../utils/ErrorDisplay";
+import LoadingButton from "../../../utils/LoadingButton";
 //Form schema
 const formSchema = Yup.object({
   toEmail: Yup.string().required("Recipent Email is required"),
@@ -41,27 +42,22 @@ const SendEmail = () => {
     <>
       <div className="min-h-screen bg-custom-gray flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-300">
-            Send message <br />
-            {/* Email title */}
-            <span className="text-custom-green">email title</span>
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
+            Send message
           </h2>
 
           <p className="mt-2 text-center text-lg text-custom-red">
-            {serverErr || appErr ? <h2>{serverErr} - {appErr}</h2> : null}
-          </p>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            {/* {emailSent && <div>Sent</div>} */}
+            {serverErr || appErr ? <ErrorDisplay first={appErr} second={serverErr} /> : null}
           </p>
         </div>
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          <div className="bg-custom-gray-light border-2 border-custom-yellow py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <form className="space-y-6" onSubmit={formik.handleSubmit}>
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-white"
                 >
                   Recipient Email
                 </label>
@@ -76,18 +72,16 @@ const SendEmail = () => {
                     name="email"
                     type="email"
                     autoComplete="email"
-                    className="appearance-none block w-full px-3 py-2 border bg-gray-200 border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    className="appearance-none block w-full px-3 py-2 border bg-gray-200 border-gray-300 rounded-md shadow-sm placeholder-white focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
                 {/* Err msg */}
-                <div className="text-custom-red">
-                  {formik.touched.toEmail && formik.errors.toEmail}
-                </div>
+                <ErrorDisplay first={formik.touched.toEmail} second={formik.errors.toEmail} />
               </div>
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-white"
                 >
                   Subject
                 </label>
@@ -104,15 +98,12 @@ const SendEmail = () => {
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
-                {/* err msg */}
-                <div className="text-custom-red">
-                  {formik.touched.subject && formik.errors.subject}
-                </div>
+                <ErrorDisplay first={formik.touched.subject} second={formik.errors.subject} />
               </div>
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-white"
                 >
                   Message
                 </label>
@@ -123,27 +114,23 @@ const SendEmail = () => {
                   onBlur={formik.handleBlur("message")}
                   rows="5"
                   cols="10"
-                  className="rounded-lg appearance-none block w-full py-3 px-3 text-base text-center leading-tight text-gray-600 bg-transparent focus:bg-transparent  border border-gray-200 focus:border-gray-500  focus:outline-none"
+                  className="rounded-lg appearance-none block w-full py-3 px-3 text-base text-center leading-tight text-black bg-white  border border-gray-200 "
                   type="text"
                 ></textarea>
-                {/* err here */}
-                <div className="text-custom-red">
-                  {formik.touched.message && formik.errors.message}
-                </div>
+                <ErrorDisplay first={formik.touched.message} second={formik.errors.message} />
               </div>
               {/* Submit btn */}
               <div>
-                {loading ? <button
-                  type="disabled"
-                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600"
-                >
-                  Loading...
-                </button> : <button
-                  type="submit"
-                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  Send email
-                </button>}
+                {loading ?
+                  <LoadingButton />
+                  :
+                  <button
+                    type="submit"
+                    className="w-full flex justify-center py-2 px-4 border border-transparent
+                     rounded-md shadow-sm text-sm font-medium text-white bg-custom-blue hover:bg-indigo-700"
+                  >
+                    Send email
+                  </button>}
               </div>
             </form>
           </div>

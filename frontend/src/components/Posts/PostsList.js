@@ -49,7 +49,7 @@ export default function PostsList() {
                 {/* View All */}
                 <button
                   onClick={() => dispatch(postFetchAllAction(''))}
-                  className="inline-block py-2 px-6 rounded-l-xl rounded-t-xl bg-custom-green hover:bg-green-700 text-gray-50 font-bold leading-loose transition duration-200">
+                  className="inline-block py-2 px-6 rounded-l-xl rounded-t-xl bg-custom-yellow text-black font-bold ">
                   View all posts
                 </button>
               </div>

@@ -16,7 +16,7 @@ export default function AccountVerificationAlertWarning() {
           />
         </div>
         <div className="ml-3">
-          <p className="text-sm text-custom-yellow">
+          <p className="text-md font-bold text-custom-yellow">
             Your account is not verified.{" "}
             <button
               onClick={() => dispatch(accountVerificationSendTokenAction())}

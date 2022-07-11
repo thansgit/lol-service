@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import { Navigate } from "react-router-dom";
 import Footer from "../General/Footer";
 import LoadingButton from "../../utils/LoadingButton";
+import ErrorDisplay from "../../utils/ErrorDisplay";
 
 const AddNewCategory = () => {
 
@@ -47,7 +48,7 @@ const AddNewCategory = () => {
               </p>
               {/* Error message */}
               <div>
-                {appErr || serverErr ? <h2 className="text-custom-red text-center text-lg">{serverErr} - {appErr}</h2> : null}
+                {appErr || serverErr ? <ErrorDisplay first={serverErr} second={appErr} /> : null}
               </div>
             </p>
           </div>
@@ -71,9 +72,7 @@ const AddNewCategory = () => {
                     focus:ring-indigo-500 focus:border-indigo-500 text-center focus:z-10 sm:text-sm"
                   placeholder="New Category"
                 />
-                <div className="text-custom-red mb-2">
-                  {formik.touched.title && formik.errors.title}
-                </div>
+                <ErrorDisplay first={formik.touched.title} second={formik.errors.title} />
               </div>
             </div>
 
@@ -85,13 +84,12 @@ const AddNewCategory = () => {
                   : <button
                     type="submit"
                     className="group relative w-full flex justify-center py-2 px-4
-                     border border-transparent text-sm font-medium rounded-md text-white
-                      bg-custom-blue hover:bg-indigo-700 focus:outline-none focus:ring-2
-                       focus:ring-offset-2 focus:ring-indigo-500"
+                      text-sm font-medium rounded-md text-white
+                      bg-custom-blue hover:bg-indigo-700"
                   >
                     <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                       <PlusCircleIcon
-                        className="h-5 w-5 text-custom-yellow group-hover:text-indigo-400"
+                        className="h-5 w-5 text-white hover:text-indigo-400"
                         aria-hidden="true"
                       />
                     </span>

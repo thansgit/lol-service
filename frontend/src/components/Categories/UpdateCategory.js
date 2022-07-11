@@ -9,6 +9,8 @@ import {
   categoryUpdateAction,
   categoryDeleteAction
 } from "../../redux/slices/category/categorySlice";
+import ErrorDisplay from "../../utils/ErrorDisplay";
+import LoadingButton from "../../utils/LoadingButton";
 
 
 
@@ -56,12 +58,12 @@ const UpdateCategory = () => {
             Update category
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            <p className="font-medium text-indigo-600 hover:text-indigo-500">
+            <p className="font-medium text-custom-yellow">
               These are the categories user will select when creating a post
             </p>
             {/* Error message */}
             <div>
-              {appErr || serverErr ? <h2 className="text-custom-red text-center text-lg">{serverErr} - {appErr}</h2> : null}
+              {appErr || serverErr ? <ErrorDisplay serverErr={serverErr} appErr={appErr} /> : null}
             </div>
           </p>
         </div>
@@ -80,41 +82,26 @@ const UpdateCategory = () => {
                 onBlur={formik.handleBlur('title')}
                 type="text"
                 autoComplete="text"
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-custom-gray rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-center focus:z-10 sm:text-sm"
+                className=" relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-custom-gray rounded-md text-center sm:text-sm"
                 placeholder="Update category name"
               />
-              <div className="text-custom-red mb-2">
-                {formik.touched.title && formik.errors.title}
-              </div>
+              <ErrorDisplay first={formik.touched.title} second={formik.errors.title} />
             </div>
           </div>
 
           <div>
             <div>
               {/* Submit */}
-              {loading ? <button
-                disabled
-                className="group relative w-full flex justify-center py-2
-                 px-4 border border-transparent text-sm font-medium rounded-md
-                  text-white bg-gray-500"
-              >
-                <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                  <PlusCircleIcon
-                    className="h-5 w-5 text-custom-yellow group-hover:text-indigo-400"
-                    aria-hidden="true"
-                  />
-                </span>
-                Loading...
-              </button>
+              {loading ? <LoadingButton />
                 :
                 <>
                   <button
                     type="submit"
-                    className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-custom-green hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-custom-blue hover:bg-indigo-700"
                   >
                     <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                       <PlusCircleIcon
-                        className="h-5 w-5 group-hover:text-indigo-400"
+                        className="h-5 w-5 text-white"
                         aria-hidden="true"
                       />
                     </span>
@@ -123,7 +110,7 @@ const UpdateCategory = () => {
                   <button
                     onClick={() => dispatch(categoryDeleteAction(id))}
                     type="submit"
-                    className="group mt-2 relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-custom-red hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="group mt-2 relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-custom-red hover:bg-rose-700"
                   >
                     Delete category
                   </button>

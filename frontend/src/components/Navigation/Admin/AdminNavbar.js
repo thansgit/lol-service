@@ -47,7 +47,9 @@ const AdminNavbar = ({ isLoggedIn }) => {
               <div className="flex">
                 <div className="-ml-2 mr-2 flex items-center md:hidden">
                   {/* Mobile menu button */}
-                  <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                  <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md
+                    text-white hover:bg-custom-gray-hover focus:outline-none focus:ring-2 focus:ring-inset
+                     focus:ring-white">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
                       <XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -68,7 +70,7 @@ const AdminNavbar = ({ isLoggedIn }) => {
                       className={classNames(
                         item.current
                           ? "bg-gray-900 text-white"
-                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          : "text-white hover:bg-custom-gray-hover hover:text-white",
                         "px-3 py-2 rounded-md text-sm font-medium"
                       )}
                       aria-current={item.current ? "page" : undefined}
@@ -84,7 +86,9 @@ const AdminNavbar = ({ isLoggedIn }) => {
                   <Link
                     to="/create-post"
                     type="button"
-                    className="relative mr-4 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
+                    className="relative mr-4 inline-flex items-center px-4 py-2 border border-transparent
+                     shadow-sm text-sm font-bold rounded-md text-custom-gray-light bg-custom-yellow hover:bg-yellow-700
+                      focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-custom-gray-light focus:ring-custom-yellow"
                   >
                     <PlusIcon
                       className="-ml-1 mr-2 h-5 w-5"
@@ -96,7 +100,9 @@ const AdminNavbar = ({ isLoggedIn }) => {
                   <button
                     onClick={() => dispatch(userLogoutAction())}
                     type="button"
-                    className="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-custom-red hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
+                    className="relative inline-flex items-center px-4 py-2 border border-transparent
+                     shadow-sm text-sm font-bold rounded-md text-custom-gray-light bg-custom-red hover:bg-rose-700 
+                     focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-custom-gray-light focus:ring-custom-red"
                   >
                     <LogoutIcon
                       className="-ml-1 mr-2 h-5 w-5"
@@ -111,7 +117,8 @@ const AdminNavbar = ({ isLoggedIn }) => {
                     {({ open }) => (
                       <>
                         <div>
-                          <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                          <Menu.Button className=" flex text-sm rounded-full focus:outline-none
+                           focus:ring-2 focus:ring-offset-2 focus:ring-offset-custom-gray-light focus:ring-custom-yellow">
                             <span className="sr-only">Open user menu</span>
                             <img
                               className="h-8 w-8 rounded-full"
@@ -132,7 +139,8 @@ const AdminNavbar = ({ isLoggedIn }) => {
                         >
                           <Menu.Items
                             static
-                            className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                            className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg
+                             py-1 bg-custom-gray-light ring-1 ring-black ring-opacity-5 focus:outline-none"
                           >
                             {userNavigation.map(item => (
                               <Menu.Item key={item.name}>
@@ -140,8 +148,8 @@ const AdminNavbar = ({ isLoggedIn }) => {
                                   <a
                                     href={item.href}
                                     className={classNames(
-                                      active ? "bg-gray-100" : "",
-                                      "block px-4 py-2 text-sm text-gray-700"
+                                      active ? "bg-custom-gray-hover" : "",
+                                      "block px-4 py-2 text-sm text-white"
                                     )}
                                   >
                                     {item.name}
@@ -191,7 +199,9 @@ const AdminNavbar = ({ isLoggedIn }) => {
                     {isLoggedIn?.email}
                   </div>
                 </div>
-                <button className="ml-auto flex-shrink-0 bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                <button className="ml-auto flex-shrink-0 bg-gray-800 p-1 rounded-full
+                 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2
+                  focus:ring-offset-gray-800 focus:ring-white">
                   <span className="sr-only">View notifications</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
@@ -201,7 +211,8 @@ const AdminNavbar = ({ isLoggedIn }) => {
                   <a
                     key={item.name}
                     href={item.href}
-                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
+                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-400
+                     hover:text-white hover:bg-gray-700"
                   >
                     {item.name}
                   </a>
