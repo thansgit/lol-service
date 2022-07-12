@@ -35,7 +35,7 @@ const CategoryDropdown = (props) => {
 
     return (
         <div style={{margin:'1rem 0'}}>
-            {loading ? <h3 className="text-base text-custom-green">Categories loading...</h3>
+            {loading ? <h3 className="text-base text-custom-red">Categories loading...</h3>
                 :
                 <Select
                     onChange={handleChange}

@@ -1,6 +1,6 @@
 import React from "react";
 import poster from '../img/poster.png'
-import Footer from "../General/Footer";
+import Footer from "../../utils/Footer";
 
 const HomePage = () => {
   return (

@@ -4,8 +4,9 @@ import { Navigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { userFetchProfileAction, userUpdateAction } from "../../../redux/slices/users/usersSlices";
-import Footer from "../../General/Footer";
 import LoadingButton from "../../../utils/LoadingButton";
+import ErrorDisplay from "../../../utils/ErrorDisplay";
+import Footer from "../../../utils/Footer";
 //Form schema
 const formSchema = Yup.object({
   nickName: Yup.string().required("Nickname is required"),
@@ -46,19 +47,19 @@ const UpdateProfileForm = () => {
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h3 className="mt-6 text-center text-3xl font-extrabold text-gray-300">
             Update your profile, <br />
-            <span className="text-custom-green">{profile?.nickName}</span>?
+            <span className="text-custom-yellow text-md">{profile?.nickName}</span>?
           </h3>
           {/* Error */}
-          {serverErr || appErr ? <h2 className="text-custom-red text-3xl" >{appErr} - {serverErr}</h2> : null}
+          {serverErr || appErr ? <ErrorDisplay first={appErr} second={serverErr} /> : null}
         </div>
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          <div className="bg-custom-gray-light py-8 px-4 shadow sm:rounded-lg sm:px-10 border-2 border-custom-yellow">
             <form className="space-y-6" onSubmit={formik.handleSubmit}>
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-white"
                 >
                   Nickname
                 </label>
@@ -75,14 +76,14 @@ const UpdateProfileForm = () => {
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
-                <div className="text-custom-red">
-                  {formik.touched.nickName && formik.errors.nickName}
-                </div>
+
+                <ErrorDisplay first={formik.touched.nickName} second={formik.errors.nickName} />
+
               </div>
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-white"
                 >
                   Email
                 </label>
@@ -99,15 +100,12 @@ const UpdateProfileForm = () => {
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
-                {/* err msg */}
-                <div className="text-custom-red">
-                  {formik.touched.email && formik.errors.email}
-                </div>
+                <ErrorDisplay first={formik.touched.email} second={formik.errors.email} />
               </div>
               <div>
                 <label
                   htmlFor="bio"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-white"
                 >
                   Bio
                 </label>
@@ -117,13 +115,11 @@ const UpdateProfileForm = () => {
                   onBlur={formik.handleBlur("bio")}
                   rows="5"
                   cols="10"
-                  className="rounded-lg appearance-none block w-full py-3 px-3 text-base text-center leading-tight text-gray-600 bg-transparent focus:bg-transparent  border border-gray-200 focus:border-gray-500  focus:outline-none"
+                  className="rounded-lg appearance-none block w-full py-3 px-3 text-base text-center leading-tight text-black "
                   type="text"
                 ></textarea>
                 {/* Err msg */}
-                <div className="text-custom-red">
-                  {formik.touched.bio && formik.errors.bio}
-                </div>
+                <ErrorDisplay first={formik.touched.bio} second={formik.errors.bio} />
               </div>
               <div>
                 {/* submit btn */}
@@ -138,16 +134,6 @@ const UpdateProfileForm = () => {
                 </button>}
               </div>
             </form>
-
-            <div className="mt-4 mb-3">
-              <div className="relative">
-                <div className="flex flex-col justify-center items-center">
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-300" />
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

@@ -3,9 +3,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { emailSendAction } from "../../../redux/slices/email/emailSlices";
-import Footer from "../../General/Footer";
 import ErrorDisplay from "../../../utils/ErrorDisplay";
 import LoadingButton from "../../../utils/LoadingButton";
+import Footer from "../../../utils/Footer";
 //Form schema
 const formSchema = Yup.object({
   toEmail: Yup.string().required("Recipent Email is required"),
@@ -45,10 +45,10 @@ const SendEmail = () => {
           <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
             Send message
           </h2>
+          <p className="text-lg font-medium mt-4 text-custom-yellow text-center">Contact your fellow blogger </p>
 
-          <p className="mt-2 text-center text-lg text-custom-red">
             {serverErr || appErr ? <ErrorDisplay first={appErr} second={serverErr} /> : null}
-          </p>
+
         </div>
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">

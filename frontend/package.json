@@ -25,7 +25,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build-css": "tailwindcss build style.css -o css/style.css",
+    "prod": "NODE_ENV=production postcss style.css -o public/style.css"
   },
   "eslintConfig": {
     "extends": [

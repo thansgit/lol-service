@@ -6,7 +6,7 @@ import { PencilAltIcon } from "@heroicons/react/outline";
 import { categoriesFetchAction } from "../../redux/slices/category/categorySlice";
 import DateFormatter from "../../utils/DateFormatter";
 import LoadingComponent from "../../utils/LoadingComponent";
-import Footer from "../General/Footer";
+import Footer from "../../utils/Footer";
 import ErrorDisplay from "../../utils/ErrorDisplay";
 
 
@@ -27,38 +27,36 @@ const CategoryList = () => {
         : appErr || serverErr ?
           <ErrorDisplay first={serverErr} second={appErr} />
           : categoryList?.length <= 0 ?
-            <h2 className="text-center text-3xl text-custom-red">
-              No category Found
-            </h2>
+            <ErrorDisplay first={"No categories found."} />
             :
             <div className="flex flex-col">
               <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8 bg-custom-gray h-screen">
-                  <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                  <div className="shadow overflow-hidden mt-1 sm:rounded-lg">
                     <table className="min-w-full divide-y divide-gray-200">
-                      <thead className="bg-gray-300">
+                      <thead className="bg-white">
                         <tr>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                            className="px-6 py-3 text-left text-xs font-medium text-black uppercase tracking-wider"
                           >
                             Author
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                            className="px-6 py-3 text-left text-xs font-medium text-black uppercase tracking-wider"
                           >
                             Title
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                            className="px-6 py-3 text-left text-xs font-medium text-black uppercase tracking-wider"
                           >
                             Created At
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                            className="px-6 py-3 text-left text-xs font-medium text-black uppercase tracking-wider"
                           >
                             Edit
                           </th>
@@ -77,7 +75,7 @@ const CategoryList = () => {
                                   />
                                 </div>
                                 <div className="ml-4">
-                                  <div className="text-sm font-medium text-white">
+                                  <div className="text-sm font-medium text-custom-yellow">
                                     {category?.user?.nickName}
                                   </div>
                                   <div className="text-sm text-white">
@@ -93,7 +91,7 @@ const CategoryList = () => {
                               {<DateFormatter date={category?.createdAt} />}
                             </td>
                             <Link to={`/update-category/${category?._id}`}>
-                              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                              <td className="px-6 py-4 whitespace-nowrap ">
                                 <PencilAltIcon className="h-5 text-custom-blue" />
                               </td>
                             </Link>

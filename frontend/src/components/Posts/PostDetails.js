@@ -7,7 +7,8 @@ import DateFormatter from "../../utils/DateFormatter";
 import LoadingComponent from "../../utils/LoadingComponent";
 import AddComment from "../Comments/AddComment";
 import CommentsList from "../Comments/CommentsList";
-import Footer from "../General/Footer";
+import Footer from "../../utils/Footer";
+import ErrorDisplay from "../../utils/ErrorDisplay";
 
 
 
@@ -36,14 +37,14 @@ const PostDetails = () => {
   return (
     <>
       {loading ? <div className="h-screen bg-custom-gray"><LoadingComponent /></div> :
-        appErr || serverErr ? <h1 className="h-screen text-custom-red text-xl">{appErr} - {serverErr}</h1> :
+        appErr || serverErr ? <ErrorDisplay first={appErr} second={serverErr} /> :
           <section h-screen className="py-20 2xl:py-40 bg-custom-gray overflow-hidden">
             <div className=" h-screen container px-4 mx-auto">
               {/* Post Image */}
               <img
                 className="mb-24 w-full h-96 object-cover"
                 src={postDetails?.image}
-                alt=""
+                alt="Postimage"
               />
               <div className="max-w-2xl mx-auto text-center">
                 <h2 className="mt-7 mb-14 text-6xl 2xl:text-7xl text-white font-bold font-heading">
@@ -75,14 +76,15 @@ const PostDetails = () => {
                   <p className="mb-6  text-xl text-gray-200 text-center">
                     {postDetails?.description}
                     {/* Show delete and update btn if created by current user */}
-                    {isCreatedBy ? <p className="flex">
-                      <Link className="p-3" to={`/update-post/${postDetails?._id}`}>
-                        <PencilAltIcon className="h-8 mt-3 text-custom-yellow" />
-                      </Link>
-                      <button onClick={() => dispatch(postDeleteAction(id))} className="ml-3">
-                        <TrashIcon className="h-8 mt-3 text-custom-red" />
-                      </button>
-                    </p> : null}
+                    {isCreatedBy ?
+                      <p className="flex justify-center">
+                        <Link className="p-3" to={`/update-post/${postDetails?._id}`}>
+                          <PencilAltIcon className="h-8 mt-3 text-custom-yellow" />
+                        </Link>
+                        <button onClick={() => dispatch(postDeleteAction(id))} className="ml-3">
+                          <TrashIcon className="h-8 mt-3 text-custom-red" />
+                        </button>
+                      </p> : null}
 
                   </p>
                 </div>

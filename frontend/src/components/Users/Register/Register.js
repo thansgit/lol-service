@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { userRegisterAction } from "../../../redux/slices/users/usersSlices";
-import Footer from "../../General/Footer";
+import Footer from "../../../utils/Footer";
 import LoadingButton from "../../../utils/LoadingButton";
 import ErrorDisplay from "../../../utils/ErrorDisplay";
 
@@ -52,8 +52,8 @@ const Register = () => {
             <div className="flex flex-wrap items-center -mx-4">
               <div className="w-full lg:w-1/2 px-4 mb-16 lg:mb-0">
                 <div className="max-w-md">
-                  <span className="text-lg text-custom-green font-bold">
-                    Register Account
+                  <span className="text-lg text-custom-yellow font-bold">
+                    Register your account
                   </span>
                   <h2 className="mt-8 mb-12 text-5xl font-bold font-heading text-white">
                     Create an account and start pending down your ideas

@@ -23,8 +23,7 @@ const UpdateCategory = () => {
 
   useEffect(() => {
     dispatch(categoryFetchAction(id))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch, id]);
 
   const formSchema = Yup.object({
     title: Yup.string().required('Title is required'),

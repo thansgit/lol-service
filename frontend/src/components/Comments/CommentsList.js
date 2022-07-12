@@ -15,7 +15,7 @@ export default function CommentsList({ comments }) {
   return (
     <div>
       <ul className="divide-y bg-custom-gray-light rounded-md w-96 divide-gray-200 p-3 mt-5">
-        <div className="text-gray-400">{comments?.length} Comments </div>
+        <div className="text-white">{comments?.length} Comments </div>
         <>
           {comments?.length <= 0 ? (
             <h1 className="text-custom-yellow text-lg text-center">No comments</h1>
@@ -31,8 +31,8 @@ export default function CommentsList({ comments }) {
                     />
                     <div className="flex-1 space-y-1">
                       <div className="flex items-center justify-between">
-                        <Link to={`/profile/${comment?.user?._id}`} className="hover:underline text-custom-green">
-                          <h3 className="text-sm font-medium text-custom-green">
+                        <Link to={`/profile/${comment?.user?._id}`} className="hover:underline text-custom-yellow">
+                          <h3 className="text-sm font-medium text-custom-yellow">
                             {comment?.user?.nickName}
                           </h3>
                         </Link>
@@ -45,7 +45,7 @@ export default function CommentsList({ comments }) {
                       <p className="text-sm text-gray-400">
                         {comment?.description}
                       </p>
-                      {/* Check if the same user created this comment */}
+                      {/* Check if the current user created this comment */}
                       {isLoginUser === comment?.user?._id ?
                         <p className="flex">
                           <Link className="p-3" to={`/update-comment/${comment?._id}`}>

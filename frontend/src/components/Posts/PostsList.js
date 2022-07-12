@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import DateFormatter from "../../utils/DateFormatter";
 import { categoriesFetchAction } from "../../redux/slices/category/categorySlice";
 import LoadingComponent from "../../utils/LoadingComponent";
-import Footer from "../General/Footer";
+import Footer from "../../utils/Footer";
+import ErrorDisplay from "../../utils/ErrorDisplay";
 export default function PostsList() {
 
   const dispatch = useDispatch();
@@ -79,9 +80,9 @@ export default function PostsList() {
               <div className="w-full lg:w-3/4 px-3">
                 {/* Posts */}
                 {appErr || serverErr ?
-                  <h1 className="text-custom-red">{serverErr} - {appErr}</h1> :
+                  <ErrorDisplay first={appErr} second={serverErr} /> :
                   postList?.length <= 0 ?
-                    <h1 className="text-white text-center text-lg">No posts found</h1> :
+                    <ErrorDisplay first='No posts found...' /> :
                     postList?.map((post) => (
                       <div key={post.id} className="flex flex-wrap bg-custom-gray -mx-3  lg:mb-6">
                         <div className="mb-10  w-full lg:w-1/4">
@@ -94,33 +95,33 @@ export default function PostsList() {
                             />
                           </Link>
                           {/* Likes, views dislikes */}
-                          <div className="flex flex-row bg-gray-300 justify-center w-full  items-center ">
+                          <div className="flex flex-row bg-custom-gray-light  border-b-2 border-custom-yellow justify-center w-full  items-center ">
                             {/* Likes */}
                             <div className="flex flex-row justify-center items-center ml-4 mr-4 pb-2 pt-1">
                               {/* Toggle like  */}
                               <div className="">
                                 <ThumbUpIcon
                                   onClick={() => dispatch(postToggleAddEmpathicVote(post?.id))}
-                                  className="h-7 w-7 text-indigo-600 cursor-pointer"
+                                  className="h-7 w-7 text-custom-blue cursor-pointer"
                                 />
                               </div>
-                              <div className="pl-2 text-gray-600">{post?.empathicVotes?.length}</div>
+                              <div className="pl-2 text-white">{post?.empathicVotes?.length}</div>
                             </div>
                             {/* Dislike */}
                             <div className="flex flex-row  justify-center items-center ml-4 mr-4 pb-2 pt-1">
                               <div>
                                 <ThumbDownIcon
                                   onClick={() => dispatch(postToggleAddEgoicVote(post?.id))}
-                                  className="h-7 w-7 cursor-pointer text-gray-600" />
+                                  className="h-7 w-7 cursor-pointer text-custom-red" />
                               </div>
-                              <div className="pl-2 text-gray-600">{post?.egoicVotes?.length}</div>
+                              <div className="pl-2 text-white">{post?.egoicVotes?.length}</div>
                             </div>
                             {/* Views */}
                             <div className="flex flex-row justify-center items-center ml-4 mr-4 pb-2 pt-1">
                               <div>
-                                <EyeIcon className="h-7 w-7  text-gray-400" />
+                                <EyeIcon className="h-7 w-7  text-white" />
                               </div>
-                              <div className="pl-2 text-gray-600">
+                              <div className="pl-2 text-white">
                                 {post?.numOfViews}
                               </div>
                             </div>
@@ -128,7 +129,7 @@ export default function PostsList() {
                         </div>
                         <div className="w-full lg:w-3/4 px-3">
                           <Link className="hover:underline" to='/'>
-                            <h3 className="mb-1 text-2xl text-custom-green font-bold font-heading">
+                            <h3 className="mb-1 text-2xl text-custom-yellow font-bold font-heading">
                               {(post?.title)}
                             </h3>
                           </Link>
@@ -162,10 +163,6 @@ export default function PostsList() {
                               </div>
                             </div>
                           </div>
-                          {/* <p className="text-gray-500">
-                          Quisque id sagittis turpis. Nulla sollicitudin rutrum
-                          eros eu dictum...
-                        </p> */}
                         </div>
                       </div>
                     ))}

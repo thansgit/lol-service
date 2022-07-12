@@ -1,9 +1,11 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import Footer from "../General/Footer";
+import Footer from "../../utils/Footer";
 import { userUpdatePasswordAction } from "../../redux/slices/users/usersSlices";
 import { Navigate } from "react-router-dom";
+import ErrorDisplay from "../../utils/ErrorDisplay";
+import LoadingButton from "../../utils/LoadingButton";
 
 //Form schema
 const formSchema = Yup.object({
@@ -36,14 +38,12 @@ const UpdatePassword = () => {
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-300">
             Change your password
           </h2>
-
-          <h3 className="text-center text-custom-red text-lg">
-            {serverErr || appErr ? <p>{serverErr} - {appErr}</p> : null}
-          </h3>
+          <p className="text-md font-medium mt-4 text-custom-yellow text-center">Feeling insecure? </p>
+          {serverErr || appErr ? <ErrorDisplay first={serverErr} second={appErr} /> : null}
         </div>
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          <div className="bg-custom-gray-light border-2 border-custom-yellow py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <form className="space-y-6" onSubmit={formik.handleSubmit}>
               <div className="flex items-center pl-6 mb-6 border border-gray-50 bg-white rounded-full">
                 <span className="inline-block pr-3 border-r border-gray-50">
@@ -76,23 +76,17 @@ const UpdatePassword = () => {
                   placeholder=" Password"
                 />
               </div>
-              {/* Err msg */}
-              <div className="text-custom-red mb-2">
-                {formik.touched.password && formik.errors.password}
-              </div>
+              <ErrorDisplay first={formik.touched.password} second={formik.errors.password} />
+
               <div>
                 {/* Submit btn */}
-                {loading ? <button
-                  disabled
-                  className="inline-flex bg-gray-600 justify-center w-full px-4 py-2 border text-white"
-                >
-                  <span>Loading...</span>
-                </button> : <button
-                  type="submit"
-                  className="inline-flex bg-indigo-700 justify-center w-full px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-200  hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
-                >
-                  <span>Update Password</span>
-                </button>}
+                {loading ? <LoadingButton />
+                  : <button
+                    type="submit"
+                    className="inline-flex bg-custom-blue justify-center w-full px-4 py-2 shadow-sm text-sm font-medium rounded-md text-gray-200  hover:bg-indigo-700 "
+                  >
+                    <span>Update Password</span>
+                  </button>}
 
               </div>
             </form>

@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import * as Yup from 'yup';
 //import poster from '../../img/poster.png'
 import { userLoginAction } from "../../../redux/slices/users/usersSlices";
-import Footer from "../../General/Footer";
 import LoadingButton from "../../../utils/LoadingButton";
 import ErrorDisplay from "../../../utils/ErrorDisplay";
+import Footer from "../../../utils/Footer";
 //Form schema
 const formSchema = Yup.object({
   email: Yup.string().required('Email is required'),
@@ -40,10 +40,15 @@ const Login = () => {
     <>
       <section className="min-h-screen relative py-20 2xl:py-40 bg-custom-gray overflow-hidden">
         <div className="relative container px-4 mx-auto">
+
           <div className="max-w-5xl mx-auto">
+
             <div className="flex flex-wrap items-center -mx-4">
+
               <div className="w-full lg:w-2/5 px-4">
+
                 <div className="px-6 lg:px-12 py-12 lg:py-24 bg-custom-gray-light shadow-lg rounded-lg">
+
                   {/* Form */}
                   <form onSubmit={formik.handleSubmit}>
                     <h3 className="mb-10 text-2xl font-bold font-heading text-white text-center">
@@ -51,7 +56,7 @@ const Login = () => {
                       Login to your Account
                     </h3>
                     {/* Display error */}
-                    {serverErr || appErr ?  <ErrorDisplay serverErr={serverErr} appErr={appErr} /> : null}
+                    {serverErr || appErr ? <ErrorDisplay serverErr={serverErr} appErr={appErr} /> : null}
                     <div className="flex items-center pl-6 mb-3 border border-gray-50 bg-white rounded-full">
                       <span className="inline-block pr-3 border-r border-gray-50">
                         <svg
@@ -82,10 +87,7 @@ const Login = () => {
                         placeholder="enter email"
                       />
                     </div>
-                    {/* Err message */}
-                    <div className="text-custom-red mb-2">
-                      {formik.touched.email && formik.errors.email}
-                    </div>
+                      <ErrorDisplay first={formik.touched.email} second={formik.errors.email} />
                     <div className="flex items-center pl-6 mb-6 border border-gray-50 bg-white rounded-full">
                       <span className="inline-block pr-3 border-r border-gray-50">
                         <svg
@@ -117,9 +119,7 @@ const Login = () => {
                       />
                     </div>
                     {/* Err msg */}
-                    <div className="text-custom-red mb-2">
-                      {formik.touched.password && formik.errors.password}
-                    </div>
+                    <ErrorDisplay first={formik.touched.password} second={formik.errors.password} />
                     {/* Login btn */}
                     {loading ?
                       <LoadingButton />
@@ -131,11 +131,14 @@ const Login = () => {
                       </button>}
                   </form>
                 </div>
+
               </div>
 
               <div className="w-full lg:w-3/5 px-4 mb-16 lg:mb-0 order-first lg:order-last">
-
                 <h2 className="mb-10 text-center text-6xl lg:text-7xl text-gray-300 font-bold font-heading">
+                  <span className="text-lg text-custom-yellow font-bold">
+                    Sign in to your account <br />
+                  </span>
                   Ready to start? Login Now.
                 </h2>
               </div>

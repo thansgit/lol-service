@@ -16,7 +16,7 @@ import { userLogoutAction } from "../../../redux/slices/users/usersSlices";
 
 
 const navigation = [
-  { name: "Home", href: "/", current: true },
+  { name: "Home", href: "/", current: false },
   { name: "Create", href: "/create-post", current: false },
   { name: "Posts", href: "/posts", current: false },
   { name: "Authors", href: "/users", current: false },
@@ -39,7 +39,7 @@ const AdminNavbar = ({ isLoggedIn }) => {
   const dispatch = useDispatch();
 
   return (
-    <Disclosure as="nav" className="bg-custom-gray-light sticky top-0 z-50">
+    <Disclosure as="nav" className="bg-custom-gray-light sticky top-0 z-50 border-b-2 border-custom-yellow">
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
@@ -63,21 +63,23 @@ const AdminNavbar = ({ isLoggedIn }) => {
                   <BookOpenIcon className="h-10 w-10 text-custom-yellow" />
                 </div>
                 <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
-                  {navigation.map(item => (
-                    <Link
-                      key={item.name}
-                      to={item.href}
-                      className={classNames(
-                        item.current
-                          ? "bg-gray-900 text-white"
-                          : "text-white hover:bg-custom-gray-hover hover:text-white",
-                        "px-3 py-2 rounded-md text-sm font-medium"
-                      )}
-                      aria-current={item.current ? "page" : undefined}
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
+                  <nav >
+                    {navigation.map(item => (
+                      <Link
+                        key={item.name}
+                        to={item.href}
+                        className={classNames(
+                          item.current
+                            ? "bg-gray-900 text-custom-red"
+                            : "text-white hover:bg-custom-gray-hover hover:text-white",
+                          "px-3 py-2 rounded-md text-sm font-medium"
+                        )}
+                        aria-current={item.current ? "page" : undefined}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </nav>
                 </div>
               </div>
               <div className="flex items-center">
@@ -221,8 +223,9 @@ const AdminNavbar = ({ isLoggedIn }) => {
             </div>
           </Disclosure.Panel>
         </>
-      )}
-    </Disclosure>
+      )
+      }
+    </Disclosure >
   );
 };
 

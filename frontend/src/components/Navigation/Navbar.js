@@ -5,6 +5,7 @@ import PrivateNavbar from "./Private/PrivateNavbar";
 import PublicNavbar from "./Public/PublicNavbar";
 import AccountVerificationAlertWarning from "./Alerts/AccountVerificationAlertWarning";
 import AccountVerificationAlertSuccess from "./Alerts/AccountVerificationAlertSuccess";
+import ErrorDisplay from "../../utils/ErrorDisplay";
 
 const Navbar = () => {
   //Get user from store
@@ -23,9 +24,9 @@ const Navbar = () => {
           <PublicNavbar />}
       {/* Alert */}
       {userAuth && !userAuth?.isAccountVerified && <AccountVerificationAlertWarning />}
-      {loading && <h2 className="text-center bg-custom-green text-green-800">Loading...</h2>}
+      {loading && <h2 className="text-center bg-custom-yellow text-green-800">Loading...</h2>}
       {tokenSent && <AccountVerificationAlertSuccess />}
-      {appErr || serverErr ? <h2 className="text-center text-custom-red">{serverErr} {appErr}</h2> : null}
+      {appErr || serverErr ? <ErrorDisplay first={appErr} second={serverErr} /> : null}
     </>
   );
 };

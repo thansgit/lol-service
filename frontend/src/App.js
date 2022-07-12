@@ -21,7 +21,6 @@ import SendEmail from "./components/Users/Emailing/SendEmail";
 import AccountVerified from "./components/Users/AccountVerification/AccountVerified";
 import UsersList from "./components/Users/UsersList/UsersList";
 import UpdatePassword from "./components/PasswordManagement/UpdatePassword";
-import NeedsModal from "./components/General/NeedsModal";
 
 
 function App() {
@@ -50,7 +49,6 @@ function App() {
           <Route path='/update-comment/:id' element={<UpdateComment />} />
           <Route path='/profile/:id' element={<Profile />} />
           <Route path='/verify-account/:token' element={<AccountVerified />} />
-          <Route path='/needs-list' element={<NeedsModal />} />
           <Route path='/update-password' element={<UpdatePassword />} />
         </Route>
 

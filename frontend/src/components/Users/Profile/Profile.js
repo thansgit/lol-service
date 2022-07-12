@@ -15,7 +15,7 @@ import {
 } from "../../../redux/slices/users/usersSlices";
 import DateFormatter from "../../../utils/DateFormatter";
 import LoadingComponent from "../../../utils/LoadingComponent";
-import Footer from "../../General/Footer";
+import Footer from "../../../utils/Footer";
 
 export default function Profile() {
 

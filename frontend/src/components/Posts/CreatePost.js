@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import * as Yup from 'yup';
 import { postCreateAction } from "../../redux/slices/posts/postSlices";
 import CategoryDropdown from "../Categories/CategoryDropdown";
-import Footer from "../General/Footer";
+import Footer from "../../utils/Footer";
 import LoadingButton from "../../utils/LoadingButton";
 
 const formSchema = Yup.object({

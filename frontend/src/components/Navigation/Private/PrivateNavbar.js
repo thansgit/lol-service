@@ -27,7 +27,7 @@ const PrivateNavbar = ({ isLoggedIn }) => {
   const { userAuth } = user;
 
   const navigation = [
-    { name: "Home", href: "/", current: true },
+    { name: "Home", href: "/", current: false },
     { name: "Create", href: "/create-post", current: false },
     { name: "Posts", href: "/posts", current: false },
     { name: "Profile", href: `/profile/${userAuth?._id}`, current: false },
@@ -36,7 +36,7 @@ const PrivateNavbar = ({ isLoggedIn }) => {
   const dispatch = useDispatch();
 
   return (
-    <Disclosure as="nav" className="bg-custom-gray-light sticky top-0 z-50">
+    <Disclosure as="nav" className="bg-custom-gray-light sticky top-0 z-50 border-b-2 border-custom-yellow">
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

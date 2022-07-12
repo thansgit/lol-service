@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { commentUpdateAction, commentFetchSingleAction } from "../../redux/slices/comments/commentSlices";
 import { useNavigate, useParams } from "react-router-dom";
+import ErrorDisplay from "../../utils/ErrorDisplay";
 //Form schema
 const formSchema = Yup.object({
   description: Yup.string().required("Description is required"),
@@ -19,7 +20,7 @@ const UpdateComment = () => {
   }, [dispatch, id])
 
   const comment = useSelector(state => state?.comment);
-  const {commentFetched} = comment;
+  const { commentFetched } = comment;
 
 
   const formik = useFormik({
@@ -39,36 +40,36 @@ const UpdateComment = () => {
 
 
   return (
-    <div className="h-screen bg-custom-gray flex justify-center items-center">
-      <div className="flex flex-col justify-center items-center">
-        <form
-          onSubmit={formik.handleSubmit}
-          className="mt-1 flex max-w-sm m-auto"
-        >
-          <textarea
-            onBlur={formik.handleBlur("description")}
-            value={formik.values.description}
-            onChange={formik.handleChange("description")}
-            type="text"
-            name="text"
-            id="text"
-            className="shadow-sm focus:ring-indigo-500  mr-2 focus:border-indigo-500 block w-full p-2 border-2 sm:text-sm border-gray-300 rounded-md"
-            placeholder="Add New comment"
-          />
-
-          <button
-          onClick={() => navigate(-1)}
-            type="submit"
-            className="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-custom-blue hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+    <>
+      <div className="h-screen bg-custom-gray flex justify-center items-center">
+        <div className="flex flex-col justify-center items-center">
+          <form
+            onSubmit={formik.handleSubmit}
+            className="mt-1 flex max-w-sm m-auto"
           >
-            Submit
-          </button>
-        </form>
-        <div className="text-custom-red mb-2 mt-2">
-          {formik.touched.description && formik.errors.description}
+            <textarea
+              onBlur={formik.handleBlur("description")}
+              value={formik.values.description}
+              onChange={formik.handleChange("description")}
+              type="text"
+              name="text"
+              id="text"
+              className="shadow-sm focus:ring-indigo-500  mr-2 focus:border-indigo-500 block w-full p-2 border-2 sm:text-sm border-gray-300 rounded-md"
+              placeholder="Add New comment"
+            />
+
+            <button
+              onClick={() => navigate(-1)}
+              type="submit"
+              className="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-custom-blue hover:bg-indigo-700"
+            >
+              Submit
+            </button>
+          </form>
+          <ErrorDisplay first={formik.touched.description} second={formik.errors.description} />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -4,7 +4,7 @@ import { categoryCreateAction } from "../../redux/slices/category/categorySlice"
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Navigate } from "react-router-dom";
-import Footer from "../General/Footer";
+import Footer from "../../utils/Footer";
 import LoadingButton from "../../utils/LoadingButton";
 import ErrorDisplay from "../../utils/ErrorDisplay";
 
@@ -42,15 +42,10 @@ const AddNewCategory = () => {
             <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
               Add New Category
             </h2>
-            <p className="mt-2 text-center text-sm text-gray-600">
-              <p className="font-medium text-custom-green">
+              <p className="mt-2 text-sm text-center font-medium text-custom-green">
                 These are the categories user will select when creating a post
               </p>
-              {/* Error message */}
-              <div>
                 {appErr || serverErr ? <ErrorDisplay first={serverErr} second={appErr} /> : null}
-              </div>
-            </p>
           </div>
           {/* Form */}
           <form onSubmit={formik.handleSubmit} className="mt-8 space-y-6">
@@ -67,9 +62,8 @@ const AddNewCategory = () => {
                   onBlur={formik.handleBlur('title')}
                   type="text"
                   autoComplete="text"
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border
-                   border-gray-300 placeholder-gray-500 text-custom-gray rounded-t-md focus:outline-none
-                    focus:ring-indigo-500 focus:border-indigo-500 text-center focus:z-10 sm:text-sm"
+                  className="appearance-none relative block w-full px-3 py-2 border
+                   border-gray-300 placeholder-gray-500 text-black rounded-md text-center focus:z-10 sm:text-sm"
                   placeholder="New Category"
                 />
                 <ErrorDisplay first={formik.touched.title} second={formik.errors.title} />
