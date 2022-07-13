@@ -1,18 +1,51 @@
-# Project Title
+# Portfolio app
+> A fullstack blog/social media application
+> Live demo [_here_](https://lol-blog-app.netlify.app).
 
-A blog / social media application
+## Table of Contents
+* [General Info](#general-information)
+* [Usage](#usage)
+* [Project Status](#project-status)
+* [Room for Improvement](#room-for-improvement)
+* [Contact](#contact)
 
-## Description
+## General Information
+- Backend deployed on Heroku
+- Frontend deployed on Netlify
 
-An application that allows you to register a user and create posts and profile. You can also follow other users, see their posts, see their followers, send email to each other etc..
+## Technologies Used
+- React-redux
+- TailwindCSS
+- Node.js
+- Express.js
+- MongoDB
 
-### Installing
+## Features
+- Register user
+- Verify user email
+- Create/read/update/delete a post
+- Create/read/update/delete a comment on a post
+- Follow another user
+- User account types
+- Admin/Signed in/Guest privileges for various users
+- Edit own profile(photo, bio, name etc..)
+- CRUD categories
+- Block user
+- etc..
 
-* Clone the project, run npm install in both backend- and frontend folders. 
-* Run npm run start in frontend, npm run server in backend
+## Usage
+Install the project on local machine
+`npm install` on backend & frontend folders
+Start the project
+`npm run start` on frontend folder
+`npm run server` on backend folder
 
-## Authors
 
-Contributors names and contact info
-Timo Hanski
-timo.hanski@gmail.com
+## Project Status
+Project is: _in progress_ 
+
+## Room for Improvement
+- Improve the styling, fix bugs, improve UX, etc..
+
+## Contact
+Created by Timo Hanski, timo.hanski@gmail.com
