@@ -1,8 +1,0 @@
-[build]
-command = "CI= npm run build"
-base = "/frontend"
-
-[[redirects]]
-from = "/*"
-to = "/public/index.html"
-status = 200
