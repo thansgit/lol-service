@@ -7,6 +7,7 @@ import { userRegisterAction } from "../../../redux/slices/users/usersSlices";
 import Footer from "../../../utils/Footer";
 import LoadingButton from "../../../utils/LoadingButton";
 import ErrorDisplay from "../../../utils/ErrorDisplay";
+import { Link } from "react-router-dom";
 
 //Form schema
 const formSchema = Yup.object({
@@ -38,7 +39,6 @@ const Register = () => {
   //Select state from store
   const storeData = useSelector(store => store?.users);
   const { loading, appErr, serverErr, registered } = storeData
-  console.log(storeData);
 
   //Redirect to login if registered
   if (registered) {
@@ -81,8 +81,8 @@ const Register = () => {
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
+                            fillRule="evenodd"
+                            clipRule="evenodd"
                             d="M7.29593 0.492188C4.81333 0.492188 2.80078 2.50474 2.80078 4.98734C2.80078 7.46993 4.81333 9.48248 7.29593 9.48248C9.77851 9.48248 11.7911 7.46993 11.7911 4.98734C11.7911 2.50474 9.77851 0.492188 7.29593 0.492188ZM3.69981 4.98734C3.69981 3.00125 5.30985 1.39122 7.29593 1.39122C9.28198 1.39122 10.892 3.00125 10.892 4.98734C10.892 6.97342 9.28198 8.58346 7.29593 8.58346C5.30985 8.58346 3.69981 6.97342 3.69981 4.98734Z"
                             fill="black"
                           ></path>
@@ -131,8 +131,8 @@ const Register = () => {
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
+                            fillRule="evenodd"
+                            clipRule="evenodd"
                             d="M7.29593 0.492188C4.81333 0.492188 2.80078 2.50474 2.80078 4.98734C2.80078 7.46993 4.81333 9.48248 7.29593 9.48248C9.77851 9.48248 11.7911 7.46993 11.7911 4.98734C11.7911 2.50474 9.77851 0.492188 7.29593 0.492188ZM3.69981 4.98734C3.69981 3.00125 5.30985 1.39122 7.29593 1.39122C9.28198 1.39122 10.892 3.00125 10.892 4.98734C10.892 6.97342 9.28198 8.58346 7.29593 8.58346C5.30985 8.58346 3.69981 6.97342 3.69981 4.98734Z"
                             fill="black"
                           ></path>
@@ -212,6 +212,14 @@ const Register = () => {
                       </button>
                     )}
                   </form>
+                  <div className="text-white text-center text-sm pt-10">
+                    Already registered? <br />
+                    <span className="text-custom-blue hover:underline hover:cursor-pointer">
+                      <Link to='/login'>
+                        Click to login
+                      </Link>
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>

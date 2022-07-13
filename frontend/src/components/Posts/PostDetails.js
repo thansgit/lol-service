@@ -30,6 +30,7 @@ const PostDetails = () => {
   //Get login user
   const user = useSelector(state => state.users);
   const { userAuth } = user;
+
   const isCreatedBy = postDetails?.user?._id === userAuth?._id;
 
   if (isDeleted) return <Navigate to='/posts' />
@@ -38,8 +39,8 @@ const PostDetails = () => {
     <>
       {loading ? <div className="h-screen bg-custom-gray"><LoadingComponent /></div> :
         appErr || serverErr ? <ErrorDisplay first={appErr} second={serverErr} /> :
-          <section h-screen className="py-20 2xl:py-40 bg-custom-gray overflow-hidden">
-            <div className=" h-screen container px-4 mx-auto">
+          <section className="py-20 2xl:py-40 bg-custom-gray overflow-hidden">
+            <div className="container px-4 mx-auto"> 
               {/* Post Image */}
               <img
                 className="mb-24 w-full h-96 object-cover"

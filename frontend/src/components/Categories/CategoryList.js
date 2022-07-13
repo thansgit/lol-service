@@ -90,11 +90,13 @@ const CategoryList = () => {
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                               {<DateFormatter date={category?.createdAt} />}
                             </td>
-                            <Link to={`/update-category/${category?._id}`}>
-                              <td className="px-6 py-4 whitespace-nowrap ">
+
+                            <td className="px-6 py-4 whitespace-nowrap ">
+                              <Link to={`/update-category/${category?._id}`}>
                                 <PencilAltIcon className="h-5 text-custom-blue" />
-                              </td>
-                            </Link>
+                              </Link>
+                            </td>
+
                           </tr>
                         ))}
                       </tbody>

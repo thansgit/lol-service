@@ -13,7 +13,7 @@ export default function CommentsList({ comments }) {
   const dispatch = useDispatch();
 
   return (
-    <div>
+    <div className="mb-60">
       <ul className="divide-y bg-custom-gray-light rounded-md w-96 divide-gray-200 p-3 mt-5">
         <div className="text-white">{comments?.length} Comments </div>
         <>

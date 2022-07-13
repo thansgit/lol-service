@@ -279,7 +279,7 @@ const userVerificationTokenGeneratorController = expressAsyncHandler(async (req,
     try {
         //Generate token
         const verificationToken = await user?.createAccountVerificationToken();
-        const verificationLink = `http://localhost:3000/verify-account/${verificationToken}`
+        const verificationLink = `https://some-blogapp.herokuapp.com/verify-account/${verificationToken}`
         //Save the user with the token to database
         await user.save();
         //Build email
@@ -292,7 +292,16 @@ const userVerificationTokenGeneratorController = expressAsyncHandler(async (req,
             content: [
                 {
                     "type": "text/html",
-                    "value": `<html><head>Verification</head><body>${resetURL}c</body></html>`
+                    "value": `
+                    <html>
+                        <head>Verification</head>
+                            <body>
+                                <p>
+                                If you requested to verify your account, verify within 10 minutes. Otherwise, ignore this message. </br>
+                                Navigate here to verify: ${verificationLink}
+                                </p> 
+                            </body>
+                    </html>`
                 }
             ],
         };

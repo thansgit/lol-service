@@ -33,23 +33,22 @@ export default function UploadProfilePhoto() {
 
   const dispatch = useDispatch();
 
-
   //formik
   const formik = useFormik({
     initialValues: {
       image: "",
     },
     onSubmit: values => {
+      console.log(values)
       dispatch(userUploadProfilePhotoAction(values));
     },
     validationSchema: formSchema,
   });
 
-  //Store data
   const users = useSelector(state => state.users);
-  const { profilePhotoUploaded, loading, appErr, serverErr, userAuth } = users;
+  const { profilePhoto, loading, appErr, serverErr, userAuth } = users;
 
-  if (profilePhotoUploaded) return <Navigate to={`/profile/${userAuth?._id}`} />
+  if (profilePhoto) return <Navigate to={`/profile/${userAuth?._id}`} />
 
   return (
     <>
@@ -78,7 +77,7 @@ export default function UploadProfilePhoto() {
                   }}
                 >
                   {({ getRootProps, getInputProps }) => (
-                    <div className="container">
+                    <section>
                       <div
                         {...getRootProps({
                           className: "dropzone",
@@ -90,7 +89,7 @@ export default function UploadProfilePhoto() {
                           Click here to select image
                         </p>
                       </div>
-                    </div>
+                    </section>
                   )}
                 </Dropzone>
               </Container>

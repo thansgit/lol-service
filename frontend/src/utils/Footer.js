@@ -3,7 +3,7 @@ import React from 'react'
 const Footer = () => {
     return (
 
-        <div>
+        <div className="">
             <div className="skew bg-custom-yellow skew-bottom mr-for-radius">
                 <svg
                     className="h-8 md:h-12 lg:h-10 w-full text-custom-gray"

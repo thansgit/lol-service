@@ -201,7 +201,7 @@ export default function Profile() {
                             {profile?.viewedBy?.length <= 0 ? <ErrorDisplay first = { "No viewers..." } />
                             :
                               profile?.viewedBy?.map((viewer) => {
-                                return <Link to={`/profile/${viewer._id}`}>
+                                return <Link key={viewer._id} to={`/profile/${viewer._id}`}>
                               <div className="flex mb-2 items-center space-x-4 lg:space-x-6">
                                 <img
                                   className="w-16 h-16 rounded-full lg:w-20 lg:h-20"

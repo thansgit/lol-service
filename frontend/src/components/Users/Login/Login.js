@@ -8,6 +8,7 @@ import { userLoginAction } from "../../../redux/slices/users/usersSlices";
 import LoadingButton from "../../../utils/LoadingButton";
 import ErrorDisplay from "../../../utils/ErrorDisplay";
 import Footer from "../../../utils/Footer";
+import { Link } from "react-router-dom";
 //Form schema
 const formSchema = Yup.object({
   email: Yup.string().required('Email is required'),
@@ -87,7 +88,7 @@ const Login = () => {
                         placeholder="enter email"
                       />
                     </div>
-                      <ErrorDisplay first={formik.touched.email} second={formik.errors.email} />
+                    <ErrorDisplay first={formik.touched.email} second={formik.errors.email} />
                     <div className="flex items-center pl-6 mb-6 border border-gray-50 bg-white rounded-full">
                       <span className="inline-block pr-3 border-r border-gray-50">
                         <svg
@@ -130,6 +131,14 @@ const Login = () => {
                         Login
                       </button>}
                   </form>
+                  <div className="text-white text-center text-sm pt-10">
+                    Don't have an account? <br />
+                    <span className="text-custom-blue hover:underline hover:cursor-pointer">
+                      <Link to='/register'>
+                        Click to register account
+                      </Link>
+                    </span>
+                  </div>
                 </div>
 
               </div>

@@ -20,14 +20,14 @@ const UsersList = () => {
 
   return (
     <>
-      <section class="py-8 bg-custom-gray min-h-screen">
+      <section className="py-8 bg-custom-gray min-h-screen">
         {loading ? <LoadingComponent />
           : appErr || serverErr ? <ErrorDisplay first={serverErr} second={appErr} />
             : allProfiles?.length <= 0 ? <ErrorDisplay first="No profiles found..." />
               : allProfiles?.map(profile => (
-                <>
+                <div key={profile._id}>
                   <UsersListItem user={profile} />
-                </>
+                </div>
               ))}
       </section>
       <Footer />
