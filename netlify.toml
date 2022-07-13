@@ -1,6 +1,6 @@
 [build]
-command = "npm run build"
-publish = "/frontend"
+command = "CI= npm run build"
+base = "/frontend"
 base = "/"
 
 [[redirects]]
