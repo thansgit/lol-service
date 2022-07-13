@@ -34,11 +34,11 @@
 - etc..
 
 ## Usage
-Install the project on local machine
-`npm install` on backend & frontend folders
-Start the project
-`npm run start` on frontend folder
-`npm run server` on backend folder
+- Install the project on local machine
+- `npm install` on backend & frontend folders
+- Start the project
+- `npm run start` on frontend folder
+- `npm run server` on backend folder
 
 
 ## Project Status
