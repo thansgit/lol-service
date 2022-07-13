@@ -47,9 +47,9 @@ export default function UploadProfilePhoto() {
 
   //Store data
   const users = useSelector(state => state.users);
-  const { profilePhoto, loading, appErr, serverErr, userAuth } = users;
+  const { profilePhotoUploaded, loading, appErr, serverErr, userAuth } = users;
 
-  if (profilePhoto) return <Navigate to={`/profile/${userAuth?._id}`} />
+  if (profilePhotoUploaded) return <Navigate to={`/profile/${userAuth?._id}`} />
 
   return (
     <>
@@ -66,7 +66,7 @@ export default function UploadProfilePhoto() {
             <form className="space-y-6" onSubmit={formik.handleSubmit}>
               {/* Display err here */}
               {appErr || serverErr ?
-                <h2 className="text center text-custom-red" >{serverErr} - {appErr}</h2> :
+                <ErrorDisplay first={appErr} second={serverErr} /> :
                 null}
               {/* Image container here thus Dropzone */}
               <Container className="">

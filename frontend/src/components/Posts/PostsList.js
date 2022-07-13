@@ -13,7 +13,7 @@ export default function PostsList() {
   const dispatch = useDispatch();
 
   const post = useSelector(state => state?.post);
-  const { postList, serverErr, appErr, loading, empathicVotes, egoicVotes } = post;
+  const { postList, serverErr, appErr, empathicVotes, egoicVotes } = post;
 
   const categories = useSelector(state => state?.category);
   const {
@@ -39,7 +39,7 @@ export default function PostsList() {
           <div className="container mx-auto px-4">
             <div className="mb-16 flex flex-wrap items-center">
               <div className="w-full lg:w-1/2">
-                <span className="text-custom-green font-bold">
+                <span className="text-custom-yellow font-bold">
                   Latest posts from your fellow beings
                 </span>
                 <h2 className="text-4xl text-gray-300 lg:text-5xl font-bold font-heading">

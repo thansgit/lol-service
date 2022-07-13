@@ -3,6 +3,7 @@ import axios from 'axios';
 import { baseURL } from "../../../utils/baseURL";
 const userResetUpdateAction = createAction('user/resetUpdateAction');
 const userResetUpdatePasswordAction = createAction('user/resetUpdatePasswordAction');
+const userResetUploadProfilePhotoAction = createAction('user/resetUploadProfilePhotoAction');
 //Register actions
 export const userRegisterAction = createAsyncThunk(
     'users/register',
@@ -201,6 +202,7 @@ export const userUploadProfilePhotoAction = createAsyncThunk(
             formData.append('image', profileImg?.image);
 
             const { data } = await axios.put(`${baseURL}/api/users/profilephoto-upload`, formData, config);
+            dispatch(userResetUploadProfilePhotoAction());
             return data;
         } catch (error) {
             if (!error?.response) throw error;
@@ -524,9 +526,13 @@ const usersSlices = createSlice({
         builder.addCase(userUploadProfilePhotoAction.pending, (state, action) => {
             state.loading = true;
         });
+        builder.addCase(userResetUploadProfilePhotoAction, (state,action) => {
+            state.profilePhotoUploaded = false
+        })
         builder.addCase(userUploadProfilePhotoAction.fulfilled, (state, action) => {
             state.profilePhoto = action?.payload;
             state.loading = false;
+            state.profilePhotoUploaded = true
             state.appErr = undefined;
             state.serverErr = undefined;
         });

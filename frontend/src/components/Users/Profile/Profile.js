@@ -16,6 +16,7 @@ import {
 import DateFormatter from "../../../utils/DateFormatter";
 import LoadingComponent from "../../../utils/LoadingComponent";
 import Footer from "../../../utils/Footer";
+import ErrorDisplay from "../../../utils/ErrorDisplay";
 
 export default function Profile() {
 
@@ -44,10 +45,8 @@ export default function Profile() {
     <>
       <div className="min-h-screen bg-custom-gray flex justify-center items-center" >
         {profileLoading ? <LoadingComponent />
-          : profileAppErr || profileServerErr
-            ? <h2 className="text-custom-red text-3xl">{profileServerErr} - {profileAppErr} </h2>
-            :
-            <div className="h-screen flex overflow-hidden bg-custom-gray">
+          : profileAppErr || profileServerErr ? <ErrorDisplay first={profileServerErr} second={profileAppErr} />
+            : <div className="h-screen flex overflow-hidden bg-custom-gray">
               {/* Static sidebar for desktop */}
 
               <div className="flex flex-col min-w-0 flex-1 overflow-hidden">
@@ -191,40 +190,34 @@ export default function Profile() {
                           </div>
                         </div>
                       </div>
-                      {/* Tabs */}
-                      <div className="mt-6 sm:mt-2 2xl:mt-5">
-                        <div className="border-b border-red-900">
-                          <div className="max-w-5xl mx-auto "></div>
-                        </div>
-                      </div>
                       <div className="flex justify-center place-items-start flex-wrap  md:mb-0">
                         <div className="w-full md:w-1/3 px-4 mb-4 md:mb-0">
                           <h1 className="text-center text-xl border-gray-500 mb-2 border-b-2 text-white">
                             Users viewed profile: {profile?.viewedBy?.length}
                           </h1>
 
-                          {/* Who view my post */}
+                          {/* Who viewed my post */}
                           <ul className="">
-                            {profile?.viewedBy?.length <= 0 ? <h1 className="text-custom-red text-center text-lg">No viewers</h1>
-                              :
+                            {profile?.viewedBy?.length <= 0 ? <ErrorDisplay first = { "No viewers..." } />
+                            :
                               profile?.viewedBy?.map((viewer) => {
                                 return <Link to={`/profile/${viewer._id}`}>
-                                  <div className="flex mb-2 items-center space-x-4 lg:space-x-6">
-                                    <img
-                                      className="w-16 h-16 rounded-full lg:w-20 lg:h-20"
-                                      src={viewer?.profilePhoto}
-                                      alt={viewer?._id}
-                                    />
-                                    <div className="font-medium text-lg leading-6 space-y-1">
-                                      <h3 className="text-custom-green">
-                                        {viewer?.nickName}
-                                      </h3>
-                                      <p className="text-custom-blue">
-                                        {viewer?.accountType}
-                                      </p>
-                                    </div>
-                                  </div>
-                                </Link>
+                              <div className="flex mb-2 items-center space-x-4 lg:space-x-6">
+                                <img
+                                  className="w-16 h-16 rounded-full lg:w-20 lg:h-20"
+                                  src={viewer?.profilePhoto}
+                                  alt={viewer?._id}
+                                />
+                                <div className="font-medium text-lg leading-6 space-y-1">
+                                  <h3 className="text-custom-green">
+                                    {viewer?.nickName}
+                                  </h3>
+                                  <p className="text-custom-blue">
+                                    {viewer?.accountType}
+                                  </p>
+                                </div>
+                              </div>
+                            </Link>
                               })}
                           </ul>
                         </div>
@@ -234,7 +227,7 @@ export default function Profile() {
                             My posts - {profile?.posts?.length}
                           </h1>
                           {/* Loo here */}
-                          {profile?.posts?.length <= 0 ? <h2 className="text-center text-lg text-custom-red"> No posts found </h2> :
+                          {profile?.posts?.length <= 0 ? <ErrorDisplay first = { "No posts found..." } /> :
                             profile?.posts?.map(post => (
                               <div key={post?._id} className="flex flex-wrap  -mx-3 mt-3  lg:mb-6">
                                 <div className="mb-2   w-full lg:w-1/4 px-3">

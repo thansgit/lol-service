@@ -56,7 +56,7 @@ const Login = () => {
                       Login to your Account
                     </h3>
                     {/* Display error */}
-                    {serverErr || appErr ? <ErrorDisplay serverErr={serverErr} appErr={appErr} /> : null}
+                    {serverErr || appErr ? <ErrorDisplay first={serverErr} second={appErr} /> : null}
                     <div className="flex items-center pl-6 mb-3 border border-gray-50 bg-white rounded-full">
                       <span className="inline-block pr-3 border-r border-gray-50">
                         <svg

@@ -18,15 +18,12 @@ const UsersList = () => {
     dispatch(userFetchAllProfilesAction())
   }, [dispatch, blocked, unblocked])
 
-
-  console.log(allProfiles);
-
   return (
     <>
       <section class="py-8 bg-custom-gray min-h-screen">
         {loading ? <LoadingComponent />
-          : appErr || serverErr ? <ErrorDisplay serverErr={serverErr} appErr={appErr} />
-            : allProfiles?.length <= 0 ? <h2>No profiles found...</h2>
+          : appErr || serverErr ? <ErrorDisplay first={serverErr} second={appErr} />
+            : allProfiles?.length <= 0 ? <ErrorDisplay first="No profiles found..." />
               : allProfiles?.map(profile => (
                 <>
                   <UsersListItem user={profile} />

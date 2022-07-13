@@ -8,6 +8,7 @@ import { postCreateAction } from "../../redux/slices/posts/postSlices";
 import CategoryDropdown from "../Categories/CategoryDropdown";
 import Footer from "../../utils/Footer";
 import LoadingButton from "../../utils/LoadingButton";
+import ErrorDisplay from "../../utils/ErrorDisplay";
 
 const formSchema = Yup.object({
   title: Yup.string().required('Title is required'),
@@ -73,10 +74,7 @@ export default function CreatePost() {
             Share your thoughts to the world.
           </p>
 
-          {appErr || serverErr ?
-            <p className="mt-2 text-center text-lg text-custom-red">
-              {serverErr} - {appErr}
-            </p> : null}
+          {appErr || serverErr ? <ErrorDisplay first={appErr} second={serverErr} /> : null}
 
         </div>
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -102,17 +100,14 @@ export default function CreatePost() {
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
-                {/* Err msg */}
-                <div className="text-custom-red">
-                  {formik?.touched?.title && formik?.errors?.title}
-                </div>
+                <ErrorDisplay first={formik?.touched?.title} second={formik?.errors?.title} />
               </div>
               {/* Category select */}
               <label
                 htmlFor="password"
                 className="block text-sm font-medium text-white"
               >
-                Select category
+                Select a category
               </label>
               <CategoryDropdown
                 value={formik.values.category?.label}
@@ -137,11 +132,8 @@ export default function CreatePost() {
                   cols="10"
                   className="rounded-lg appearance-none block w-full py-3 px-3 text-base text-center leading-tight text-black  border border-gray-200 focus:border-gray-500  focus:outline-none"
                   type="text"
-                ></textarea>
-                {/* Err msg */}
-                <div className="text-custom-red">
-                  {formik?.touched?.description && formik?.errors?.description}
-                </div>
+                />
+                <ErrorDisplay first={formik?.touched?.description} second={formik?.errors?.description} />
                 {/* Image upload component */}
                 <label
                   htmlFor="password"

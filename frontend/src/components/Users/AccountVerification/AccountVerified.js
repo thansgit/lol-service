@@ -27,7 +27,7 @@ export default function AccountVerified() {
             <div>
               <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
                 <CheckIcon
-                  className="h-6 w-6 text-custom-green"
+                  className="h-6 w-6 text-custom-yellow"
                   aria-hidden="true"
                 />
               </div>
@@ -50,7 +50,7 @@ export default function AccountVerified() {
               <button
                 onClick={() => dispatch(userLogoutAction())}
                 type="button"
-                className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+                className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-blue text-base font-medium text-white hover:bg-indigo-700 sm:text-sm"
               >
                 Logout
               </button>
@@ -62,7 +62,7 @@ export default function AccountVerified() {
           <Link
             to="/"
             type="button"
-            className="inline-flex justify-center  rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+            className="inline-flex justify-center  rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-blue text-base font-medium text-white hover:bg-indigo-700 sm:text-sm"
           >
             Go Home
           </Link>

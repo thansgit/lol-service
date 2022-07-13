@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Select from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
 import { categoriesFetchAction } from "../../redux/slices/category/categorySlice";
+import ErrorDisplay from "../../utils/ErrorDisplay";
 
 
 
@@ -34,7 +35,7 @@ const CategoryDropdown = (props) => {
 
 
     return (
-        <div style={{margin:'1rem 0'}}>
+        <div style={{ margin: '1rem 0' }}>
             {loading ? <h3 className="text-base text-custom-red">Categories loading...</h3>
                 :
                 <Select
@@ -46,9 +47,7 @@ const CategoryDropdown = (props) => {
                 />}
             {/* Error message */}
             {props?.error &&
-                <div style={{color:'red', marginTop:'.5rem'}}>
-                    {props?.error}
-                </div>}
+                <ErrorDisplay first={props?.error} />}
         </div>
     );
 

@@ -38,10 +38,11 @@ const Register = () => {
   //Select state from store
   const storeData = useSelector(store => store?.users);
   const { loading, appErr, serverErr, registered } = storeData
+  console.log(storeData);
 
-  //Redirect to profile if registered
+  //Redirect to login if registered
   if (registered) {
-    return <Navigate to="/profile" />;
+    return <Navigate to={`/login`} />;
   }
 
   return (
@@ -65,7 +66,7 @@ const Register = () => {
                   <form onSubmit={formik.handleSubmit}>
                     <h3 className="mb-10 text-2xl text-white font-bold font-heading">
                       Register Account
-                      {appErr || serverErr ? <ErrorDisplay serverErr={serverErr} appErr={appErr} /> : null}
+                      {appErr || serverErr ? <ErrorDisplay first={serverErr} second={appErr} /> : null}
                     </h3>
 
                     {/* NickName */}
@@ -117,10 +118,7 @@ const Register = () => {
                         placeholder="Nickname"
                       />
                     </div>
-                    {/* Err msg*/}
-                    <div className="text-custom-red mb-2">
-                      {formik.touched.nickName && formik.errors.nickName}
-                    </div>
+                      <ErrorDisplay first={formik.touched.nickName} second={formik.errors.nickName} />
                     {/* Email */}
                     <div className="flex items-center pl-6 mb-3 bg-white rounded-full">
                       <span className="inline-block pr-3 py-2 border-r border-gray-50">
@@ -170,12 +168,9 @@ const Register = () => {
                         placeholder="example@email.com"
                       />
                     </div>
-                    {/* Err msg*/}
-                    <div className="text-custom-red mb-2">
-                      {formik.touched.email && formik.errors.email}
-                    </div>
+                    <ErrorDisplay first={formik.touched.email} second={formik.errors.email} />
                     {/* Password */}
-                    <div className="flex items-center pl-6 mb-3 bg-white rounded-full">
+                    <div className="flex items-center pl-6 bg-white rounded-full mb-5">
                       <span className="inline-block pr-3 py-2 border-r border-gray-50">
                         <svg
                           className="w-5 h-5"
@@ -204,13 +199,7 @@ const Register = () => {
                         placeholder="Password"
                       />
                     </div>
-                    {/* Err msg*/}
-                    <div className="text-custom-red mb-2">
-                      {formik.touched.password && formik.errors.password}
-                    </div>
-
-                    <div className="inline-flex mb-10"></div>
-
+                    <ErrorDisplay first={formik.touched.password} second={formik.errors.password} />
                     {/* Check for loading */}
                     {loading ? (
                       <LoadingButton />
