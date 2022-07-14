@@ -1,7 +1,7 @@
-export const baseURL = 'https://some-blogapp.herokuapp.com';
+export const baseURL = 'https://cors-anywhere.herokuapp.com/https://some-blogapp.herokuapp.com';
 
 
 //Development
 //http://localhost:5000
 //Production
-//'https://some-blogapp.herokuapp.com'
+//'https://cors-anywhere.herokuapp.com/https://some-blogapp.herokuapp.com'
