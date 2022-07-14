@@ -1,9 +1,9 @@
 import React from 'react'
 
-const ErrorDisplay = ({first, second}) => {
+const ErrorDisplay = (props) => {
   return (
     <div>
-      <h2 className='text-custom-red text-center font-semibold'>{first} {" "} {second}</h2>
+      <h2 className='text-custom-red text-center font-semibold'>{props?.first} {" "} {props?.second}</h2>
     </div>
   )
 }

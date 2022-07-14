@@ -5,10 +5,11 @@ import { useFormik } from "formik";
 import styled from "styled-components";
 import * as Yup from "yup";
 import { userUploadProfilePhotoAction } from "../../../redux/slices/users/usersSlices";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import Footer from "../../../utils/Footer";
 import ErrorDisplay from "../../../utils/ErrorDisplay";
 import LoadingButton from "../../../utils/LoadingButton";
+import DropZoneComponent from "../../../utils/DropZoneComponent";
 //Css for dropzone
 const Container = styled.div`
   flex: 1;
@@ -25,6 +26,8 @@ const Container = styled.div`
   transition: border 0.24s ease-in-out;
 `;
 
+
+
 const formSchema = Yup.object({
   image: Yup.string().required("Image is required"),
 });
@@ -32,6 +35,7 @@ const formSchema = Yup.object({
 export default function UploadProfilePhoto() {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   //formik
   const formik = useFormik({
@@ -39,8 +43,8 @@ export default function UploadProfilePhoto() {
       image: "",
     },
     onSubmit: values => {
-      console.log(values)
       dispatch(userUploadProfilePhotoAction(values));
+      navigate(-1)
     },
     validationSchema: formSchema,
   });
@@ -62,28 +66,32 @@ export default function UploadProfilePhoto() {
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-custom-gray-light py-8 px-4 shadow sm:rounded-lg sm:px-10 border-2 border-custom-yellow">
-            <form className="space-y-6" onSubmit={formik.handleSubmit}>
+            <form className="space-y-6" onSubmit={formik?.handleSubmit}>
               {/* Display err here */}
               {appErr || serverErr ?
                 <ErrorDisplay first={appErr} second={serverErr} /> :
                 null}
+
+              <DropZoneComponent setFieldValue={formik?.setFieldValue} />
               {/* Image container here thus Dropzone */}
-              <Container className="">
+              {/* <Container className="">
                 <Dropzone
                   onBlur={formik.handleBlur("image")}
+                  maxFiles={1}
+                  maxSize={1}
                   accept="image/jpeg, image/png"
                   onDrop={acceptedFiles => {
                     formik.setFieldValue("image", acceptedFiles[0]);
                   }}
-                >
-                  {({ getRootProps, getInputProps }) => (
+                  >
+                  {({ getRootProps, getInputProps, isDragReject }) => (
                     <section>
                       <div
                         {...getRootProps({
                           className: "dropzone",
                           onDrop: event => event.stopPropagation(),
                         })}
-                      >
+                        >
                         <input {...getInputProps()} />
                         <p className="text-black text-lg cursor-pointer hover:text-gray-500">
                           Click here to select image
@@ -92,14 +100,15 @@ export default function UploadProfilePhoto() {
                     </section>
                   )}
                 </Dropzone>
-              </Container>
-              <ErrorDisplay first={formik.touched.image} second={formik.errors.image} />
+              </Container> */}
+              <ErrorDisplay first={formik?.errors?.image} second={appErr} />
               <p className="text-sm text-white">
-                PNG, JPG or GIF. Minimum size 400kb. Upload only 1 image
+                PNG, JPG or GIF. Maximum size 1mb. Upload only 1 image
               </p>
 
               <div>
-                {loading ? <LoadingButton />
+                {loading ? <LoadingButton /> ?
+                appErr : <LoadingButton />
 
                   : <button
                     type="submit"

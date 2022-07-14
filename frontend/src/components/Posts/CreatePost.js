@@ -9,6 +9,7 @@ import CategoryDropdown from "../Categories/CategoryDropdown";
 import Footer from "../../utils/Footer";
 import LoadingButton from "../../utils/LoadingButton";
 import ErrorDisplay from "../../utils/ErrorDisplay";
+import DropZoneComponent from "../../utils/DropZoneComponent";
 
 const formSchema = Yup.object({
   title: Yup.string().required('Title is required'),
@@ -141,7 +142,7 @@ export default function CreatePost() {
                 >
                   Select image to upload
                 </label>
-                <Container >
+                {/* <Container >
                   <Dropzone
                     onDrop={(acceptedFiles) => { formik.setFieldValue('image', acceptedFiles[0]) }}
                     accept='image/jpeg, image/png'
@@ -163,7 +164,8 @@ export default function CreatePost() {
                       )
                     }}
                   </Dropzone>
-                </Container>
+                </Container> */}
+                <DropZoneComponent setFieldValue={formik.setFieldValue}/>
               </div>
               <div>
                 {/* Submit btn */}

@@ -21,9 +21,9 @@ const postCreateController = expressAsyncHandler(async (req, res) => {
     const uploadedImg = await cloudinaryUploadImage(localPath);
 
     //Prevent user if account type is not high enough
-    if (req?.user?.accountType === 'Obnoxious person' && req?.user?.postCount >= 2) {
-        throw new Error('Account type post limit is 2 posts. Gain more followers.')
-    }
+    // if (req?.user?.accountType === 'Obnoxious person' && req?.user?.postCount >= 2) {
+    //     throw new Error('Account type post limit is 2 posts. Gain more followers.')
+    // }
 
     //Maybe profane word filter for have to etc..
     try {
@@ -122,9 +122,15 @@ const postUpdateController = expressAsyncHandler(async (req, res) => {
 //-------------------------------------------------------------------
 const postDeleteController = expressAsyncHandler(async (req, res) => {
     const { id } = req.params;
+    const { _id } = req.user;
     validateMongodbID(id);
     try {
         const post = await Post.findByIdAndDelete(id)
+
+        await User.findByIdAndUpdate(_id, {
+            $inc: { postCount: -1 },
+        }, { new: true });
+
         res.json(post);
     } catch (error) {
         res.json(error);

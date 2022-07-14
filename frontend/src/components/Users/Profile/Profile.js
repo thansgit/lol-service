@@ -39,6 +39,8 @@ export default function Profile() {
     dispatch(userFetchProfileAction(id))
   }, [dispatch, id, followed, unFollowed])
 
+  console.log(profile?.postCount)
+
   const isLoggedInUser = userAuth?._id === profile?._id;
 
   return (
