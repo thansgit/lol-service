@@ -1,4 +1,4 @@
-export const baseURL = 'https://cors-applied.herokuapp.com/https://some-blogapp.herokuapp.com';
+export const baseURL = 'https://cors-anywhere.herokuapp.com/https://some-blogapp.herokuapp.com';
 
 
 //Development
