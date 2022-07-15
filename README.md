@@ -1,4 +1,4 @@
-# Portfolio app
+# Blog/social media application
 > A fullstack blog/social media application
 > Live demo [_here_](https://lol-blog-app.netlify.app).
 
