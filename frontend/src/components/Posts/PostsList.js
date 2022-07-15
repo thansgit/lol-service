@@ -62,36 +62,35 @@ export default function PostsList() {
                     Categories
                   </h4>
                   <ul>
-                    {catLoading ? <LoadingComponent /> : catAppErr || catServerErr
-                      ? <h1>{catServerErr} - {catAppErr}</h1> : categoryList?.length <= 0 ? <h1 className="text-white">No categories found</h1>
-                        : categoryList?.map((category) => (
-                          <li key={category.createdAt}>
-                            <p
-                              onClick={() => dispatch(postFetchAllAction(category.title))}
-                              className="block cursor-pointer py-2 px-3 mb-4 rounded
+                    {catLoading ? <LoadingComponent />
+                      : catAppErr || catServerErr ? <ErrorDisplay first={catAppErr} second={catServerErr} />
+                        : categoryList?.length <= 0 ? <ErrorDisplay first='No categories found...' />
+                          : categoryList?.map((category) => (
+                            <li key={category.createdAt}>
+                              <p
+                                onClick={() => dispatch(postFetchAllAction(category.title))}
+                                className="block cursor-pointer py-2 px-3 mb-4 rounded
                              text-custom-yellow font-bold">
-                              {category?.title}
-                            </p>
-                          </li>
-                        ))}
+                                {category?.title}
+                              </p>
+                            </li>
+                          ))}
                   </ul>
                 </div>
               </div>
               <div className="w-full lg:w-3/4 px-3">
                 {/* Posts */}
-                {appErr || serverErr ?
-                  <ErrorDisplay first={appErr} second={serverErr} /> :
-                  postList?.length <= 0 ?
-                    <ErrorDisplay first='No posts found...' /> :
-                    postList?.map((post) => (
+                {appErr || serverErr ? <ErrorDisplay first={appErr} second={serverErr} />
+                  : postList?.length <= 0 ? <ErrorDisplay first='No posts found...' />
+                    : postList?.map((post) => (
                       <div key={post.id} className="flex flex-wrap bg-custom-gray -mx-3  lg:mb-6">
                         <div className="mb-10  w-full lg:w-1/4">
-                          <Link to='/'>
+                          <Link to={`/posts/${post?.id}`}>
                             {/* Post image */}
                             <img
                               className="w-full h-full object-cover rounded"
                               src={post?.image}
-                              alt=""
+                              alt="postPhoto"
                             />
                           </Link>
                           {/* Likes, views dislikes */}
@@ -128,7 +127,7 @@ export default function PostsList() {
                           </div>
                         </div>
                         <div className="w-full lg:w-3/4 px-3">
-                          <Link className="hover:underline" to='/'>
+                          <Link className="hover:underline" to={`/posts/${post?.id}`}>
                             <h3 className="mb-1 text-2xl text-custom-yellow font-bold font-heading">
                               {(post?.title)}
                             </h3>
@@ -145,7 +144,7 @@ export default function PostsList() {
                                 <img
                                   className="h-10 w-10 rounded-full"
                                   src={post?.user?.profilePhoto}
-                                  alt=""
+                                  alt="profilePhoto"
                                 />
                               </Link>
                             </div>

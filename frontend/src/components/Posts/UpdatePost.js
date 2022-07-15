@@ -80,7 +80,7 @@ export default function UpdatePost() {
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
-                <ErrorDisplay first={formik.touched.title} second={formik.errors.title} />
+                <ErrorDisplay first={formik?.touched?.title} second={formik?.errors?.title} />
               </div>
 
               <CategoryDropdown
@@ -106,7 +106,7 @@ export default function UpdatePost() {
                   className="rounded-lg appearance-none block w-full py-3 px-3 text-base text-center leading-tight text-black border border-gray-200 focus:border-gray-500  focus:outline-none"
                   type="text"
                 ></textarea>
-                <ErrorDisplay first={formik.touched.description} second={formik.errors.description} />
+                <ErrorDisplay first={formik?.touched?.description} second={formik?.errors?.description} />
               </div>
 
               <div>
@@ -117,14 +117,14 @@ export default function UpdatePost() {
                       type="submit"
                       className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-custom-blue hover:bg-indigo-700"
                     >
-                      Update category
+                      Update post
                     </button>
                     <button
                       onClick={() => dispatch(postDeleteAction(id))}
                       type="submit"
                       className="group mt-2 relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-custom-red hover:bg-rose-700"
                     >
-                      Delete category
+                      Delete post
                     </button>
                   </>
                 }

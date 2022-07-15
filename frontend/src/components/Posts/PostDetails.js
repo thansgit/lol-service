@@ -62,7 +62,7 @@ const PostDetails = () => {
                   <div className="text-left">
                     <Link to={`/profile/${postDetails?.user?._id}`} className="hover:underline text-custom-green">
                       <h4 className="mb-1 text-2xl font-bold text-gray-50">
-                        <span className="text-xl lg:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-custom-yellow to-orange-600">
+                        <span className="text-xl lg:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-custom-yellow to-custom-red">
                           {postDetails?.user?.nickName}
                         </span>
                       </h4>
