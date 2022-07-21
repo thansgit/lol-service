@@ -1,9 +1,10 @@
-const express = require("express");
+const http = require('http');
 const dotenv = require("dotenv");
 const cors = require('cors');
-
+const express = require("express");
 dotenv.config();
 const dbConnect = require('./config/db/dbConnect');
+const socketIoConnect = require('./config/socketIo/socketIoConnect');
 
 const userRoutes = require('./route/users/usersRoute');
 const postRoutes = require('./route/posts/postsRoute');
@@ -14,14 +15,16 @@ const categoriesRoute = require("./route/categories/categoriesRoute");
 const { errorHandler, notFound, multerErrorDebugger } = require('./middlewares/error/errorHandler');
 
 const app = express();
+
+
+//Cors
+app.use(cors());
+
 //DB
 dbConnect();
 
 //Middleware
 app.use(express.json());
-
-//Cors
-app.use(cors());
 
 //Users route
 app.use('/api/users', userRoutes);
@@ -38,12 +41,17 @@ app.use('/api/email', emailRoutes);
 //Categories route
 app.use('/api/categories', categoriesRoute)
 
+//Socket
 //Err handling
 //app.use(multerErrorDebugger);
 app.use(notFound);  //Passes notfound error to errorhandler
 app.use(errorHandler);
 
+//Servers
+const server = http.createServer(app);
+socketIoConnect(server)
 
-//server
 const PORT = process.env.PORT || 5000
-app.listen(PORT, console.log(`Server is running on port: ${PORT}`));
+server.listen(PORT, console.log(`Server is running on port: ${PORT}`));
+
+

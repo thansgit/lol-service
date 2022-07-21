@@ -21,6 +21,8 @@ import SendEmail from "./components/Users/Emailing/SendEmail";
 import AccountVerified from "./components/Users/AccountVerification/AccountVerified";
 import UsersList from "./components/Users/UsersList/UsersList";
 import UpdatePassword from "./components/PasswordManagement/UpdatePassword";
+import Chat from "./components/Chat/Chat";
+
 
 
 function App() {
@@ -50,6 +52,7 @@ function App() {
           <Route path='/profile/:id' element={<Profile />} />
           <Route path='/verify-account/:token' element={<AccountVerified />} />
           <Route path='/update-password' element={<UpdatePassword />} />
+          <Route path='/chat' element={<Chat />} />
         </Route>
 
         {/* Public users routes */}
