@@ -5,6 +5,7 @@ import postsReducer from '../slices/posts/postSlices';
 import commentsReducer from '../slices/comments/commentSlices';
 import emailReducer from '../slices/email/emailSlices';
 import accountVerificationReducer from "../slices/accountVerification/accountVerificationSlices";
+import chatReducer from '../slices/chat/chatSlices';
 
 export const store = configureStore({
     reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
         comment: commentsReducer,
         email: emailReducer,
         accountVerification: accountVerificationReducer,
+        chats: chatReducer,
     },
 });

@@ -1,38 +1,112 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import io from "socket.io-client"
 import { useDispatch, useSelector } from "react-redux";
+import { chatsFetchAction } from "../../redux/slices/chat/chatSlices";
 import Footer from "../../utils/Footer";
-import ChatBox from "./ChatBox";
+import Conversation from "./Conversation";
+import Message from "./Message";
 
-const socket = io('http://localhost:5000')
+
+
 const Chat = () => {
-
-    //console.log(socket)
-
+    const dispatch = useDispatch();
+    const socket = useRef();
     const users = useSelector(state => state.users)
     const { userAuth } = users;
+    const currentUserId = userAuth?._id;
 
-    const [room, setRoom] = useState("");
+    const [arrivalMessage, setArrivalMessage] = useState('null')
 
-    const joinRoom = () => {
-        if (room !== "") {
-            socket.emit("join_room", room);
-        }
-    };
+    //Connect socket
+    useEffect(() => {
+        socket.current = io('http://localhost:5000');
+        socket.current.on('getMessage', (data) => ({
+            sender: data.senderId,
+            text: data.text,
+            createdAt: Date.now(),
 
-    console.log(userAuth._id);
+        }))
+    }, [])
+
+    // useEffect(() => {
+    //     arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) && setMessages([...messages, arrivalMessage])
+    // },[arrivalMessage])
+    //Send current user id to server in order to populate it with socket id
+    useEffect(() => {
+        socket.current.emit('addUser', currentUserId);
+        socket.current.on('getUsers', onlineUsers => {
+            console.log(onlineUsers);
+        });
+    }, [currentUserId])
+
+    //Fetch all chats by current user
+    useEffect(() => {
+        dispatch(chatsFetchAction(currentUserId));
+    }, [currentUserId, dispatch]);
+    const chats = useSelector(state => state.chats)
+    const { loading, appErr, serverErr, userChats } = chats;
+
+
+    const message = {
+        sender: currentUserId,
+        text: 'NewMessage, maybe in useState',
+        conversationId: 'currentChat._id'
+    }
+
+    //const receiverId = currentChat.members.find(member => member !== currentUserId)
+
+    // socket.current.emit('sendMessage', {
+    //     senderId: currentUserId,
+    //     receiverId: receiverId,
+    //     text: 'NewMessageState'
+    // });
+
+
     return (
         <>
-            <div className="min-h-screen flex flex-col items-center justify-center  bg-custom-gray py-12 px-4 sm:px-6 lg:px-8">
-                <h3 className="text-white">Join a chat</h3>
+            {/* classname=Messenger */}
+            <div className="min-h-screen flex">
+                {/* chatMenus */}
+                <div className=" basis-1/4 bg-custom-gray-light">
+                    {/* ChatMenuWrapper */}
+                    <div className="p-10 text-black">
+                        <input placeholder="Search for friends..." className="w-11/12" />
+                        <Conversation  />
+                        <Conversation />
+                        <Conversation />
+                    </div>
 
-                    <input type='text' placeholder={userAuth?.nickName} className="border-2 border-custom-yellow" />
-                    <input type='text' placeholder="Room ID..." onChange={(event) => setRoom(event.target.value)} className="border-2 border-custom-yellow" />
-                    <button onClick={joinRoom} className="group relative w-full flex justify-center py-2 px-4
-                      text-sm font-medium rounded-md text-white
-                      bg-custom-blue hover:bg-indigo-700" >Join a room</button>
+                </div>
+                {/* chatBox */}
+                <div className="basis-1/2 bg-custom-gray">
+                    {/* chatBoxWrapper */}
+                    <div className="p-10 text-white">
+
+                        <div className="">
+                            <Message />
+                            <Message own={true}/>
+                            <Message />
+                        </div>
+
+                        <div className="mt-3 flex items-center justify-between">
+                            <textarea placeholder="Write something...." 
+                            className="w-4/5 h-24 text-black"
+                            />
+                            <button className="">Send message</button>
+                        </div>
+                    </div>
+                </div>
+                {/* chatOnline */}
+                <div className="basis-1/4 bg-custom-gray-light">
+                    {/* chatOnlineWrapper */}
+                    <div className="p-10 text-white">
+                        online
+                    </div>
+                </div>
+
             </div>
-            <ChatBox socket={socket} nickName={userAuth?.nickName} room={room} />
+
+
             <Footer />
         </>
     )
