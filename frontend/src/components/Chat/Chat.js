@@ -71,7 +71,7 @@ const Chat = () => {
                     {/* ChatMenuWrapper */}
                     <div className="p-10 text-black">
                         <input placeholder="Search for friends..." className="w-11/12" />
-                        <Conversation  />
+                        <Conversation />
                         <Conversation />
                         <Conversation />
                     </div>
@@ -84,15 +84,19 @@ const Chat = () => {
 
                         <div className="">
                             <Message />
-                            <Message own={true}/>
+                            <Message own={true} />
                             <Message />
                         </div>
 
                         <div className="mt-3 flex items-center justify-between">
-                            <textarea placeholder="Write something...." 
-                            className="w-4/5 h-24 text-black"
+                            <textarea placeholder="Write something...."
+                                className="w-4/5 h-24 text-black p-3 "
                             />
-                            <button className="">Send message</button>
+                            <button
+                                className="inline-flex items-center w-24 h-14 border border-transparent text-md font-medium rounded shadow-sm text-white bg-custom-blue hover:bg-indigo-700"
+                            >
+                               Send message
+                            </button>
                         </div>
                     </div>
                 </div>
